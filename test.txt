@@ -1,5 +1,0 @@
-test; blabla
-
-Ceci est un autre test
-
-Test 998982
