@@ -13,7 +13,7 @@ I completed the step 1) of the worksheet. I plotted the graph with two different
 
 I used pandas in order to complete the histogram (bar plot).
 
-I have also tried to get a fitting curve of the exponential decay, by using the polynomial tool polyfit. I managed to get the graph but the approximation wasn't great, even with a degree equal to 100. Nevertheless, I understood it was normal considering that there is more than 1000 values in the x-axis. I had tried to get a fitting curve because I thought it have been more visual than a histogram but, eventually, the red dotted line returns the same thing.
+I have also tried to get a fitting curve of the exponential decay, by using the polynomial tool polyfit. I managed to get the graph but the approximation wasn't great, even with a degree equal to 100. Nevertheless, I understood it was normal considering that there is more than 1000 values in the x-axis. I had tried to get a fitting curve because I thought it could have been more visual than a histogram but, eventually, the red dotted line returns the same thing.
 
 That's basically what I did today.
 Aurelien
