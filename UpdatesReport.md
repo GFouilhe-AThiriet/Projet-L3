@@ -11,6 +11,8 @@ We were told to write our scripts in English, so I don't know if we are also exp
 
 I completed the step 1) of the worksheet. I plotted the graph with two different styles. The first one is a histogram and the second one a dotted line. I thought the second one could be more visual than the first one.
 
+Result : https://i.ibb.co/NWDCSqb/Capture-d-cran-2021-04-04-234953.png
+
 I used pandas in order to complete the histogram (bar plot).
 
 I have also tried to get a fitting curve of the exponential decay, by using the polynomial tool polyfit. I managed to get the graph but the approximation wasn't great, even with a degree equal to 100. Nevertheless, I understood it was normal considering that there is more than 1000 values in the x-axis. I had tried to get a fitting curve because I thought it could have been more visual than a histogram but, eventually, the red dotted line returns the same thing.
