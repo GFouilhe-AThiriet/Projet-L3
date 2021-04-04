@@ -25,7 +25,6 @@ x,y=np.zeros(len(os.listdir())),np.zeros(len(os.listdir()))
 i=0
 for DIR in os.listdir():
     x[i]=DIR
-    dir_path=path_to_train+'\\'+DIR
     y[i] = len([name for name in os.listdir(DIR)])
     i+=1
 
