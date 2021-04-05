@@ -8,7 +8,7 @@ import pandas as pd
 
 ##Notes
 
-#To comment a section on VSC : ctr+K then ctr+C ; ctr+k then ctr+U to uncomment
+#To comment a section on VSC : ctr+K then ctr+C ; ctr+K then ctr+U to uncomment
 # ctr+alt+n shortcut to run the code
 # double the \ to make os.chdir works
 # for instance : C:\Users\lyz50\desktop should be :
@@ -17,7 +17,7 @@ import pandas as pd
 ##Documentation
 # https://www.youtube.com/watch?v=tJxcKyFMTGo for os
 
-student = False
+student = True
 if student:
     path_to_train = 'C:\\Users\\lyz50\\Documents\\GitHub\\plantnet_dataset\\python\\train'
 else:
@@ -30,7 +30,6 @@ x, y = np.zeros(len(os.listdir())), np.zeros(len(os.listdir()))
 i = 0
 for DIR in os.listdir():
     x[i] = DIR
-    dir_path = path_to_train+'\\'+DIR
     y[i] = len([name for name in os.listdir(DIR)])
     i += 1
 
