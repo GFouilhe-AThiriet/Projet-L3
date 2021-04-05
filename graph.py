@@ -20,11 +20,11 @@ import pandas as pd
 student1 = False #Aurélien 
 student2 = True  #Guilhem 
 if student1:
-    path_to_train = 'C:\\Users\\lyz50\\Documents\\GitHub\\plantnet_dataset\\python\\train'
+    path_to_train = os.path.join('C:','Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
 elif student2:
-    path_to_train = "C:\\plantnet_subset"
+    path_to_train = os.path.join('C:/','plantnet_subset')
 else:
-    path_to_train = "/home/jsalmon/Documents/Datasets/train"
+    path_to_train = os.path.join("/home/jsalmon/Documents/Datasets/train")
 
 os.chdir(path_to_train)
 
