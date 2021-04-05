@@ -17,9 +17,12 @@ import pandas as pd
 ##Documentation
 # https://www.youtube.com/watch?v=tJxcKyFMTGo for os
 
-student = True
-if student:
+student1 = False #Aurélien 
+student2 = True  #Guilhem 
+if student1:
     path_to_train = 'C:\\Users\\lyz50\\Documents\\GitHub\\plantnet_dataset\\python\\train'
+elif student2:
+    path_to_train = "C:\\plantnet_subset"
 else:
     path_to_train = "/home/jsalmon/Documents/Datasets/train"
 
