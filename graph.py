@@ -17,10 +17,10 @@ import pandas as pd
 ##Documentation
 # https://www.youtube.com/watch?v=tJxcKyFMTGo for os
 
-student1 = False #Aurélien 
-student2 = True  #Guilhem 
+student1 = True #Aurélien 
+student2 = False  #Guilhem 
 if student1:
-    path_to_train = os.path.join('C:','Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
+    path_to_train = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
 elif student2:
     path_to_train = os.path.join('C:/','plantnet_subset')
 else:
