@@ -40,4 +40,4 @@ Current state : https://i.ibb.co/99rX13G/Capture-d-cran-2021-04-08-192809.png
 
 That's what I'll try to fix in the following days.
 
-If it's possible to save mouse's coordinates in an array. Then it should be quite easy to change the plant image in real time with FuncAnimation.
+If it's possible to save mouse's coordinates in an array, then it should be quite easy to change the plant image in real time with FuncAnimation.
