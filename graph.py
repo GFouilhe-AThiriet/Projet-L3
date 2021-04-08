@@ -63,7 +63,7 @@ df = df.reset_index(drop=True)
 
 ####Plot the graph and the image
 DIR='1355868'
-path_to_DIR = os.path.join('C:\\','Users','lyz50','Documents','GitHub','plantnet_dataset','python','train',DIR)
+path_to_DIR = os.path.join(path_to_train,DIR)
 os.chdir(path_to_DIR)
 
 image=os.listdir()[5]
