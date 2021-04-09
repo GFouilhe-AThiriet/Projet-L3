@@ -133,7 +133,7 @@ fig.canvas.mpl_connect('button_press_event', onclick)
 
 def animate(i):
     number=coords[-1][0]
-    number_y=array[number][2]
+    number_y=int(array[number][2])
     if number<0 or number>len(x):
         number=-1
         number_y=-1
