@@ -51,24 +51,18 @@ for DIR in os.listdir():
     y[i] = len([name for name in os.listdir(DIR)])
     i += 1
 
-new_x, new_y = [], []
-for i in range(len(x)):
-    if y[i] != 0:  # delete values y[i]=0 for prettier graphs
-        new_x += [x[i]]
-        new_y += [y[i]]
-
-df = pd.DataFrame({"Species":new_x, "Images":new_y})
+df = pd.DataFrame({"Directories":os.listdir(),"Species":x, "Images":y})
 df = df.sort_values("Images", ascending=False)
 df = df.reset_index(drop=True)
 #print(df)
-index=df.index
-print(index)
 
 DIR='1355868'
 path_to_DIR = os.path.join(path_to_train,DIR)
 os.chdir(path_to_DIR)
 
-image=os.listdir()[5]
+plant_representative=0
+
+image=os.listdir()[plant_representative]
 read_image=plt.imread( os.path.join(path_to_DIR,image))
 
 # ####Plot the graph and the image
@@ -100,10 +94,10 @@ plt.show()
 
 ##Two Other Visualisations :
 
-array = df.to_numpy()  # array=([new_x_i,new_y_i]) and new_y is in sorted in descending order in df
+array = df.to_numpy()  # array=([Directory,x_i,y_i]) and new_y is in sorted in descending order in df
 new_y_ordered = []
 for i in range(len(array)):
-    new_y_ordered += [array[i][1]]
+    new_y_ordered += [array[i][2]]
 
 #To get the coordinates of the mouse in real time
 coords=[[0,0]] #Global Variable
@@ -112,6 +106,11 @@ def onclick(event):
     x,y=event.xdata, event.ydata
     global coords
     coords+=[[int(x),int(y)]]
+
+#Remaining : a right click event to add +1 to plant_representative
+#and 0 if plant_representative=len(os.list(DIR))
+#in order to change the plant picture from a same species in the directory
+
 #The First
 
 fig=plt.figure()
@@ -124,7 +123,7 @@ ax.set_title("Number of images for each species")
 cursor = Cursor(ax,color='lightblue', linewidth=2)#vertical and horizontal lines
 
 second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
-subplot_title=("Subplot0")
+subplot_title='Species n°'+" "+';Images='+" "
 second_sub_plot.set_title(subplot_title)  
 plt.axis('off')
 plt.imshow(read_image)
@@ -135,14 +134,19 @@ def animate(i):
     number=coords[-1][0]
     number_y=coords[-1][1]
     if number<0 or number>len(x):
-        number=" "
-        number_y=" "
-    else:
-        number=str(number)
-        number_y=str(number_y)
-    subplot_title=('Species n°'+number+';Images='+number_y)
-    second_sub_plot.set_title(subplot_title)  
-anim = FuncAnimation(fig, animate, interval=100, frames=1)
+        number=-1
+        number_y=-1
+    subplot_title=('Species n°'+str(number)+';Images='+str(number_y))
+    second_sub_plot.set_title(subplot_title)
+    DIR=array[number][0]
+    
+    path_to_DIR = os.path.join(path_to_train,DIR)#to change the plant picture
+    os.chdir(path_to_DIR)
+    image=os.listdir()[plant_representative]
+    read_image=plt.imread( os.path.join(path_to_DIR,image))
+    plt.imshow(read_image)
+
+anim = FuncAnimation(fig, animate, interval=100, frames=50)#increase frames if it lags
 
 plt.draw()
 plt.show()
