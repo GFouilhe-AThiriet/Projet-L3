@@ -120,7 +120,7 @@ ax.set_xlabel("Species")
 ax.set_ylabel("Number of Images")
 ax.set_title("Number of images for each species")
 
-cursor = Cursor(ax,color='lightblue', linewidth=2)#vertical and horizontal lines
+cursor = Cursor(ax,color='lightblue', horizOn=False, linewidth=2)#vertical
 
 second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
 subplot_title='Species n°'+" "+';Images='+" "
@@ -139,14 +139,14 @@ def animate(i):
     subplot_title=('Species n°'+str(number)+';Images='+str(number_y))
     second_sub_plot.set_title(subplot_title)
     DIR=array[number][0]
-    
-    path_to_DIR = os.path.join(path_to_train,DIR)#to change the plant picture
-    os.chdir(path_to_DIR)
-    image=os.listdir()[plant_representative]
-    read_image=plt.imread( os.path.join(path_to_DIR,image))
-    plt.imshow(read_image)
+    if number>0:
+        path_to_DIR = os.path.join(path_to_train,DIR)#to change the plant picture
+        os.chdir(path_to_DIR)
+        image=os.listdir()[plant_representative]
+        read_image=plt.imread( os.path.join(path_to_DIR,image))
+        plt.imshow(read_image)
 
-anim = FuncAnimation(fig, animate, interval=100, frames=50)#increase frames if it lags
+anim = FuncAnimation(fig, animate, interval=100, frames=1)#change frames if it lags ??
 
 plt.draw()
 plt.show()
