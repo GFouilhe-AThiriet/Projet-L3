@@ -30,6 +30,7 @@ from matplotlib.animation import FuncAnimation
 # https://python4astronomers.github.io/plotting/advanced.html for ax.plot
 
 # https://www.youtube.com/watch?v=YobjoBrND4w for mouse's coordinates
+# https://stackoverflow.com/questions/25521120/store-mouse-click-event-coordinates-with-matplotlib answer to the problem of 08/04
 
 student1 = True #Aurélien 
 student2 = False #Guilhem 
@@ -60,8 +61,9 @@ df = pd.DataFrame({"Species":new_x, "Images":new_y})
 df = df.sort_values("Images", ascending=False)
 df = df.reset_index(drop=True)
 #print(df)
+index=df.index
+print(index)
 
-####Plot the graph and the image
 DIR='1355868'
 path_to_DIR = os.path.join(path_to_train,DIR)
 os.chdir(path_to_DIR)
@@ -69,6 +71,7 @@ os.chdir(path_to_DIR)
 image=os.listdir()[5]
 read_image=plt.imread( os.path.join(path_to_DIR,image))
 
+# ####Plot the graph and the image
 fig=plt.figure()
 
 #Bar plot
@@ -103,15 +106,12 @@ for i in range(len(array)):
     new_y_ordered += [array[i][1]]
 
 #To get the coordinates of the mouse in real time
-MOUSE=[[17,17]] #Global Variable
-print(MOUSE)
-print("Corretly printed")
+coords=[[0,0]] #Global Variable
+
 def onclick(event):
     x,y=event.xdata, event.ydata
-    print(x,y)
-    #print(MOUSE)
-    #MOUSE+=[[x,y]]
-    #print("END OF ONLICK")
+    global coords
+    coords+=[[int(x),int(y)]]
 #The First
 
 fig=plt.figure()
@@ -132,12 +132,21 @@ plt.imshow(read_image)
 fig.canvas.mpl_connect('button_press_event', onclick)
 
 def animate(i):
-    subplot_title=('Species ' + str(i)+'(test)')
+    number=coords[-1][0]
+    number_y=coords[-1][1]
+    if number<0 or number>len(x):
+        number=" "
+        number_y=" "
+    else:
+        number=str(number)
+        number_y=str(number_y)
+    subplot_title=('Species n°'+number+';Images='+number_y)
     second_sub_plot.set_title(subplot_title)  
-anim = FuncAnimation(fig, animate, interval=100, frames=10)
+anim = FuncAnimation(fig, animate, interval=100, frames=1)
 
 plt.draw()
 plt.show()
+
 
 #The Second
 

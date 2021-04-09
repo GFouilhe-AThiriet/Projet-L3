@@ -34,10 +34,6 @@ So I looked into Pygame documentation. I thought and I still think that it would
 
 Then, I discovered FuncAnimation. It works well to get a 'simple' moving display. The only problem is that the documentation didn't seem great in general -in my opinion-, except for the Ken Hughes' article that I linked in the code.
 
-Eventually, I added a cursor that follows the mouse and I tried to obtain the coordinates of the mouse in real time with Button (both functions from matplotlib.widgets). Thus, mouse's coordinates are correctly printed for each click. But I can't get the mouse's coordinates into an array. I don't understand why it prints 'local variable 'MOUSE' referenced before assignment'.
+Eventually, I added a cursor that follows the mouse and I tried to obtain the coordinates of the mouse in real time with Button (both functions from matplotlib.widgets). Thus, mouse's coordinates are correctly printed for each click.
 
 Current state : https://i.ibb.co/99rX13G/Capture-d-cran-2021-04-08-192809.png
-
-That's what I'll try to fix in the following days.
-
-If it's possible to save mouse's coordinates in an array, then it should be quite easy to change the plant image in real time with FuncAnimation.
