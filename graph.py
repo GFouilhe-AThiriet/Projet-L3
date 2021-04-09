@@ -98,6 +98,7 @@ array = df.to_numpy()  # array=([Directory,x_i,y_i]) and new_y is in sorted in d
 new_y_ordered = []
 for i in range(len(array)):
     new_y_ordered += [array[i][2]]
+#print(array)
 
 #To get the coordinates of the mouse in real time
 coords=[[0,0]] #Global Variable
@@ -132,14 +133,14 @@ fig.canvas.mpl_connect('button_press_event', onclick)
 
 def animate(i):
     number=coords[-1][0]
-    number_y=coords[-1][1]
+    number_y=array[number][2]
     if number<0 or number>len(x):
         number=-1
         number_y=-1
     subplot_title=('Species n°'+str(number)+';Images='+str(number_y))
-    second_sub_plot.set_title(subplot_title)
-    DIR=array[number][0]
     if number>0:
+        second_sub_plot.set_title(subplot_title)
+        DIR=array[number][0]
         path_to_DIR = os.path.join(path_to_train,DIR)#to change the plant picture
         os.chdir(path_to_DIR)
         image=os.listdir()[plant_representative]
