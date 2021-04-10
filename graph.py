@@ -8,6 +8,8 @@ import pandas as pd
 from matplotlib.widgets import Cursor, Button
 from matplotlib.animation import FuncAnimation
 
+import csv
+
 ##Notes
 
 #To comment a section on VSC : ctr+K then ctr+C ; ctr+K then ctr+U to uncomment
@@ -36,10 +38,13 @@ student1 = True #Aurélien
 student2 = False #Guilhem 
 if student1:
     path_to_train = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
+    path_to_classnames = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset')
 elif student2:
     path_to_train = os.path.join('C:/','plantnet_subset')
 else:
     path_to_train = os.path.join("/home/jsalmon/Documents/Datasets/train")
+
+doc=os.path.join(path_to_classnames,"class_names.csv")#to display class names
 
 os.chdir(path_to_train)
 
@@ -56,7 +61,7 @@ df = df.sort_values("Images", ascending=False)
 df = df.reset_index(drop=True)
 #print(df)
 
-DIR='1355868'
+DIR='1357367'
 path_to_DIR = os.path.join(path_to_train,DIR)
 os.chdir(path_to_DIR)
 
@@ -79,7 +84,7 @@ first_sub_fig.set_ylabel("Species")
 first_sub_fig.set_ylabel("Number of Images")
 first_sub_fig.bar(df.index, "Images", data=df, width=bar_width)
 
-cursor = Cursor(first_sub_fig, color='red', linewidth=2)#vertical and horizontal lines
+cursor = Cursor(first_sub_fig, color='red', horizOn=False, linewidth=2)#vertical line
 
 #Plant image
 second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
@@ -124,7 +129,7 @@ ax.set_title("Number of images for each species")
 cursor = Cursor(ax,color='lightblue', horizOn=False, linewidth=2)#vertical
 
 second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
-subplot_title='Species n°'+" "+';Images='+" "
+subplot_title=' '
 second_sub_plot.set_title(subplot_title)  
 plt.axis('off')
 plt.imshow(read_image)
@@ -138,8 +143,7 @@ def animate(i):
         number_y=-1
     else:
         number_y=int(array[number][2])
-
-    subplot_title=('Species n°'+str(number)+';Images='+str(number_y))
+        subplot_title=("Species+ n°"+str(number))
     if number>0:
         second_sub_plot.set_title(subplot_title)
         DIR=array[number][0]
@@ -153,7 +157,6 @@ anim = FuncAnimation(fig, animate, interval=100, frames=1)#change frames if it l
 
 plt.draw()
 plt.show()
-
 
 #The Second
 
