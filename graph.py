@@ -40,7 +40,8 @@ if student1:
     path_to_train = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
     path_to_classnames = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset')
 elif student2:
-    path_to_train = os.path.join('C:/','plantnet_subset')
+    path_to_train = os.path.join('C:/','Plantnet_project','plantnet_subset')
+    path_to_classnames = os.path.join('C:/','Plantnet_project')
 else:
     path_to_train = os.path.join("/home/jsalmon/Documents/Datasets/train")
 
