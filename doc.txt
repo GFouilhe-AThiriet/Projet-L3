@@ -1,0 +1,16 @@
+##Documentation
+# https://www.youtube.com/watch?v=tJxcKyFMTGo for os
+# https://www.delftstack.com/fr/howto/matplotlib/add-subplot-to-a-figure-matplotlib/ for subplots
+# https://brushingupscience.com/2016/06/21/matplotlib-animations-the-easy-way/ for matplotlib.animation.FuncAnimation
+
+# https://realpython.com/python-matplotlib-guide/ for ax.plot instead of plt.plot
+# https://stackoverflow.com/questions/43482191/matplotlib-axes-plot-vs-pyplot-plot for ax.plot (cf 1st comment)
+# https://python4astronomers.github.io/plotting/advanced.html for ax.plot
+
+# https://www.youtube.com/watch?v=YobjoBrND4w for mouse's coordinates
+# https://stackoverflow.com/questions/25521120/store-mouse-click-event-coordinates-with-matplotlib answer to the problem of 08/04
+
+
+# Next step : get the coordinates of the mouse in real time
+# https://matplotlib.org/stable/users/event_handling.html maybe ?
+
