@@ -61,7 +61,7 @@ def onclick(event):
 #Dataframe from csv (df_names)
 path_csv=os.path.join(path_to_classnames,"class_names.csv")
 df_names = pd.read_csv(path_csv)
-df_names.columns = ['id_species', 'species_name'] #otherwise there is an ennoying space in ' species_name'
+df_names.columns = ['id_species', 'species_name'] #otherwise there is an annoying space in ' species_name'
 #--------------------------
 
 #Dataframe with directories names and number of images (df)
