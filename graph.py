@@ -32,11 +32,10 @@ else:
 #------Functions-----------
 
 #---To get the coordinates of the mouse in real time--
-coords=[[0,0]] #Global Variable
 
 def animate(i):
     number=coords[-1][0]
-    if number<0 or number>len(x):
+    if number<0 or number>len(np.array(df.id_species)):
         number=-1
         number_y=-1
     else:
@@ -48,8 +47,10 @@ def animate(i):
         path_to_DIR = os.path.join(path_to_train,DIR)#to change the plant picture
         os.chdir(path_to_DIR)
         image=os.listdir()[plant_representative]
-        read_image=plt.imread( os.path.join(path_to_DIR,image))
+        read_image=plt.imread(os.path.join(path_to_DIR,image))
         plt.imshow(read_image)
+
+coords=[[0,0]] #Global Variable
 
 def onclick(event):
     x,y=event.xdata, event.ydata
