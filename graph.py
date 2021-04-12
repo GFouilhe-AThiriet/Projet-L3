@@ -96,7 +96,7 @@ read_image=plt.imread( os.path.join(path_to_DIR,image))
 
 
 
-# #---Bar plot : not yet animated------------------
+# #---Bar plot : not animated yet------------------
 
 # fig=plt.figure()
 # bar_width = 5
