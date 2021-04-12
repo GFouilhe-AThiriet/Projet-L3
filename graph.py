@@ -56,31 +56,9 @@ def onclick(event):
     global coords
     coords+=[[int(x),int(y)]]
 
-#-------------------------------------------------------------
-
-#Dataframe from csv (df_names)
-path_csv=os.path.join(path_to_classnames,"class_names.csv")
-df_names = pd.read_csv(path_csv)
-df_names.columns = ['id_species', 'species_name'] #otherwise there is an annoying space in ' species_name'
-#--------------------------
-
-#Dataframe with directories names and number of images (df)
-os.chdir(path_to_train)
-x, y = np.zeros(len(os.listdir())), np.zeros(len(os.listdir()))
-i = 0
-for DIR in os.listdir():
-    x[i] = DIR
-    y[i] = len([name for name in os.listdir(DIR)])
-    i += 1
-df = pd.DataFrame({"Directories":os.listdir(),"Species":x, "Images":y})
-#--------------------------
-
-#Merging dataframes then sort
-df = pd.concat([df_names.id_species,df_names.species_name, df.Images], axis = 1)
-df = df.sort_values("Images", ascending=False)
-df = df.reset_index(drop=True)
-#--------------------------
-
+#Dataframe with id_species, species_name, Images (number of images) sorted by decreasing number of images 
+url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/data.csv'
+df = pd.read_csv(url)
 
 DIR='1357367' #Dir of initial picture on plot
 path_to_DIR = os.path.join(path_to_train,DIR)
