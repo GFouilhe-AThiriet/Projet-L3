@@ -42,3 +42,9 @@ Current state : https://i.ibb.co/99rX13G/Capture-d-cran-2021-04-08-192809.png
 
 Update 09/04 by Au. : Step 2) almost done.
 Now, the plant image changes when someone clicks on the graph. There still is some presentation to do, but the code works now.
+
+
+Update 11/04 by Guilhem : 
+I cleaned the code by removing unnecessary features, simplifying some lines, formatted comments and created a separated "doc.txt" to save doc info on tools we use.
+I also added the actual names of species on the picture displayed instead of their id.
+

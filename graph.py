@@ -31,6 +31,9 @@ else:
 
 #------Functions-----------
 
+#---To get the coordinates of the mouse in real time--
+coords=[[0,0]] #Global Variable
+
 def animate(i):
     number=coords[-1][0]
     if number<0 or number>len(x):
@@ -48,9 +51,6 @@ def animate(i):
         read_image=plt.imread( os.path.join(path_to_DIR,image))
         plt.imshow(read_image)
 
-#---To get the coordinates of the mouse in real time--
-coords=[[0,0]] #Global Variable
-
 def onclick(event):
     x,y=event.xdata, event.ydata
     global coords
@@ -61,7 +61,7 @@ def onclick(event):
 #Dataframe from csv (df_names)
 path_csv=os.path.join(path_to_classnames,"class_names.csv")
 df_names = pd.read_csv(path_csv)
-df_names.columns = ['id_species', 'species_name'] #otherwise there is an ennoying space in ' species_name'
+df_names.columns = ['id_species', 'species_name'] #otherwise there is an annoying space in ' species_name'
 #--------------------------
 
 #Dataframe with directories names and number of images (df)
@@ -96,7 +96,7 @@ read_image=plt.imread( os.path.join(path_to_DIR,image))
 
 
 
-# #---Bar plot : not yet animated------------------
+# #---Bar plot : not animated yet------------------
 
 # fig=plt.figure()
 # bar_width = 5
