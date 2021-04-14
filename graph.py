@@ -76,27 +76,31 @@ read_image=plt.imread( os.path.join(path_to_DIR,image))
 
 # #---Bar plot : not animated yet------------------
 
-# fig=plt.figure()
-# bar_width = 5
+fig=plt.figure()
+bar_width = 5
 
-# first_sub_fig=fig.add_subplot(1, 1, 1)#position of the subplot
-# subplot_title=("Number of images for each species")
-# first_sub_fig.set_title(subplot_title)
-# first_sub_fig.set_ylabel("Species")
-# first_sub_fig.set_ylabel("Number of Images")
-# first_sub_fig.bar(df.index, "Images", data=df, width=bar_width)
+first_sub_fig=fig.add_subplot(1, 1, 1)#position of the subplot
+subplot_title=("Number of images for each species")
+first_sub_fig.set_title(subplot_title)
+first_sub_fig.set_ylabel("Species")
+first_sub_fig.set_ylabel("Number of Images")
+first_sub_fig.bar(df.index, "Images", data=df, width=bar_width)
 
-# cursor = Cursor(first_sub_fig, color='red', horizOn=False, linewidth=2)#vertical line
+cursor = Cursor(first_sub_fig, color='red', horizOn=False, linewidth=2)#vertical line
 
-# #--------Plant image ---------
-# second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
-# subplot_title=('')
-# second_sub_plot.set_title(subplot_title)  
-# plt.axis('off')
-# plt.imshow(read_image)
+#--------Plant image ---------
+second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
+subplot_title='n°697 Carthamus_caeruleus'
+second_sub_plot.set_title(subplot_title)  
+plt.axis('off')
+plt.imshow(read_image)
 
-# plt.show()
+fig.canvas.mpl_connect('button_press_event', onclick)
 
+anim = FuncAnimation(fig, animate, interval=100, frames=1)#change frames if it lags ??
+
+plt.draw()
+plt.show()
 
 # #------------------------------------------------
 
