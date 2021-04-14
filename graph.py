@@ -17,8 +17,8 @@ import csv
 #--------------------------
 
 #-------User selection-----
-student1 = False #Aurélien 
-student2 = True  #Guilhem 
+student1 = True #Aurélien 
+student2 = False  #Guilhem 
 if student1:
     path_to_train = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
     path_to_classnames = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset')
@@ -74,7 +74,6 @@ read_image=plt.imread( os.path.join(path_to_DIR,image))
 #---------------Plot the graph and the image-------------------------
 
 
-
 # #---Bar plot : not animated yet------------------
 
 # fig=plt.figure()
@@ -114,13 +113,12 @@ ax.set_title("Number of images for each species")
 cursor = Cursor(ax,color='lightblue', horizOn=False, linewidth=2)#vertical
 
 second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
-subplot_title=' '
+subplot_title='n°697 Carthamus_caeruleus'
 second_sub_plot.set_title(subplot_title)  
 plt.axis('off')
 plt.imshow(read_image)
 
 fig.canvas.mpl_connect('button_press_event', onclick)
-
 
 anim = FuncAnimation(fig, animate, interval=100, frames=1)#change frames if it lags ??
 
