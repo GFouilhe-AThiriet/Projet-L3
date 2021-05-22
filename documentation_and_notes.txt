@@ -14,6 +14,8 @@
 # Next step : get the coordinates of the mouse in real time
 # https://matplotlib.org/stable/users/event_handling.html maybe ?
 
+################-----Altair-----################
+https://altair-viz.github.io/
 
 https://towardsdatascience.com/python-interactive-data-visualization-with-altair-b4c4664308f8
 (Making Charts Interactive with Altair)
