@@ -50,7 +50,7 @@ I also added the actual names of species on the picture displayed instead of the
 
 Update 22/05 by Au. : Tentative to have a fluider display with Altair. Altair does open an internet window from VSC where the graph is displayed. I have tried to have an intern display with the additional module altair_view but it seems that it does not work with VSC. I thought that I had found a possibility but the code didn't work and then, when I looked in some discussions of 2020 in StackOverflow, some people who both seemed to know programmation better than me were saying that the documentation indicating that there were a possiblity to have altair_view working on VSC was not good. So I stopped that and I did it with the window display -which is good, so it's fine.
 
-There are possibilities to display images so I will look into it in the next days. (I might also try to display interactive horizontal or vertical bar in real time.)
+There are possibilities to display images so I will look into it in the next days. (I might also try to display an interactive horizontal or vertical bar in real time.)
 
 Altair seems undoubtedly to be the absolute best way to display interactive Python graphs.
 Better than Ipywidget, Pygame, Matplotlib.animation.Funcanimation.
