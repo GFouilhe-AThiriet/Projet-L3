@@ -1,0 +1,24 @@
+
+# To import altair : https://altair-viz.github.io/getting_started/installation.html
+# You also have to install : altair_viewer
+
+# alt.renderers.enable('altair_viewer', inline=True)
+
+########-----Altair Documentation-----########
+# https://altair-viz.github.io/
+# https://altair-viz.github.io/user_guide/display_frontends.html#display-general
+# https://www.youtube.com/watch?v=x-iU2UwgVf0
+# https://pypi.org/project/altair-viewer/
+
+from vega_datasets import data
+cars = data.cars()
+
+chart = alt.Chart(cars).mark_point().encode(
+    x='Horsepower',
+    y='Miles_per_Gallon',
+    color='Origin',
+).interactive()
+
+chart.show()
+
+#altair_viewer.display(chart)

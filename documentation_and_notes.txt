@@ -14,12 +14,14 @@
 # Next step : get the coordinates of the mouse in real time
 # https://matplotlib.org/stable/users/event_handling.html maybe ?
 
-################-----Altair-----################
-https://altair-viz.github.io/
-
-https://towardsdatascience.com/python-interactive-data-visualization-with-altair-b4c4664308f8
-(Making Charts Interactive with Altair)
-
+########-----Altair Documentation-----########
+# https://altair-viz.github.io/
+# https://altair-viz.github.io/user_guide/display_frontends.html#display-general
+# https://www.youtube.com/watch?v=x-iU2UwgVf0
+# https://pypi.org/project/altair-viewer/
+# https://towardsdatascience.com/python-interactive-data-visualization-with-altair-b4c4664308f8
+# https://altair-viz.github.io/user_guide/interactions.html
+# https://vegawidget.github.io/altair/articles/example-gallery-08-interactive-charts.html
 
 #----------------manually get df --------------------
 
@@ -45,3 +47,11 @@ https://towardsdatascience.com/python-interactive-data-visualization-with-altair
 # df = df.sort_values("Images", ascending=False)
 # df = df.reset_index(drop=True)
 # #--------------------------
+
+#---------Notes------------
+    #To comment a section on VSC : ctr+K then ctr+C ; ctr+K then ctr+U to uncomment
+    #ctr+alt+n shortcut to run the code
+    #Remaining : a right click event to add +1 to plant_representative
+        #and 0 if plant_representative=len(os.list(DIR))
+        #in order to change the plant picture from a same species in the directory
+#--------------------------
