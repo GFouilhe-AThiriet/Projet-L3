@@ -1,9 +1,7 @@
 import os
 import csv
-import matplotlib.pyplot as plt
 import pandas as pd
 import altair as alt
-import altair_viewer
 
 # To import altair : https://altair-viz.github.io/getting_started/installation.html
 
@@ -15,6 +13,9 @@ import altair_viewer
 # https://towardsdatascience.com/python-interactive-data-visualization-with-altair-b4c4664308f8
 # https://altair-viz.github.io/user_guide/interactions.html
 # https://vegawidget.github.io/altair/articles/example-gallery-08-interactive-charts.html
+# https://pypi.org/project/altair-images/
+# https://matthewkudija.com/blog/2018/06/22/altair-interactive/
+# https://altair-viz.github.io/user_guide/marks.html
 
 User = "Aurélien"
 
@@ -35,19 +36,14 @@ elif User=="Camille":
 url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/data.csv'
 data = pd.read_csv(url)
 
-brush = alt.selection_interval()
+print(data)
 
-chart = alt.Chart(data).mark_point().encode(
+chart = alt.Chart(data,title="Number of Images for each species in the Dataset").mark_point().encode(
     x="index",
-    y="Images",
-    color=alt.condition(brush, 'Origin:N', alt.value('lightgray'))
-
-).add_selection(
-    brush
-)
-
+    y="Images"
+).encode(tooltip=['species_name','Images'])
 
 chart.encoding.x.title = 'Species'
-chart.encoding.y.title = 'Number of Images in the Dataset'
+chart.encoding.y.title = 'Images'
 
 chart.show()
