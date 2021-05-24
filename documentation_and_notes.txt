@@ -55,3 +55,7 @@
         #and 0 if plant_representative=len(os.list(DIR))
         #in order to change the plant picture from a same species in the directory
 #--------------------------
+
+### Other ###
+
+# https://www.materialui.co/icon/arrow-back
