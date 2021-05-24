@@ -52,5 +52,4 @@ Update 22/05 by Au. : Tentative to have a fluider display with Altair. Altair do
 
 There are possibilities to display images so I will look into it in the next days. (I might also try to display an interactive horizontal or vertical bar in real time.)
 
-Altair seems undoubtedly to be the absolute best way to display interactive Python graphs.
-Better than Ipywidget, Pygame, Matplotlib.animation.Funcanimation.
+Update 24/05 by Au. : Finally I opted for Pygame and as I thought, it is clearly better than the rest to have an interactive display. I created the basics of interactive windows and controls. I also added a new column "groups" in order to complete the step 3.
