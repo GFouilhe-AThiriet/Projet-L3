@@ -22,4 +22,4 @@ group = pd.Series(L)
 data = pd.read_csv('data.csv')
 data.insert(2, "species_group", group)
 
-data.to_csv("groups")
+data.to_csv("groups",index=False)
