@@ -2,8 +2,11 @@ import os
 import csv
 import pandas as pd
 import altair as alt
+import altair_viewer
 
 # To import altair : https://altair-viz.github.io/getting_started/installation.html
+
+alt.renderers.enable('altair_viewer')
 
 ########-----Altair Documentation-----########
 # https://altair-viz.github.io/
@@ -47,3 +50,4 @@ chart.encoding.x.title = 'Species'
 chart.encoding.y.title = 'Images'
 
 chart.show()
+

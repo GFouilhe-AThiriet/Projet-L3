@@ -88,19 +88,19 @@ first_sub_fig.bar(df.index, "Images", data=df, width=bar_width)
 
 cursor = Cursor(first_sub_fig, color='red', horizOn=False, linewidth=2)#vertical line
 
-#--------Plant image ---------
-second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
-subplot_title='n°697 Carthamus_caeruleus'
-second_sub_plot.set_title(subplot_title)  
-plt.axis('off')
-plt.imshow(read_image)
+# #--------Plant image ---------
+# second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
+# subplot_title='n°697 Carthamus_caeruleus'
+# second_sub_plot.set_title(subplot_title)  
+# plt.axis('off')
+# plt.imshow(read_image)
 
-fig.canvas.mpl_connect('button_press_event', onclick)
+# fig.canvas.mpl_connect('button_press_event', onclick)
 
-anim = FuncAnimation(fig, animate, interval=100, frames=1)#change frames if it lags ??
+# anim = FuncAnimation(fig, animate, interval=100, frames=1)#change frames if it lags ??
 
-plt.draw()
-plt.show()
+# plt.draw()
+# plt.show()
 
 # #------------------------------------------------
 
