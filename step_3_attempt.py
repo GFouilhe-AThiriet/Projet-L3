@@ -87,7 +87,7 @@ grey = (96,119,117)
 def menu():
 
     while True:
- 
+        screen = pygame.display.set_mode((screen_width,screen_height))
         screen.fill((0,0,0))
         screen.blit(background,(0,0))
  
@@ -135,6 +135,7 @@ def menu():
 #### Number of images for each species ###
 
 def Images():
+    screen = pygame.display.set_mode((1200,screen_height))
     running = True
     while running:
         screen.fill(white)
