@@ -36,20 +36,22 @@ mainClock = pygame.time.Clock()
 from pygame.locals import *
 pygame.init()
 
+logo = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_logo.png"))
+logo = pygame.transform.scale(logo, (100,100))
+
+pygame.display.set_icon(logo)
 window_name = "Pl@ntNet"
-
 pygame.display.set_caption(window_name)
-
-#NB; to do : change the pygame icon by the plantnet icon
-#https://stackoverflow.com/questions/21271059/how-do-i-change-the-pygame-icon
 
 ###ADJUST THE SIZE OF THE WINDOW BY CHANGING THE FOLLOWING VALUE :
 
-screen_width = 1000
+screen_width = 800
+ratio=0.8
 
 ### End of Global Setup ###
 
-screen_height = int(screen_width*0.8)
+r=ratio
+screen_height = int(screen_width*r)
 
 w , h = screen_width , screen_height
 
@@ -74,8 +76,8 @@ arrow_back_grey = pygame.image.load(os.path.join(path_to_folder,"Pygames_element
 arrow_back_grey = pygame.transform.scale(arrow_back_grey, (int(w*0.1),int(h*0.1)))
 
 images_repartition = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","images_for_each_species.png"))
-images_repartition_width = int(w*0.8)
-images_repartition_height = int(h*0.8)
+images_repartition_width = int(w*r)
+images_repartition_height = int(h*r)
 images_repartition = pygame.transform.scale(images_repartition,(images_repartition_width,images_repartition_height))
 
 white = (255,255,255)
@@ -85,7 +87,7 @@ grey = (96,119,117)
 #### MENU #### 
 
 def menu():
-
+    
     while True:
         screen = pygame.display.set_mode((screen_width,screen_height))
         screen.fill((0,0,0))
@@ -98,7 +100,7 @@ def menu():
         # reference_square = pygame.Rect(w*0.8, h*0.1 , w*0.1, h*0.1)# x_pos,y_pos,width,height
         # pygame.draw.rect(screen, (255, 255, 255), reference_square)
 
-        Images_button = pygame.Rect(w*0.1, h*0.1,w*0.65, h*0.1)
+        Images_button = pygame.Rect(w*0.1, h*0.1,w*0.8, h*0.1)
         pygame.draw.rect(screen, (255, 255, 255), Images_button)
 
         #Number of images for each species
@@ -135,8 +137,8 @@ def menu():
 #### Number of images for each species ###
 
 def Images():
-    screen = pygame.display.set_mode((1200,screen_height))
     running = True
+
     while running:
         screen.fill(white)
         arrow_button = pygame.Rect(0.9*w,0, w*0.1 , h*0.1)
@@ -147,8 +149,8 @@ def Images():
         draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h)
         draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")", font, black, screen, 0,0.7*h)
 
-        if 160<=mx<=830:
-            abscisses=int(((mx-160)/(830-160))*1080)
+        if 130<=mx<=660:
+            abscisses=int(((mx-130)/(660-130))*1080)
             draw_text("abscisses="+str(abscisses), font, black, screen, 0.5*w,0.5*h)
             if 0<=abscisses<=1080:
                 species_name = data.species_name[abscisses]
@@ -160,12 +162,13 @@ def Images():
                 id_species = data.id_species[abscisses]
                 path_to_DIR = os.path.join(path_to_train,str(id_species))
                 os.chdir(path_to_DIR)
-                if len(os.listdir())>0:
+                number_images=len(os.listdir())
+                if number_images>0:
                     plant_image_jpg_name = os.listdir()[0]
                     plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
                     plant_image = pygame.transform.scale(plant_image, (int(w*0.3),int(h*0.3)))
                     screen.blit(plant_image,(0.65*w,0.2*h))
-
+                    
         # draw_text('Number of images for each species', font, black, screen, 20, 20)
 
         for event in pygame.event.get():
@@ -200,20 +203,24 @@ def groups():
 
         draw_text('Groups', font, black, screen, 20, 20)
 
+        rectangle = pygame.Rect(w*0.2, h*0.1,w*0.6, h*0.2)
+        pygame.draw.rect(screen, grey, rectangle)
+        draw_text("Coquelicot", pygame.font.SysFont(None, 30), black, screen, 0.3*w,0.15*h)
+
         for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        running = False
-                if arrow_button.collidepoint((mx, my)):
-                    if event.type == MOUSEBUTTONDOWN:
-                        running = False
-                if arrow_button.collidepoint((mx, my)):
-                    screen.blit(arrow_back_grey,(0.9*w,0))
-                else :
-                    screen.blit(arrow_back,(0.9*w,0))
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    running = False
+            if arrow_button.collidepoint((mx, my)):
+                if event.type == MOUSEBUTTONDOWN:
+                    running = False
+        if arrow_button.collidepoint((mx, my)):
+            screen.blit(arrow_back_grey,(0.9*w,0))
+        else :
+            screen.blit(arrow_back,(0.9*w,0))
 
         pygame.display.update()
         mainClock.tick(60)
