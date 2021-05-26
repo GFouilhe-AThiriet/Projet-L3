@@ -1,5 +1,6 @@
 # https://www.youtube.com/watch?v=0RryiSjpJn0
 # https://stackoverflow.com/questions/20002242/how-to-scale-images-to-screen-size-in-pygame
+# https://stackoverflow.com/questions/33296740/unboundlocalerror-local-variable-event-referenced-before-assignment-pygame
 
 import pygame, sys
 import os
@@ -67,10 +68,14 @@ blue = (51,153,255)
 
 ############ Pygales Elements ############
 
-background = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","plantnet_background.jpg"))
-background_width , backgroundheight = background.get_rect().size
-background = pygame.transform.scale(background, (int((background_width*h)/backgroundheight),h))
-background_width , backgroundheight = background.get_rect().size
+list_of_backgrounds = []
+for i in range(1,7):
+    background = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","plantnet_background_"+str(i)+".jpg"))
+    background_width , backgroundheight = background.get_rect().size
+    background = pygame.transform.scale(background, (int((background_width*h)/backgroundheight),h))
+    background_width , backgroundheight = background.get_rect().size
+    list_of_backgrounds+=[background]
+
 margin = w-background_width
 
 arrow_w = int(w*0.1)
@@ -95,12 +100,32 @@ button_color = white # Change it from white to blue to see margin's buttons
 
 def menu():
 
+    background_index = 0
+
     while True:
         screen = pygame.display.set_mode((screen_width,screen_height))
         screen.fill(white)
-        screen.blit(background,(margin,0))
- 
+
         mx, my = pygame.mouse.get_pos()
+
+        background_button = pygame.Rect(margin,0, background_width , backgroundheight)
+        screen.blit(list_of_backgrounds[background_index],(margin,0))
+
+        for event in pygame.event.get():
+            if background_button.collidepoint((mx, my)):
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
+                    if background_index<5:
+                        background_index+=1
+                    else:
+                        background_index=0
+
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
 
         # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h) 
         # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
@@ -138,15 +163,6 @@ def menu():
             img_groups_position_x, img_groups_position_y)
 
         ####### End of Margin #######
-
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
  
         pygame.display.update()
         mainClock.tick(60)
