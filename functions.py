@@ -8,6 +8,7 @@ from pygame.locals import *
 
 # user_paths
 # draw_text
+# possibility_to_return_to_menu
 
 ############# END #############
 
@@ -42,3 +43,22 @@ def draw_text(text, font, color, surface, x, y):
     surface.blit(textobj, textrect)
 
 ###################################################################################
+
+def possibility_to_return_to_menu(running,screen,w,mx, my,arrow_button,arrow_back,arrow_back_grey):
+
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                running = False
+        if arrow_button.collidepoint((mx, my)):
+            if event.type == MOUSEBUTTONDOWN:
+                running = False
+    if arrow_button.collidepoint((mx, my)):
+        screen.blit(arrow_back_grey,(0.9*w,0))
+    else :
+        screen.blit(arrow_back,(0.9*w,0))
+
+    return running

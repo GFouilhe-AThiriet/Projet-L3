@@ -171,20 +171,8 @@ def groups():
         pygame.draw.rect(screen, grey, rectangle)
         draw_text("Coquelicot", pygame.font.SysFont(None, 30), black, screen, 0.3*w,0.15*h)
         
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    running = False
-            if arrow_button.collidepoint((mx, my)):
-                if event.type == MOUSEBUTTONDOWN:
-                    running = False
-        if arrow_button.collidepoint((mx, my)):
-            screen.blit(arrow_back_grey,(0.9*w,0))
-        else :
-            screen.blit(arrow_back,(0.9*w,0))
+        running = possibility_to_return_to_menu(running,screen,w,mx, my,
+        arrow_button,arrow_back,arrow_back_grey)
 
         pygame.display.update()
         mainClock.tick(60)
@@ -198,7 +186,7 @@ def Images():
 
     while running:
         screen.fill(white)
-        arrow_button = pygame.Rect(0.9*w,0, w*0.1 , h*0.1)
+        arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
 
         screen.blit(images_repartition,(0.06*w,0.1*h))
 
@@ -223,30 +211,18 @@ def Images():
                 if number_images>0:
                     plant_image_jpg_name = os.listdir()[0]
                     plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
-                    plant_image = pygame.transform.scale(plant_image, (int(w*0.3),int(h*0.3)))
+                    plant_image = pygame.transform.scale(plant_image, (int(w*0.3),int(w*0.3)))
                     screen.blit(plant_image,(0.65*w,0.2*h))
                     
         # draw_text('Number of images for each species', medium_font, black, screen, 20, 20)
 
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    running = False
-            if arrow_button.collidepoint((mx, my)):
-                if event.type == MOUSEBUTTONDOWN:
-                    running = False
-        if arrow_button.collidepoint((mx, my)):
-            screen.blit(arrow_back_grey,(0.9*w,0))
-        else :
-            screen.blit(arrow_back,(0.9*w,0))
+        running = possibility_to_return_to_menu(running,screen,w,mx, my,
+        arrow_button,arrow_back,arrow_back_grey)
 
         pygame.display.update()
         mainClock.tick(60)
 
 #### End of Number of images for each species ###
 
-groups()
+menu()
 
