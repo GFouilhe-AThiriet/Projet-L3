@@ -5,7 +5,7 @@ import pygame, sys
 import os
 import pandas as pd
 
-User = "Aurélien"
+User = "Guilhem"
 
 if User=="Aurélien":
     path_to_train = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
@@ -14,7 +14,7 @@ if User=="Aurélien":
 elif User=="Guilhem":
     path_to_train = os.path.join('C:/','Plantnet_project','plantnet_subset')
     path_to_classnames = os.path.join('C:/','Plantnet_project')
-    path_to_folder=os.path.join("...")
+    path_to_folder= os.path.join('C:','\\Users\guilh\OneDrive\Documents\GitHub\Projet-L3')
 elif User=="Joseph":
     path_to_train = os.path.join("/home","jsalmon","Documents","Datasets","train")
     path_to_classnames = os.path.join("/home","jsalmon","Documents","...")
@@ -24,7 +24,6 @@ elif User=="Camille":
     path_to_classnames = os.path.join("...")
     path_to_folder=os.path.join("...")
 
-path_to_folder=os.path.join('C:','\\Users','lyz50',"documents","Github","Projet-L3")
 
 #Dataframe with index, id_species, species_name, Images (number of images) sorted by decreasing number of images 
 url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/data.csv'
@@ -94,8 +93,8 @@ def menu():
         screen.blit(background,(0,0))
  
         mx, my = pygame.mouse.get_pos()
-        draw_text("(x="+str(mx)+", y="+str(my)+")", font, white, screen, 0,0.6*h)
-        draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")", font, white, screen, 0,0.7*h)
+        #draw_text("(x="+str(mx)+", y="+str(my)+")", font, white, screen, 0,0.6*h)
+        #draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")", font, white, screen, 0,0.7*h)
 
         # reference_square = pygame.Rect(w*0.8, h*0.1 , w*0.1, h*0.1)# x_pos,y_pos,width,height
         # pygame.draw.rect(screen, (255, 255, 255), reference_square)
@@ -146,8 +145,8 @@ def Images():
         screen.blit(images_repartition,(0.06*w,0.1*h))
 
         mx, my = pygame.mouse.get_pos()
-        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h)
-        draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")", font, black, screen, 0,0.7*h)
+        #draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h)
+        #draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")", font, black, screen, 0,0.7*h)
 
         if 130<=mx<=660:
             abscisses=int(((mx-130)/(660-130))*1080)
