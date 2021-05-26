@@ -8,16 +8,13 @@ import pandas as pd
 from functions import *
 from pygame.locals import *
 
-### Users' Parameters ###
+############ Users' Parameters ############
 
 # Complete the required paths in functions.py and then enter your name :
 
 User = "Aurélien"
 
-screen_width = 1400 # 1400 with 0.57 ratio might be a good size
-ratio=0.57
-
-### End of Users' Parameters ###
+############ End of Users' Parameters ############
 
 path_to_train, path_to_classnames, path_to_folder = user_paths(User)
 
@@ -27,7 +24,13 @@ path_to_train, path_to_classnames, path_to_folder = user_paths(User)
 url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
 data = pd.read_csv(url)
 
-### Global Setup ###
+############ Global Setup ############
+
+screen_width = 1400 # 1400 with 0.57 ratio might be a good size
+ratio = 0.57
+
+# NB : text font won't be affected by the size of the Window.
+# Thus, you might have to change the global font manually below
 
 mainClock = pygame.time.Clock()
 pygame.init()
@@ -39,77 +42,102 @@ pygame.display.set_icon(logo)
 window_name = "Pl@ntNet"
 pygame.display.set_caption(window_name)
 
-r=ratio
+r = ratio
 screen_height = int(screen_width*r)
 
 w , h = screen_width , screen_height
 
 screen = pygame.display.set_mode((screen_width,screen_height))
 
-### End of Global Setup ###
+############ End of Global Setup ############
 
-#### Fonts and colors ####
+############ Fonts and Colors ############
 
-medium_font = pygame.font.SysFont(None, 30)
+medium_font = pygame.font.SysFont(None, 27)
 big_font = pygame.font.SysFont(None, 50)
+
+font = medium_font
 
 white = (255,255,255)
 black = (0,0,0)
 grey = (96,119,117)
+dark_grey = (64,64,64)
+green = (0,200,0)
+blue = (51,153,255)
 
-#### Pygales Elements ####
+############ Pygales Elements ############
 
 background = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","plantnet_background.jpg"))
-background = pygame.transform.scale(background, (screen_width,screen_height))
+background_width , backgroundheight = background.get_rect().size
+background = pygame.transform.scale(background, (int((background_width*h)/backgroundheight),h))
+background_width , backgroundheight = background.get_rect().size
+margin = w-background_width
 
+arrow_w = int(w*0.1)
+arrow_h =  int(w*0.08)
 arrow_back = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","arrow_back.png"))
-arrow_back = pygame.transform.scale(arrow_back, (int(w*0.1),int(h*0.1)))
+arrow_back = pygame.transform.scale(arrow_back, (arrow_w, arrow_h))
 arrow_back_grey = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","arrow_back_grey.png"))
-arrow_back_grey = pygame.transform.scale(arrow_back_grey, (int(w*0.1),int(h*0.1)))
+arrow_back_grey = pygame.transform.scale(arrow_back_grey, (arrow_w,arrow_h))
 
 images_repartition = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","images_for_each_species.png"))
 images_repartition_width = int(w*r)
 images_repartition_height = int(h*r)
 images_repartition = pygame.transform.scale(images_repartition,(images_repartition_width,images_repartition_height))
 
-#### MENU #### 
+button_color = white # Change it from white to blue to see margin's buttons
+
+##############################################################################
+################################################## Main part of the code below
+##############################################################################
+
+############ MENU ############
 
 def menu():
-    
+
     while True:
         screen = pygame.display.set_mode((screen_width,screen_height))
-        screen.fill((0,0,0))
-        screen.blit(background,(0,0))
+        screen.fill(white)
+        screen.blit(background,(margin,0))
  
         mx, my = pygame.mouse.get_pos()
 
-        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, white, screen, 0,0.6*h)
-        # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")", font, white, screen, 0,0.7*h)
+        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h) 
+        # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
+        # font, black, screen, 0,0.7*h)
+        # Useful to see positions when placing things
 
-        # reference_square = pygame.Rect(w*0.8, h*0.1 , w*0.1, h*0.1)# x_pos,y_pos,width,height
-        # pygame.draw.rect(screen, (255, 255, 255), reference_square)
+        ####### Margin #######
 
-        Images_button = pygame.Rect(w*0.1, h*0.1,w*0.8, h*0.1)
-        pygame.draw.rect(screen, (255, 255, 255), Images_button)
+        Images_button = pygame.Rect(0, h*0.1, margin, h*0.1)
+        pygame.draw.rect(screen, button_color, Images_button)
+        img_txt_position_x = w*0.01
+        img_txt_position_y = h* 0.135
 
-        #Number of images for each species
         if Images_button.collidepoint((mx, my)):
-            draw_text('Number of images for each species', medium_font, grey, screen, 0.13*w, 0.13*h)
+            draw_text('Number of images for each species', font, grey, screen, 
+            img_txt_position_x, img_txt_position_y)
             if event.type == MOUSEBUTTONDOWN:
                 Images()
         else:
-            draw_text('Number of images for each species', medium_font, black, screen, 0.13*w, 0.13*h)
+            draw_text('Number of images for each species', font, black, screen,
+            img_txt_position_x, img_txt_position_y)
 
-        #Groups
-        Groups_button = pygame.Rect(w*0.1, h*0.3,w*0.2 , h*0.1)
-        pygame.draw.rect(screen, (255, 255, 255), Groups_button)
+        Groups_button = pygame.Rect(0, h*0.25,margin, h*0.1)
+        pygame.draw.rect(screen, button_color, Groups_button)
+        img_groups_position_x = w*0.1
+        img_groups_position_y = h*0.29
 
         if Groups_button.collidepoint((mx, my)):
-            draw_text('Groups', medium_font, grey, screen, 0.13*w, 0.33*h)
+            draw_text('Groups', font, grey, screen,
+            img_groups_position_x, img_groups_position_y)
             if event.type == MOUSEBUTTONDOWN:
                 groups()
         else:
-            draw_text('Groups', medium_font, black, screen, 0.13*w, 0.33*h)
+            draw_text('Groups', font, black, screen,
+            img_groups_position_x, img_groups_position_y)
+
+        ####### End of Margin #######
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -127,10 +155,13 @@ def menu():
 #### GROUPS ###
 
 def groups():
+
     running = True
-    while running:
+
+    while running :
+
         screen.fill(white)
-        arrow_button = pygame.Rect(0.9*w,0, w*0.1 , h*0.1)
+        arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
 
         mx, my = pygame.mouse.get_pos()
 
@@ -217,5 +248,5 @@ def Images():
 
 #### End of Number of images for each species ###
 
-menu()
+groups()
 
