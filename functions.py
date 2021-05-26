@@ -2,11 +2,12 @@ import pygame, sys
 import os
 import pandas as pd
 
+from pygame.locals import *
+
 ###### List of functions #####
 
 # user_paths
 # draw_text
-# return_main_menu_possibility()
 
 ############# END #############
 
@@ -41,19 +42,3 @@ def draw_text(text, font, color, surface, x, y):
     surface.blit(textobj, textrect)
 
 ###################################################################################
-
-def return_main_menu_possibility(arrow_back,arrow_back_grey,w,r):
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
-                running = False
-        if arrow_button.collidepoint((mx, my)):
-            if event.type == MOUSEBUTTONDOWN:
-                running = False
-    if arrow_button.collidepoint((mx, my)):
-        screen.blit(arrow_back_grey,(0.9*w,0))
-    else :
-        screen.blit(arrow_back,(0.9*w,0))

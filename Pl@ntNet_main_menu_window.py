@@ -6,8 +6,11 @@ import os
 import pandas as pd
 
 from functions import *
+from pygame.locals import *
 
 ### Users' Parameters ###
+
+# Complete the required paths in functions.py and then enter your name :
 
 User = "Aurélien"
 
@@ -21,13 +24,12 @@ path_to_train, path_to_classnames, path_to_folder = user_paths(User)
 # Dataframe with index, id_species, species_name, Images (number of images)
 # sorted by decreasing number of images 
 
-url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/data.csv'
+url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
 data = pd.read_csv(url)
 
 ### Global Setup ###
 
 mainClock = pygame.time.Clock()
-from pygame.locals import *
 pygame.init()
 
 logo = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_logo.png"))
@@ -137,7 +139,7 @@ def groups():
         rectangle = pygame.Rect(w*0.2, h*0.1,w*0.6, h*0.2)
         pygame.draw.rect(screen, grey, rectangle)
         draw_text("Coquelicot", pygame.font.SysFont(None, 30), black, screen, 0.3*w,0.15*h)
-
+        
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -216,3 +218,4 @@ def Images():
 #### End of Number of images for each species ###
 
 menu()
+
