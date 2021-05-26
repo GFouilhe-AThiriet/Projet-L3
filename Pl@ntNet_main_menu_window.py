@@ -100,7 +100,7 @@ button_color = white # Change it from white to blue to see margin's buttons
 
 def menu():
 
-    background_index = 0
+    background_index = 3 # Initialisation
 
     while True:
         screen = pygame.display.set_mode((screen_width,screen_height))
@@ -167,34 +167,6 @@ def menu():
         pygame.display.update()
         mainClock.tick(60)
 
-
-#### GROUPS ###
-
-def groups():
-
-    running = True
-
-    while running :
-
-        screen.fill(white)
-        arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
-
-        mx, my = pygame.mouse.get_pos()
-
-        draw_text('Groups', medium_font, black, screen, 20, 20)
-
-        rectangle = pygame.Rect(w*0.2, h*0.1,w*0.6, h*0.2)
-        pygame.draw.rect(screen, grey, rectangle)
-        draw_text("Coquelicot", pygame.font.SysFont(None, 30), black, screen, 0.3*w,0.15*h)
-        
-        running = possibility_to_return_to_menu(running,screen,w,mx, my,
-        arrow_button,arrow_back,arrow_back_grey)
-
-        pygame.display.update()
-        mainClock.tick(60)
-
-#### End of GROUPS ###
-
 #### Number of images for each species ###
 
 def Images():
@@ -207,18 +179,21 @@ def Images():
         screen.blit(images_repartition,(0.06*w,0.1*h))
 
         mx, my = pygame.mouse.get_pos()
-        #draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h)
-        #draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")", medium_font, black, screen, 0,0.7*h)
+        
+        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h)
+        draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
+        medium_font, black, screen, 0,0.7*h)
+        # Useful to see positions when placing things
 
         if 130<=mx<=660:
             abscisses=int(((mx-130)/(660-130))*1080)
             draw_text("abscisses="+str(abscisses), medium_font, black, screen, 0.5*w,0.5*h)
             if 0<=abscisses<=1080:
                 species_name = data.species_name[abscisses]
-                draw_text(species_name, medium_font, black, screen, 0.5*w,0.65*h)
+                draw_text(species_name, font, black, screen, 0.5*w,0.65*h)
 
                 images = data.Images[abscisses]
-                draw_text("Number of Images : "+str(images), medium_font, black, screen, 0.5*w,0.55*h)
+                draw_text("Number of Images : "+str(images), font, black, screen, 0.5*w,0.55*h)
 
                 id_species = data.id_species[abscisses]
                 path_to_DIR = os.path.join(path_to_train,str(id_species))
@@ -239,6 +214,32 @@ def Images():
         mainClock.tick(60)
 
 #### End of Number of images for each species ###
+
+#### GROUPS ###
+
+def groups():
+
+    running = True
+
+    while running :
+
+        screen.fill(white)
+        arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
+
+        mx, my = pygame.mouse.get_pos()
+
+        draw_text('Groups', font, black, screen, w*0.5, 0)
+
+        for i in range(50):
+            draw_text(data.species_group[i], font, black, screen, 0, h*i*0.02)
+        
+        running = possibility_to_return_to_menu(running,screen,w,mx, my,
+        arrow_button,arrow_back,arrow_back_grey)
+
+        pygame.display.update()
+        mainClock.tick(60)
+
+#### End of GROUPS ###
 
 menu()
 
