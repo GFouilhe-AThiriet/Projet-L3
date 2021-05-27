@@ -1,6 +1,9 @@
 # https://www.youtube.com/watch?v=0RryiSjpJn0
 # https://stackoverflow.com/questions/20002242/how-to-scale-images-to-screen-size-in-pygame
 # https://stackoverflow.com/questions/33296740/unboundlocalerror-local-variable-event-referenced-before-assignment-pygame
+# https://stackoverflow.com/questions/34287938/how-to-distinguish-left-click-right-click-mouse-clicks-in-pygame
+# Very interesting : https://www.reddit.com/r/pygame/comments/40873s/could_you_explain_for_event_in_pygameeventget/
+# https://stackoverflow.com/questions/42215932/two-for-event-in-pygame-event-get
 
 import pygame, sys
 import os
@@ -25,6 +28,9 @@ path_to_train, path_to_classnames, path_to_folder = user_paths(User)
 
 url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
 data = pd.read_csv(url)
+
+list_of_groups = list_of_groups(data.species_group)
+print(list_of_groups)
 
 ############ Global Setup ############
 
@@ -219,6 +225,8 @@ def Images():
 
 def groups():
 
+    j = 0
+
     running = True
 
     while running :
@@ -238,26 +246,32 @@ def groups():
         rect = pygame.Rect(0, h*0.06,margin, h*0.1)
         pygame.draw.rect(screen, dark_grey, rect)
 
-        # for event in pygame.event.get():
-        #     if event.type == KEYDOWN:
-        #         if event.key == K_UP:
-        #             print("up")
-        #         if event.key == K_DOWN:
-        #             print("down")
-        #     if mx<margin*0.6:
-        #         if event.type == MOUSEWHEEL:
-        #             print("wheel")
+        list_of_events = pygame.event.get()
 
+        for event in list_of_events:
+            if event.type == KEYDOWN:
+                if event.key == K_UP:
+                    print("up")
+                if event.key == K_DOWN:
+                    print("down")
+            if mx<margin*0.6:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 4 and j>0:
+                        print("wheel up")
+                        j+=-1
+                    if event.button == 5 and j<1080:
+                        print("wheel down")
+                        j+=1
+        
         for i in range(1,40):
             draw_text(data.species_group[i], font, black, screen, 0, h*(i+10)*0.02)
-        
-        running = possibility_to_return_to_menu(running,screen,w,mx, my,
-        arrow_button,arrow_back,arrow_back_grey) ### PB to solve : doesn't work because there is already for event in pygame.event.get(): above
+
+        running = possibility_to_return_to_menu(list_of_events, running,screen,w,mx, my,
+        arrow_button,arrow_back,arrow_back_grey)
 
         pygame.display.update()
         mainClock.tick(60)
 
 #### End of GROUPS ###
 
-menu()
-
+groups()

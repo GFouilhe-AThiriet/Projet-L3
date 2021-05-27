@@ -44,9 +44,9 @@ def draw_text(text, font, color, surface, x, y):
 
 ###################################################################################
 
-def possibility_to_return_to_menu(running,screen,w,mx, my,arrow_button,arrow_back,arrow_back_grey):
+def possibility_to_return_to_menu(list_of_events,running,screen,w,mx, my,arrow_button,arrow_back,arrow_back_grey):
 
-    for event in pygame.event.get():
+    for event in list_of_events:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
@@ -62,3 +62,18 @@ def possibility_to_return_to_menu(running,screen,w,mx, my,arrow_button,arrow_bac
         screen.blit(arrow_back,(0.9*w,0))
 
     return running
+
+###################################################################################
+
+def list_of_groups(serie):
+    a=[]
+    for i in range(len(serie)):
+        switch=0
+        for j in range(len(a)):
+            if a[j]==serie[i]:
+                    switch=1
+        if switch==0:
+            a+=[serie[i]]
+    return a
+
+# to do : sorting the list by decreasing numer of species ?
