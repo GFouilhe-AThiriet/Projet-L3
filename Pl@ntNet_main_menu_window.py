@@ -87,10 +87,27 @@ margin = w-background_width
 
 arrow_w = int(w*0.1)
 arrow_h =  int(w*0.08)
+
 arrow_back = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","arrow_back.png"))
 arrow_back = pygame.transform.scale(arrow_back, (arrow_w, arrow_h))
+
 arrow_back_grey = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","arrow_back_grey.png"))
 arrow_back_grey = pygame.transform.scale(arrow_back_grey, (arrow_w,arrow_h))
+
+right_arrow_size = int(arrow_w*0.6)
+
+grey_right_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","grey_right_arrow.png"))
+grey_right_arrow = pygame.transform.scale(grey_right_arrow, (right_arrow_size,right_arrow_size))
+
+black_right_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","black_right_arrow.png"))
+black_right_arrow = pygame.transform.scale(black_right_arrow, (right_arrow_size,right_arrow_size))
+
+grey_left_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","grey_left_arrow.png"))
+grey_left_arrow = pygame.transform.scale(grey_left_arrow, (right_arrow_size,right_arrow_size))
+
+black_left_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","black_left_arrow.png"))
+black_left_arrow = pygame.transform.scale(black_left_arrow, (right_arrow_size,right_arrow_size))
+
 
 images_repartition = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","images_for_each_species.png"))
 images_repartition_width = int(w*r)
@@ -232,7 +249,7 @@ def groups():
     interactive_text = "Enter a group name"
     list_of_species = ["not initialised"]
 
-    switch = 1
+    page = 1
 
     running = True
 
@@ -251,10 +268,9 @@ def groups():
         medium_font, black, screen, 0.8*w,0)
         # Useful to see positions when placing things
 
-        draw_text('Groups', font, black, screen, w*0.09, 0.18*h)
-        draw_text(interactive_text, font, black, screen, 0, h*0.1)
-
         list_of_events = pygame.event.get()
+
+        ### Scrolling list ###
 
         for event in list_of_events:
             if event.type == KEYDOWN:
@@ -263,7 +279,7 @@ def groups():
                 if event.key == K_DOWN and j<len(list_of_groups)-40:
                     j+=1
 
-            if mx<margin*0.6:
+            if mx<margin*0.6: 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 4 and j>0:
                         j+=-1
@@ -278,25 +294,73 @@ def groups():
                                     if data.species_group[k] == actual_group :
                                         list_of_species += [data.species_name[k]]
 
-        draw_text("Group : ", font, black, screen, margin, h*11*0.02)
-        draw_text(actual_group, font, black, screen, margin+w*0.05, h*11*0.02)
+           ### End of the Scrolling list ###
 
-        for i in range(0,len(list_of_species)):
-                draw_text(list_of_species[i], font, black, screen, w*0.5, h*i*0.02)
-
-        for i in range(1,40):
-            draw_text(list_of_groups[i+j], font, black, screen, 0, h*(i+10)*0.02)
-
-        ### FUTURE DISPLAYED PICTURES ###
+        ### Displayed Displayed Global Text ###
+        
+        draw_text('Groups', font, black, screen, w*0.09, 0.18*h)
+        draw_text(interactive_text, font, black, screen, 0, h*0.1)
 
         interval_w = 0.02
         interval_h = 0.05
 
+        draw_text("Group : "+actual_group+".", font, black, screen, margin, h*11*0.02)
+        draw_text("Number of species : "+str(len(list_of_species)), font, black, screen,
+        margin+(0.15+interval_w)*w, h*11*0.02)
+
+        # for i in range(0,len(list_of_species)):
+        #         draw_text(list_of_species[i], font, black, screen, w*0.5, h*i*0.02)
+        # Let's keep that to control groups' species if necessary
+
+        for i in range(1,40): # Displa
+            draw_text(list_of_groups[i+j], font, black, screen, 0, h*(i+10)*0.02)
+
+        ### End of Displayed Global Text ###
+
+        ### FUTURE DISPLAYED PICTURES ###
+        
+        additional_color = green # Change it from white to green to see additional buttons
+
+        more_button = pygame.Rect(0.92*w,0.7475*h, right_arrow_size, right_arrow_size)
+        pygame.draw.rect(screen, additional_color, more_button)
+
+        previous_button = pygame.Rect(0.165*w,0.7475*h, right_arrow_size, right_arrow_size)
+        pygame.draw.rect(screen, additional_color, previous_button)
+
+        counter = 0
         for p in range(2):
             for i in range(4):
                 rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
                 pygame.draw.rect(screen, button_color, rect)
-                draw_text("species_name"+str(i), font, black, screen, margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+                if (counter+(page-1)*8)<len(list_of_species):
+                    draw_text(list_of_species[counter+(page-1)*8], font, black, screen, margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+                    counter+=1
+
+        ### If there are more than 8 images to display ###
+
+        if page > 1: # need to have the possibility to come back to the previous window
+            for event in list_of_events:
+                if previous_button.collidepoint((mx, my)):
+                    if event.type == MOUSEBUTTONDOWN:
+                        page+= -1
+            if previous_button.collidepoint((mx, my)):
+                screen.blit(grey_left_arrow,(0.165*w,0.7475*h))
+            else :
+                screen.blit(black_left_arrow,(0.165*w,0.7475*h))
+
+        if (len(list_of_species)-8*page)>=1: # then, need to have an additional window
+            for event in list_of_events:
+                if more_button.collidepoint((mx, my)):
+                    if event.type == MOUSEBUTTONDOWN:
+                        page += 1
+            if more_button.collidepoint((mx, my)):
+                screen.blit(grey_right_arrow,(0.92*w,0.7475*h))
+            else :
+                screen.blit(black_right_arrow,(0.92*w,0.7475*h))
+
+        ### If there are more than 8 images to display ###
+
+        ### End of FUTURE DISPLAYED PICTURES ###
 
         running = possibility_to_return_to_menu(list_of_events, running,screen,w, mx, my,
         arrow_button,arrow_back,arrow_back_grey)
@@ -306,4 +370,4 @@ def groups():
 
 #### End of GROUPS ###
 
-groups()
+menu()

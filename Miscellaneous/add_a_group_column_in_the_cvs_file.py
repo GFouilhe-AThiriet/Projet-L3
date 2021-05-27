@@ -27,8 +27,7 @@ for i in range(len(L)):
     if interrupteur==0:
         a+=[L[i]]
 
-print(a)
-print(len(a))
+for 
 
 # data = pd.read_csv('data.csv')
 # data.insert(2, "species_group", group)
