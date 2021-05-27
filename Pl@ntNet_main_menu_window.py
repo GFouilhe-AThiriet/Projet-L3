@@ -97,7 +97,7 @@ images_repartition_width = int(w*r)
 images_repartition_height = int(h*r)
 images_repartition = pygame.transform.scale(images_repartition,(images_repartition_width,images_repartition_height))
 
-button_color = white # Change it from white to blue to see margin's buttons
+button_color = blue # Change it from white to blue to see margin's buttons
 
 ##############################################################################
 ################################################## Main part of the code below
@@ -230,7 +230,7 @@ def groups():
     j = 0
     actual_group = "not initialised"
     interactive_text = "Enter a group name"
-    list_of_species = "not initialised"
+    list_of_species = ["not initialised"]
 
     switch = 1
 
@@ -244,14 +244,14 @@ def groups():
         mx, my = pygame.mouse.get_pos()
         
         rect = pygame.Rect(0, h*0.06,margin, h*0.1)
-        pygame.draw.rect(screen, blue, rect)
+        pygame.draw.rect(screen, button_color, rect)
 
         draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.6*h)
         draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
-        medium_font, black, screen, 0.8*w,0.7*h)
+        medium_font, black, screen, 0.8*w,0)
         # Useful to see positions when placing things
 
-        draw_text('Groups', font, black, screen, w*0.5, 0)
+        draw_text('Groups', font, black, screen, w*0.09, 0.18*h)
         draw_text(interactive_text, font, black, screen, 0, h*0.1)
 
         list_of_events = pygame.event.get()
@@ -278,16 +278,27 @@ def groups():
                                     if data.species_group[k] == actual_group :
                                         list_of_species += [data.species_name[k]]
 
-        draw_text("Group : ", font, black, screen, margin+0, h*11*0.02)
+        draw_text("Group : ", font, black, screen, margin, h*11*0.02)
         draw_text(actual_group, font, black, screen, margin+w*0.05, h*11*0.02)
 
         for i in range(0,len(list_of_species)):
-                draw_text(list_of_species[i], font, black, screen, w*0.5, h*(i+10)*0.02)
+                draw_text(list_of_species[i], font, black, screen, w*0.5, h*i*0.02)
 
         for i in range(1,40):
             draw_text(list_of_groups[i+j], font, black, screen, 0, h*(i+10)*0.02)
 
-        running = possibility_to_return_to_menu(list_of_events, running,screen,w,mx, my,
+        ### FUTURE DISPLAYED PICTURES ###
+
+        interval_w = 0.02
+        interval_h = 0.05
+
+        for p in range(2):
+            for i in range(4):
+                rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
+                pygame.draw.rect(screen, button_color, rect)
+                draw_text("species_name"+str(i), font, black, screen, margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+
+        running = possibility_to_return_to_menu(list_of_events, running,screen,w, mx, my,
         arrow_button,arrow_back,arrow_back_grey)
 
         pygame.display.update()
@@ -295,4 +306,4 @@ def groups():
 
 #### End of GROUPS ###
 
-menu()
+groups()
