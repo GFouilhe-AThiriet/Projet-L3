@@ -48,6 +48,8 @@ Update 11/04 by Guilhem :
 I cleaned the code by removing unnecessary features, simplifying some lines, formatted comments and created a separated "doc.txt" to save doc info on tools we use.
 I also added the actual names of species on the picture displayed instead of their id.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Update 22/05 by Au. : Tentative to have a fluider display with Altair. Altair does open an internet window from VSC where the graph is displayed. I have tried to have an intern display but it seems that it does not work with VSC. I thought that I had found a possibility but the code didn't work and then, when I looked in some discussions of 2020 in StackOverflow, some people who both seemed to know programmation better than me were saying that the documentation indicating that there were a possiblity to have an intern display in VSC was not good. So I stopped that and I did it with the window display -which is good, so it's fine.
 
 There are possibilities to display images so I will look into it in the next days. (I might also try to display an interactive horizontal or vertical bar in real time.)
