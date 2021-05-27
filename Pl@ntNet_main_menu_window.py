@@ -141,12 +141,11 @@ def menu():
         if Images_button.collidepoint((mx, my)):
             draw_text('Number of images for each species', font, grey, screen, 
             img_txt_position_x, img_txt_position_y)
-            for event in pygame.event.get():
-                if event.type == MOUSEBUTTONDOWN:
-                    Images()
-                else:
-                    draw_text('Number of images for each species', font, black, screen,
-                    img_txt_position_x, img_txt_position_y)
+            if event.type == MOUSEBUTTONDOWN:
+                Images()
+        else:
+            draw_text('Number of images for each species', font, black, screen,
+            img_txt_position_x, img_txt_position_y)
 
         Groups_button = pygame.Rect(0, h*0.25,margin, h*0.1)
         pygame.draw.rect(screen, button_color, Groups_button)
@@ -156,12 +155,11 @@ def menu():
         if Groups_button.collidepoint((mx, my)):
             draw_text('Groups', font, grey, screen,
             img_groups_position_x, img_groups_position_y)
-            for event in pygame.event.get():
-                if event.type == MOUSEBUTTONDOWN:
-                    groups()
-                else:
-                    draw_text('Groups', font, black, screen,
-                    img_groups_position_x, img_groups_position_y)
+            if event.type == MOUSEBUTTONDOWN:
+                groups()
+        else:
+            draw_text('Groups', font, black, screen,
+            img_groups_position_x, img_groups_position_y)
 
         ####### End of Margin #######
  
@@ -239,15 +237,15 @@ def groups():
         rect = pygame.Rect(0, h*0.06,margin, h*0.1)
         pygame.draw.rect(screen, dark_grey, rect)
 
-        for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                if event.key == K_UP:
-                    print("up")
-                if event.key == K_DOWN:
-                    print("down")
-            if mx<margin*0.6:
-                if event.type == MOUSEWHEEL:
-                    print("wheel")
+        # for event in pygame.event.get():
+        #     if event.type == KEYDOWN:
+        #         if event.key == K_UP:
+        #             print("up")
+        #         if event.key == K_DOWN:
+        #             print("down")
+        #     if mx<margin*0.6:
+        #         if event.type == MOUSEWHEEL:
+        #             print("wheel")
 
         for i in range(1,40):
             draw_text(data.species_group[i], font, black, screen, 0, h*(i+10)*0.02)
@@ -260,5 +258,5 @@ def groups():
 
 #### End of GROUPS ###
 
-groups()
+menu()
 
