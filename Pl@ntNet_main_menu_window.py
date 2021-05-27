@@ -100,7 +100,7 @@ button_color = white # Change it from white to blue to see margin's buttons
 
 def menu():
 
-    background_index = 3 # Initialisation
+    background_index = 1 # Initialisation
 
     while True:
         screen = pygame.display.set_mode((screen_width,screen_height))
@@ -118,7 +118,6 @@ def menu():
                         background_index+=1
                     else:
                         background_index=0
-
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
@@ -142,11 +141,12 @@ def menu():
         if Images_button.collidepoint((mx, my)):
             draw_text('Number of images for each species', font, grey, screen, 
             img_txt_position_x, img_txt_position_y)
-            if event.type == MOUSEBUTTONDOWN:
-                Images()
-        else:
-            draw_text('Number of images for each species', font, black, screen,
-            img_txt_position_x, img_txt_position_y)
+            for event in pygame.event.get():
+                if event.type == MOUSEBUTTONDOWN:
+                    Images()
+                else:
+                    draw_text('Number of images for each species', font, black, screen,
+                    img_txt_position_x, img_txt_position_y)
 
         Groups_button = pygame.Rect(0, h*0.25,margin, h*0.1)
         pygame.draw.rect(screen, button_color, Groups_button)
@@ -156,11 +156,12 @@ def menu():
         if Groups_button.collidepoint((mx, my)):
             draw_text('Groups', font, grey, screen,
             img_groups_position_x, img_groups_position_y)
-            if event.type == MOUSEBUTTONDOWN:
-                groups()
-        else:
-            draw_text('Groups', font, black, screen,
-            img_groups_position_x, img_groups_position_y)
+            for event in pygame.event.get():
+                if event.type == MOUSEBUTTONDOWN:
+                    groups()
+                else:
+                    draw_text('Groups', font, black, screen,
+                    img_groups_position_x, img_groups_position_y)
 
         ####### End of Margin #######
  
@@ -228,18 +229,36 @@ def groups():
 
         mx, my = pygame.mouse.get_pos()
 
+        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.6*h)
+        draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
+        medium_font, black, screen, 0.8*w,0.7*h)
+        # Useful to see positions when placing things
+
         draw_text('Groups', font, black, screen, w*0.5, 0)
 
-        for i in range(50):
-            draw_text(data.species_group[i], font, black, screen, 0, h*i*0.02)
+        rect = pygame.Rect(0, h*0.06,margin, h*0.1)
+        pygame.draw.rect(screen, dark_grey, rect)
+
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_UP:
+                    print("up")
+                if event.key == K_DOWN:
+                    print("down")
+            if mx<margin*0.6:
+                if event.type == MOUSEWHEEL:
+                    print("wheel")
+
+        for i in range(1,40):
+            draw_text(data.species_group[i], font, black, screen, 0, h*(i+10)*0.02)
         
         running = possibility_to_return_to_menu(running,screen,w,mx, my,
-        arrow_button,arrow_back,arrow_back_grey)
+        arrow_button,arrow_back,arrow_back_grey) ### PB to solve : doesn't work because there is already for event in pygame.event.get(): above
 
         pygame.display.update()
         mainClock.tick(60)
 
 #### End of GROUPS ###
 
-menu()
+groups()
 
