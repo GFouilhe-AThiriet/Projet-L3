@@ -252,6 +252,7 @@ def groups():
 
     j = 0
     actual_group = "not initialised"
+    index_actual_group = 0
     interactive_text = "Enter a group name"
     list_of_species = ["not initialised"]
 
@@ -299,6 +300,7 @@ def groups():
                         for i in range(40):
                             if my>h*(i+10)*0.02 and my<h*(i+11)*0.02:
                                 actual_group = list_of_groups[i+j]
+                                index_actual_group = i+j
                                 list_of_species = []
                                 for k in range(len(data)):
                                     if data.species_group[k] == actual_group :
@@ -338,15 +340,30 @@ def groups():
 
         # Display species' photos and names
 
+        list_of_species_for_the_actual_group = id_species_per_group[index_actual_group]
+
         counter = 0
 
         for p in range(2):
             for i in range(4):
                 if (counter+(page-1)*8)<len(list_of_species):
 
-                    rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
-                    pygame.draw.rect(screen, button_color, rect)
-                    # Let's keep these rectangles; there are very useful if an error occurs
+                    # rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
+                    # pygame.draw.rect(screen, button_color, rect)
+                    # Let's keep these rectangles in comments;
+                    # There are very useful to understand the code
+
+                    path_to_DIR = os.path.join(path_to_train,str(list_of_species_for_the_actual_group[counter+(page-1)*8]))
+
+                    os.chdir(path_to_DIR)
+
+                    number_images = len(os.listdir())
+
+                    if number_images > 0 :
+                        plant_image_jpg_name = os.listdir()[0]
+                        plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
+                        plant_image = pygame.transform.scale(plant_image, (int(w*0.15),int(w*0.15)))
+                        screen.blit(plant_image,(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
 
                     draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
                     margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
