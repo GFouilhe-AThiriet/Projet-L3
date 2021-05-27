@@ -277,8 +277,6 @@ def groups():
                                 for k in range(len(data)):
                                     if data.species_group[k] == actual_group :
                                         list_of_species += [data.species_name[k]]
-                                print(list_of_species)
-
 
         draw_text("Group : ", font, black, screen, margin+0, h*11*0.02)
         draw_text(actual_group, font, black, screen, margin+w*0.05, h*11*0.02)

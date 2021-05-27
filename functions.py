@@ -9,6 +9,7 @@ from pygame.locals import *
 # user_paths
 # draw_text
 # possibility_to_return_to_menu
+# list_of_groups(serie)
 
 ############# END #############
 
