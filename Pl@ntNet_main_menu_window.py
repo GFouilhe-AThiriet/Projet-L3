@@ -30,7 +30,6 @@ url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscel
 data = pd.read_csv(url)
 
 list_of_groups = list_of_groups(data.species_group)
-print(list_of_groups)
 
 ############ Global Setup ############
 
@@ -226,6 +225,7 @@ def Images():
 def groups():
 
     j = 0
+    middle_text = "middle text"
 
     running = True
 
@@ -250,21 +250,25 @@ def groups():
 
         for event in list_of_events:
             if event.type == KEYDOWN:
-                if event.key == K_UP:
-                    print("up")
-                if event.key == K_DOWN:
-                    print("down")
+                if event.key == K_UP and j>0:
+                    j+=-1
+                if event.key == K_DOWN and j<len(list_of_groups)-40:
+                    j+=1
             if mx<margin*0.6:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 4 and j>0:
-                        print("wheel up")
                         j+=-1
-                    if event.button == 5 and j<1080:
-                        print("wheel down")
+                    if event.button == 5 and j<len(list_of_groups)-40:
                         j+=1
-        
+                    if event.button == 1:
+                        for i in range(40):
+                            if my>h*(i+10)*0.02 and my<h*(i+11)*0.02:
+                                middle_text = list_of_groups[i+j]
+
+        draw_text(middle_text, font, black, screen, w*0.5, h*0.5)
+
         for i in range(1,40):
-            draw_text(data.species_group[i], font, black, screen, 0, h*(i+10)*0.02)
+            draw_text(list_of_groups[i+j], font, black, screen, 0, h*(i+10)*0.02)
 
         running = possibility_to_return_to_menu(list_of_events, running,screen,w,mx, my,
         arrow_button,arrow_back,arrow_back_grey)
