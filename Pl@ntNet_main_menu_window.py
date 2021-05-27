@@ -191,6 +191,8 @@ def Images():
         medium_font, black, screen, 0,0.7*h)
         # Useful to see positions when placing things
 
+        list_of_events = pygame.event.get()
+
         if 130<=mx<=660:
             abscisses=int(((mx-130)/(660-130))*1080)
             draw_text("abscisses="+str(abscisses), medium_font, black, screen, 0.5*w,0.5*h)
@@ -213,7 +215,7 @@ def Images():
                     
         # draw_text('Number of images for each species', medium_font, black, screen, 20, 20)
 
-        running = possibility_to_return_to_menu(running,screen,w,mx, my,
+        running = possibility_to_return_to_menu(list_of_events, running,screen,w,mx, my,
         arrow_button,arrow_back,arrow_back_grey)
 
         pygame.display.update()
