@@ -5,6 +5,7 @@
 import pygame, sys
 import os
 import pandas as pd
+import numpy as np
 
 from functions import *
 from pygame.locals import *
@@ -100,7 +101,7 @@ button_color = white # Change it from white to blue to see margin's buttons
 
 def menu():
 
-    background_index = 1 # Initialisation
+    background_index = np.random.randint(0,6) # Initialisation
 
     while True:
         screen = pygame.display.set_mode((screen_width,screen_height))
