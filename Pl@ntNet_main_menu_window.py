@@ -31,6 +31,7 @@ url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscel
 data = pd.read_csv(url)
 
 list_of_groups = list_of_groups(data.species_group)
+id_species_per_group = id_species_per_group(data.id_species,data.species_group,list_of_groups)
 
 ############ Global Setup ############
 
@@ -61,6 +62,7 @@ screen = pygame.display.set_mode((screen_width,screen_height))
 
 ############ Fonts and Colors ############
 
+mini_font = pygame.font.SysFont(None, 24)
 medium_font = pygame.font.SysFont(None, 27)
 big_font = pygame.font.SysFont(None, 50)
 
@@ -76,6 +78,7 @@ blue = (51,153,255)
 ############ Pygales Elements ############
 
 list_of_backgrounds = []
+
 for i in range(1,7):
     background = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","plantnet_background_"+str(i)+".jpg"))
     background_width , backgroundheight = background.get_rect().size
@@ -240,6 +243,9 @@ def Images():
 
 #### End of Number of images for each species ###
 
+###################################################################################
+###################################################################################
+
 #### GROUPS ###
 
 def groups():
@@ -248,6 +254,9 @@ def groups():
     actual_group = "not initialised"
     interactive_text = "Enter a group name"
     list_of_species = ["not initialised"]
+
+    interval_w = 0.02
+    interval_h = 0.05
 
     page = 1
 
@@ -263,7 +272,7 @@ def groups():
         rect = pygame.Rect(0, h*0.06,margin, h*0.1)
         pygame.draw.rect(screen, button_color, rect)
 
-        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.6*h)
+        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h)
         draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
         medium_font, black, screen, 0.8*w,0)
         # Useful to see positions when placing things
@@ -286,6 +295,7 @@ def groups():
                     if event.button == 5 and j<len(list_of_groups)-40:
                         j+=1
                     if event.button == 1:
+                        page = 1
                         for i in range(40):
                             if my>h*(i+10)*0.02 and my<h*(i+11)*0.02:
                                 actual_group = list_of_groups[i+j]
@@ -296,13 +306,12 @@ def groups():
 
            ### End of the Scrolling list ###
 
-        ### Displayed Displayed Global Text ###
+        ### Displayed Global Text ###
         
+        # Title and Interactive research text (not active yet)
+
         draw_text('Groups', font, black, screen, w*0.09, 0.18*h)
         draw_text(interactive_text, font, black, screen, 0, h*0.1)
-
-        interval_w = 0.02
-        interval_h = 0.05
 
         draw_text("Group : "+actual_group+".", font, black, screen, margin, h*11*0.02)
         draw_text("Number of species : "+str(len(list_of_species)), font, black, screen,
@@ -312,14 +321,14 @@ def groups():
         #         draw_text(list_of_species[i], font, black, screen, w*0.5, h*i*0.02)
         # Let's keep that to control groups' species if necessary
 
-        for i in range(1,40): # Displa
+        for i in range(1,40): # Display groups' names in the margin
             draw_text(list_of_groups[i+j], font, black, screen, 0, h*(i+10)*0.02)
 
         ### End of Displayed Global Text ###
 
-        ### FUTURE DISPLAYED PICTURES ###
+        ############### SPECIES' NAMES AND PHOTOS IN A GROUP ###############
         
-        additional_color = green # Change it from white to green to see additional buttons
+        additional_color = white # Change it from white to green to see additional buttons
 
         more_button = pygame.Rect(0.92*w,0.7475*h, right_arrow_size, right_arrow_size)
         pygame.draw.rect(screen, additional_color, more_button)
@@ -327,13 +336,21 @@ def groups():
         previous_button = pygame.Rect(0.165*w,0.7475*h, right_arrow_size, right_arrow_size)
         pygame.draw.rect(screen, additional_color, previous_button)
 
+        # Display species' photos and names
+
         counter = 0
+
         for p in range(2):
             for i in range(4):
-                rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
-                pygame.draw.rect(screen, button_color, rect)
                 if (counter+(page-1)*8)<len(list_of_species):
-                    draw_text(list_of_species[counter+(page-1)*8], font, black, screen, margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+
+                    rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
+                    pygame.draw.rect(screen, button_color, rect)
+                    # Let's keep these rectangles; there are very useful if an error occurs
+
+                    draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
+                    margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+
                     counter+=1
 
         ### If there are more than 8 images to display ###
@@ -358,11 +375,9 @@ def groups():
             else :
                 screen.blit(black_right_arrow,(0.92*w,0.7475*h))
 
-        ### If there are more than 8 images to display ###
+        ############### End of SPECIES' NAMES AND PHOTOS IN A GROUP ###############
 
-        ### End of FUTURE DISPLAYED PICTURES ###
-
-        running = possibility_to_return_to_menu(list_of_events, running,screen,w, mx, my,
+        running = possibility_to_return_to_menu(list_of_events, running,screen, w, mx, my,
         arrow_button,arrow_back,arrow_back_grey)
 
         pygame.display.update()

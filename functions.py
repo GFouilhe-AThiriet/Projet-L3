@@ -10,6 +10,7 @@ from pygame.locals import *
 # draw_text
 # possibility_to_return_to_menu
 # list_of_groups(serie)
+# id_species_per_group
 
 ############# END #############
 
@@ -78,3 +79,16 @@ def list_of_groups(serie):
     return a
 
 # to do : sorting the list by decreasing number of species ?
+
+###################################################################################
+
+def id_species_per_group(list_of_id_species,sorted_list_of_species_group,list_of_groups):
+    L = []
+    for i in range(len(list_of_groups)):
+        H = []
+        for j in range(len(sorted_list_of_species_group)):
+            if sorted_list_of_species_group[j] == list_of_groups[i]:
+                H += [list_of_id_species[j]]
+        L += [H]
+    return L
+
