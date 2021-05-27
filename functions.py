@@ -77,4 +77,4 @@ def list_of_groups(serie):
             a+=[serie[i]]
     return a
 
-# to do : sorting the list by decreasing numer of species ?
+# to do : sorting the list by decreasing number of species ?
