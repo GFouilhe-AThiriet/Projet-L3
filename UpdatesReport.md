@@ -55,3 +55,5 @@ There are possibilities to display images so I will look into it in the next day
 Update 24/05 by Au. : Finally I opted for Pygame and as I thought, it is clearly better than the rest to have an interactive display. I created the basics of interactive windows and controls. I also added a new column "groups" in the cvs file in order to complete the step 3.
 
 Update 25/05 by Au. : Today minor updates. I think the Pygame code should be rebuilt properly. Otherwise we'll end up with a 600 lines illigible code.
+
+Update 27/05 by Au. : Code rebuilt properly. I redid a more beautiful presentation of the main window and coded a scrolling group_species list. When you click on it, the name of the species within the selected group are displayed. Still have to see how to display images considering the number of species per group varies.

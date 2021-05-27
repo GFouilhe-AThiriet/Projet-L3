@@ -4,6 +4,7 @@
 # https://stackoverflow.com/questions/34287938/how-to-distinguish-left-click-right-click-mouse-clicks-in-pygame
 # Very interesting : https://www.reddit.com/r/pygame/comments/40873s/could_you_explain_for_event_in_pygameeventget/
 # https://stackoverflow.com/questions/42215932/two-for-event-in-pygame-event-get
+# https://stackoverflow.com/questions/46390231/how-can-i-create-a-text-input-box-with-pygame#:~:text=If%20the%20box%20is%20active,and%20reset%20it%20to%20%27%27%20.
 
 import pygame, sys
 import os
@@ -225,7 +226,11 @@ def Images():
 def groups():
 
     j = 0
-    middle_text = "middle text"
+    actual_group = "not initialised"
+    interactive_text = "Enter a group name"
+    list_of_species = "not initialised"
+
+    switch = 1
 
     running = True
 
@@ -235,6 +240,9 @@ def groups():
         arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
 
         mx, my = pygame.mouse.get_pos()
+        
+        rect = pygame.Rect(0, h*0.06,margin, h*0.1)
+        pygame.draw.rect(screen, blue, rect)
 
         draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.6*h)
         draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
@@ -242,9 +250,7 @@ def groups():
         # Useful to see positions when placing things
 
         draw_text('Groups', font, black, screen, w*0.5, 0)
-
-        rect = pygame.Rect(0, h*0.06,margin, h*0.1)
-        pygame.draw.rect(screen, dark_grey, rect)
+        draw_text(interactive_text, font, black, screen, 0, h*0.1)
 
         list_of_events = pygame.event.get()
 
@@ -254,6 +260,7 @@ def groups():
                     j+=-1
                 if event.key == K_DOWN and j<len(list_of_groups)-40:
                     j+=1
+
             if mx<margin*0.6:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 4 and j>0:
@@ -263,9 +270,19 @@ def groups():
                     if event.button == 1:
                         for i in range(40):
                             if my>h*(i+10)*0.02 and my<h*(i+11)*0.02:
-                                middle_text = list_of_groups[i+j]
+                                actual_group = list_of_groups[i+j]
+                                list_of_species = []
+                                for k in range(len(data)):
+                                    if data.species_group[k] == actual_group :
+                                        list_of_species += [data.species_name[k]]
+                                print(list_of_species)
 
-        draw_text(middle_text, font, black, screen, w*0.5, h*0.5)
+
+        draw_text("Group : ", font, black, screen, margin+0, h*11*0.02)
+        draw_text(actual_group, font, black, screen, margin+w*0.05, h*11*0.02)
+
+        for i in range(0,len(list_of_species)):
+                draw_text(list_of_species[i], font, black, screen, w*0.5, h*(i+10)*0.02)
 
         for i in range(1,40):
             draw_text(list_of_groups[i+j], font, black, screen, 0, h*(i+10)*0.02)
@@ -278,4 +295,4 @@ def groups():
 
 #### End of GROUPS ###
 
-groups()
+menu()
