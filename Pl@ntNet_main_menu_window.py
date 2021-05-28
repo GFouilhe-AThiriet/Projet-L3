@@ -117,7 +117,7 @@ images_repartition_width = int(w*r)
 images_repartition_height = int(h*r)
 images_repartition = pygame.transform.scale(images_repartition,(images_repartition_width,images_repartition_height))
 
-button_color = blue # Change it from white to blue to see margin's buttons
+button_color = white # Change it from white to blue to see margin's buttons
 
 ##############################################################################
 ################################################## Main part of the code below
@@ -253,7 +253,7 @@ def groups():
     j = 0
     actual_group = "not initialised"
     index_actual_group = 0
-    interactive_text = "Enter a group name"
+    interactive_text = "Click on a group name"
     list_of_species = ["not initialised"]
 
     interval_w = 0.02
@@ -313,7 +313,7 @@ def groups():
         # Title and Interactive research text (not active yet)
 
         draw_text('Groups', font, black, screen, w*0.09, 0.18*h)
-        draw_text(interactive_text, font, black, screen, 0, h*0.1)
+        draw_text(interactive_text, font, black, screen, 0.04*w, h*0.1)
 
         draw_text("Group : "+actual_group+".", font, black, screen, margin, h*11*0.02)
         draw_text("Number of species : "+str(len(list_of_species)), font, black, screen,
