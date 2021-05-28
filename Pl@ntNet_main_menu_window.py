@@ -14,7 +14,9 @@ import numpy as np
 from functions import *
 from pygame.locals import *
 
-############ Users' Parameters ############
+##################################################
+
+################ Users' Parameters ###############
 
 # Complete the required paths in functions.py and then enter your name :
 
@@ -23,9 +25,11 @@ User = "Aurélien"
 # If you don't have internet, write False and the species' data will
 # be read from the csv file instead of the online file
 
-internet = True
+internet = False
 
 ############ End of Users' Parameters ############
+
+################## Global Setup ##################
 
 path_to_train, path_to_classnames, path_to_folder = user_paths(User)
 
@@ -36,13 +40,11 @@ if internet == True :
     url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
     data = pd.read_csv(url)
 else:
-    print("ok")
+    data = pd.read_csv(os.path.join(path_to_folder,"Miscellaneous","groups.csv")) 
 
 
 list_of_groups = list_of_groups(data.species_group)
 id_species_per_group = id_species_per_group(data.id_species,data.species_group,list_of_groups)
-
-############ Global Setup ############
 
 screen_width = 1400 # 1400 with 0.57 ratio might be a good size
 ratio = 0.57
@@ -54,7 +56,7 @@ mainClock = pygame.time.Clock()
 pygame.init()
 
 logo = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_logo.png"))
-logo = pygame.transform.scale(logo, (100,100))
+logo = pygame.transform.scale(logo, (32,32))
 
 pygame.display.set_icon(logo)
 window_name = "Pl@ntNet"
@@ -69,7 +71,7 @@ screen = pygame.display.set_mode((screen_width,screen_height))
 
 ############ End of Global Setup ############
 
-############ Fonts and Colors ############
+############# Fonts and Colors ##############
 
 mini_font = pygame.font.SysFont(None, 24)
 medium_font = pygame.font.SysFont(None, 27)
@@ -84,7 +86,15 @@ dark_grey = (64,64,64)
 green = (0,200,0)
 blue = (51,153,255)
 
+button_color = white # Change it from white to blue to see margin's buttons
+
+additional_color = white # Change it from white to green to see additional buttons
+
+############# End of Fonts and Colors ##############
+
 ############ Pygales Elements ############
+
+# Backgrounds :
 
 list_of_backgrounds = []
 
@@ -96,6 +106,8 @@ for i in range(1,7):
     list_of_backgrounds+=[background]
 
 margin = w-background_width
+
+# Arrows :
 
 arrow_w = int(w*0.1)
 arrow_h =  int(w*0.08)
@@ -120,13 +132,22 @@ grey_left_arrow = pygame.transform.scale(grey_left_arrow, (right_arrow_size,righ
 black_left_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","black_left_arrow.png"))
 black_left_arrow = pygame.transform.scale(black_left_arrow, (right_arrow_size,right_arrow_size))
 
+# Number of images for each species :
 
 images_repartition = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","images_for_each_species.png"))
 images_repartition_width = int(w*r)
 images_repartition_height = int(h*r)
 images_repartition = pygame.transform.scale(images_repartition,(images_repartition_width,images_repartition_height))
 
-button_color = white # Change it from white to blue to see margin's buttons
+# Other :
+
+wide_logo = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_wide_logo.png"))
+logo_width , logo_height = wide_logo.get_size()
+coeff = logo_height/logo_width
+wide_logo = pygame.transform.scale(wide_logo, (int(0.5*w),int(w*0.5*coeff)))
+
+no_images = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_logo.png"))
+no_images = pygame.transform.scale(no_images, (int(w*0.15),int(w*0.15)))
 
 ##############################################################################
 ################################################## Main part of the code below
@@ -276,15 +297,17 @@ def groups():
 
         screen.fill(white)
         arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
+        screen.blit(wide_logo,(0.25*w,0))
 
         mx, my = pygame.mouse.get_pos()
         
         rect = pygame.Rect(0, h*0.06,margin, h*0.1)
-        pygame.draw.rect(screen, button_color, rect)
+        # pygame.draw.rect(screen, button_color, rect)
+        # Keep that uncomment please
 
-        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h)
-        draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
-        medium_font, black, screen, 0.8*w,0)
+        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h)
+        # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
+        # medium_font, black, screen, 0.8*w,0)
         # Useful to see positions when placing things
 
         list_of_events = pygame.event.get()
@@ -339,8 +362,6 @@ def groups():
 
         ############### SPECIES' NAMES AND PHOTOS IN A GROUP ###############
         
-        additional_color = white # Change it from white to green to see additional buttons
-
         more_button = pygame.Rect(0.92*w,0.7475*h, right_arrow_size, right_arrow_size)
         pygame.draw.rect(screen, additional_color, more_button)
 
@@ -387,6 +408,9 @@ def groups():
                             if list_of_images_for_the_actual_group[counter] != False:
                                 screen.blit(list_of_images_for_the_actual_group[counter],
                                 (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
+                            else:
+                                screen.blit(no_images,
+                                (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
 
                             draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
                             margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
@@ -425,4 +449,4 @@ def groups():
 
 #### End of GROUPS ###
 
-menu()
+groups()
