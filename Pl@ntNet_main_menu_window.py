@@ -321,7 +321,7 @@ def groups():
     list_of_species = []
 
     plant_representative = np.zeros((2,4),dtype=int)
-    max_plant_representative = 1 # maximum value of plant_representative+1
+    max_plant_representative = 5 # maximum value of plant_representative+1
 
     interval_w = 0.02
     interval_h = 0.05
@@ -480,6 +480,7 @@ def groups():
                 if previous_button.collidepoint((mx, my)):
                     if event.type == MOUSEBUTTONDOWN:
                         page+= -1
+                        switch = 0 # have to load the images of the new page
             if previous_button.collidepoint((mx, my)):
                 screen.blit(grey_left_arrow,(0.165*w,0.7475*h))
             else :
@@ -490,6 +491,7 @@ def groups():
                 if more_button.collidepoint((mx, my)):
                     if event.type == MOUSEBUTTONDOWN:
                         page += 1
+                        switch = 0 # have to load the images of the new page
             if more_button.collidepoint((mx, my)):
                 screen.blit(grey_right_arrow,(0.92*w,0.7475*h))
             else :
