@@ -423,12 +423,18 @@ def groups():
 
             counter = 0
 
+            list_of_rectangles = []
+
             for p in range(2):
+                sub_list_of_rectangles = []
                 for i in range(4):
+
                     if (counter+(page-1)*8)<len(list_of_species):
 
                         rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
-                        pygame.draw.rect(screen, green, rect)
+                        # pygame.draw.rect(screen, green, rect)
+                        # Keep that comment please
+                        sub_list_of_rectangles +=[rect]
 
                         path_to_DIR = os.path.join(path_to_train,str(list_of_species_for_the_actual_group[counter+(page-1)*8]))
 
@@ -436,10 +442,13 @@ def groups():
 
                         number_images = len(os.listdir()) # number of images for ONE species
 
+                        if plant_representative[p][i] > min(number_images-1,max_plant_representative-1):
+                            plant_representative[p][i] = 0
+
                         if number_images > 0 :
                             list_of_images_of_the_same_species = []
                             for m in range(min(number_images,max_plant_representative)):
-                                plant_image_jpg_name = os.listdir()[0]
+                                plant_image_jpg_name = os.listdir()[m]
                                 plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
                                 plant_image = pygame.transform.scale(plant_image, (int(w*0.15),int(w*0.15)))
                                 list_of_images_of_the_same_species += [plant_image]
@@ -448,6 +457,10 @@ def groups():
                             list_of_images_for_the_actual_group += [False] # No images for this species
                             
                         counter+=1
+
+                list_of_rectangles += [sub_list_of_rectangles]
+
+            # print(plant_representative)
 
             switch = 1 # no need to load again the images for Pygame until another group is selected
 
@@ -460,9 +473,10 @@ def groups():
         for p in range(2):
             for i in range(4):
                 if (counter+(page-1)*8)<len(list_of_species):
-
-                    # Display one images and names of each of the species of the group
+                    # Display one image and the species' name
                     if list_of_images_for_the_actual_group[counter] != False:
+                        # print(list_of_images_for_the_actual_group[counter])
+                        # print(plant_representative[p][i])
                         screen.blit(list_of_images_for_the_actual_group[counter][plant_representative[p][i]],
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
                     else:
@@ -471,6 +485,17 @@ def groups():
                     
                     draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
                     margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+                    # End of Display one image and the species' name
+
+                    rect = list_of_rectangles[p][i]
+
+                    for event in list_of_events:
+                        if rect.collidepoint((mx, my)):
+                            if event.type == MOUSEBUTTONDOWN:
+                                if event.button == 3:
+                                    plant_representative[p][i] += 1
+                                    print("ok")
+                                    switch = 0
 
                     counter+=1
 
