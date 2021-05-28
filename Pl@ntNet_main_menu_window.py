@@ -461,7 +461,7 @@ def groups():
             for i in range(4):
                 if (counter+(page-1)*8)<len(list_of_species):
 
-                    # Display one imags of each of the species of the group
+                    # Display one images and names of each of the species of the group
                     if list_of_images_for_the_actual_group[counter] != False:
                         screen.blit(list_of_images_for_the_actual_group[counter][plant_representative[p][i]],
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
@@ -469,6 +469,9 @@ def groups():
                         screen.blit(no_images,
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
                     
+                    draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
+                    margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+
                     counter+=1
 
         ####### End of Display of the images of this group #######
