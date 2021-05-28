@@ -494,7 +494,6 @@ def groups():
                             if event.type == MOUSEBUTTONDOWN:
                                 if event.button == 3:
                                     plant_representative[p][i] += 1
-                                    print("ok")
                                     switch = 0
 
                     counter+=1
