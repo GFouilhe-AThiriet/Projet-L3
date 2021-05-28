@@ -6,4 +6,4 @@ data = pd.read_csv(url)
 
 for i in range (len(data)):
     if data.species_group[i] == "Alliaria":
-        print(data.species_name[i],i)
+        print(data.id_species[i],i)

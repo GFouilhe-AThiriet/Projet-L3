@@ -341,6 +341,7 @@ def groups():
         # Display species' photos and names
 
         list_of_species_for_the_actual_group = id_species_per_group[index_actual_group]
+        list_of_images_for_the_actual_group = []
 
         counter = 0
 
@@ -363,12 +364,25 @@ def groups():
                         plant_image_jpg_name = os.listdir()[0]
                         plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
                         plant_image = pygame.transform.scale(plant_image, (int(w*0.15),int(w*0.15)))
-                        screen.blit(plant_image,(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
-
-                    draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
-                    margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
-
+                        list_of_images_for_the_actual_group += [plant_image]
+                    else :
+                        list_of_images_for_the_actual_group += "no_images_for_this_species"
                     counter+=1
+
+        counter = 0
+
+        for p in range(2):
+                    for i in range(4):
+                        if (counter+(page-1)*8)<len(list_of_species):
+
+                            if list_of_images_for_the_actual_group[counter] != "no_images_for_this_species":
+                                screen.blit(list_of_images_for_the_actual_group[counter],
+                                (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
+
+                            draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
+                            margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+                            
+                            counter+=1
 
         ### If there are more than 8 images to display ###
 
