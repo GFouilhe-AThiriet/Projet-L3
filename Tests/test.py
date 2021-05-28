@@ -117,4 +117,50 @@
 
 # fig.show()
 
-print(int(2!=3))
+# https://www.youtube.com/watch?v=0RryiSjpJn0
+# https://stackoverflow.com/questions/20002242/how-to-scale-images-to-screen-size-in-pygame
+# https://stackoverflow.com/questions/33296740/unboundlocalerror-local-variable-event-referenced-before-assignment-pygame
+# https://stackoverflow.com/questions/34287938/how-to-distinguish-left-click-right-click-mouse-clicks-in-pygame
+# Very interesting : https://www.reddit.com/r/pygame/comments/40873s/could_you_explain_for_event_in_pygameeventget/
+# https://stackoverflow.com/questions/42215932/two-for-event-in-pygame-event-get
+# https://stackoverflow.com/questions/46390231/how-can-i-create-a-text-input-box-with-pygame#:~:text=If%20the%20box%20is%20active,and%20reset%20it%20to%20%27%27%20.
+
+# import pygame, sys
+# import os
+# import pandas as pd
+# import numpy as np
+
+# from functions import *
+
+##################################################
+
+################ Users' Parameters ###############
+
+# # Complete the required paths in functions.py and then enter your name :
+
+# User = "Aurélien"
+
+# # If you don't have internet, write False and the species' data will
+# # be read from the csv file instead of the online file
+
+# internet = False
+
+# ############ End of Users' Parameters ############
+
+# ################## Global Setup ##################
+
+# path_to_train, path_to_classnames, path_to_folder = user_paths(User)
+
+# # Dataframe with index, id_species, species_name, Images (number of images)
+# # sorted by decreasing number of images 
+
+# if internet == True :
+#     url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
+#     data = pd.read_csv(url)
+# else:
+#     data = pd.read_csv(os.path.join(path_to_folder,"Miscellaneous","groups.csv")) 
+
+# path_to_DIR = os.path.join(path_to_train,"1412445")
+# print(path_to_DIR)
+# os.chdir(path_to_DIR)
+# print(os.listdir())

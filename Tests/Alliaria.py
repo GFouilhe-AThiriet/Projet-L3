@@ -6,4 +6,4 @@ data = pd.read_csv(url)
 
 for i in range (len(data)):
     if data.species_group[i] == "Angelica":
-        print(data.id_species[i],data.Images[i],i)
+        print(data.id_species[i],data.species_name[i],data.Images[i])

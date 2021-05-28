@@ -1,11 +1,3 @@
-# https://www.youtube.com/watch?v=0RryiSjpJn0
-# https://stackoverflow.com/questions/20002242/how-to-scale-images-to-screen-size-in-pygame
-# https://stackoverflow.com/questions/33296740/unboundlocalerror-local-variable-event-referenced-before-assignment-pygame
-# https://stackoverflow.com/questions/34287938/how-to-distinguish-left-click-right-click-mouse-clicks-in-pygame
-# Very interesting : https://www.reddit.com/r/pygame/comments/40873s/could_you_explain_for_event_in_pygameeventget/
-# https://stackoverflow.com/questions/42215932/two-for-event-in-pygame-event-get
-# https://stackoverflow.com/questions/46390231/how-can-i-create-a-text-input-box-with-pygame#:~:text=If%20the%20box%20is%20active,and%20reset%20it%20to%20%27%27%20.
-
 import pygame, sys
 import os
 import pandas as pd
@@ -18,6 +10,10 @@ from pygame.locals import *
 
 ################ Users' Parameters ###############
 
+# Note : you have to download the ENTIRE subset named "TRAIN" before lauching this code
+# If you have only downloaded a sample of this subset, the code should not return errors
+# but a standard image will be displayed instead of a missing species' photo.
+
 # Complete the required paths in functions.py and then enter your name :
 
 User = "Aurélien"
@@ -28,6 +24,10 @@ User = "Aurélien"
 internet = False
 
 ############ End of Users' Parameters ############
+
+
+###################################################################################
+###################################################################################
 
 ################## Global Setup ##################
 
@@ -135,16 +135,17 @@ black_left_arrow = pygame.transform.scale(black_left_arrow, (right_arrow_size,ri
 # Number of images for each species :
 
 images_repartition = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","images_for_each_species.png"))
-images_repartition_width = int(w*r)
-images_repartition_height = int(h*r)
-images_repartition = pygame.transform.scale(images_repartition,(images_repartition_width,images_repartition_height))
+images_repartition_width , images_repartition_height = images_repartition.get_size()
+coeff = images_repartition_height/images_repartition_width
+images_repartition = pygame.transform.scale(images_repartition,(int(0.6*w),int(0.6*w*coeff)))
 
 # Other :
 
 wide_logo = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_wide_logo.png"))
 logo_width , logo_height = wide_logo.get_size()
 coeff = logo_height/logo_width
-wide_logo = pygame.transform.scale(wide_logo, (int(0.5*w),int(w*0.5*coeff)))
+wide_logo_1 = pygame.transform.scale(wide_logo, (int(0.3*w),int(w*0.3*coeff)))
+wide_logo_2 = pygame.transform.scale(wide_logo, (int(0.5*w),int(w*0.5*coeff)))
 
 no_images = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_logo.png"))
 no_images = pygame.transform.scale(no_images, (int(w*0.15),int(w*0.15)))
@@ -223,47 +224,80 @@ def menu():
         pygame.display.update()
         mainClock.tick(60)
 
+
+###################################################################################
+###################################################################################
+
 #### Number of images for each species ###
 
 def Images():
+
+    plant_representative = 0
+
     running = True
+
+    a , b = 0.085 , 0.585
+    # y position of the y axis and of the last species' data
+    # on the x axis of the displayed graph
 
     while running:
         screen.fill(white)
         arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
+        screen.blit(wide_logo_1,(0.345*w,h*0.00))
 
-        screen.blit(images_repartition,(0.06*w,0.1*h))
+        screen.blit(images_repartition,(0.01*w,0.15*h)) # the graph
 
         mx, my = pygame.mouse.get_pos()
         
-        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h)
-        draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
-        medium_font, black, screen, 0,0.7*h)
+        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h)
+        # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
+        # medium_font, black, screen, 0.8*w,0)
         # Useful to see positions when placing things
+
+        # rect = pygame.Rect(0.65*w,0.23*h,int(w*0.3),int(w*0.3))
+        # pygame.draw.rect(screen, green, rect)
+        # In order to see the place where the plant image is displayed
+        # Keep that uncomment please
 
         list_of_events = pygame.event.get()
 
-        if 130<=mx<=660:
-            abscisses=int(((mx-130)/(660-130))*1080)
-            draw_text("abscisses="+str(abscisses), medium_font, black, screen, 0.5*w,0.5*h)
+        mxw = mx / w
+
+        if a <= mxw and mxw <=b and my/h>0.23:
+
+            abscisses = int((mxw-a)/(b-a)*1080)
+
+            # draw_text("abscisses="+str(abscisses), medium_font, black, screen, 0.8*w,0.1*h)
+            # Keep also that please
+
             if 0<=abscisses<=1080:
                 species_name = data.species_name[abscisses]
-                draw_text(species_name, font, black, screen, 0.5*w,0.65*h)
+                draw_text("Species : "+species_name, font, black, screen, 0.65*w,0.78*h)
 
                 images = data.Images[abscisses]
-                draw_text("Number of Images : "+str(images), font, black, screen, 0.5*w,0.55*h)
+                draw_text("Number of Images : "+str(images), font, black, screen, 0.65*w,0.81*h)
 
                 id_species = data.id_species[abscisses]
                 path_to_DIR = os.path.join(path_to_train,str(id_species))
                 os.chdir(path_to_DIR)
-                number_images=len(os.listdir())
-                if number_images>0:
-                    plant_image_jpg_name = os.listdir()[0]
+
+                number_images = len(os.listdir()) # first part of gadget to change the plant photo whith right click
+                if plant_representative > number_images-1:
+                    plant_representative = 0
+
+                if number_images>0: # Display of the photo of the plant-species
+                    plant_image_jpg_name = os.listdir()[plant_representative]
                     plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
                     plant_image = pygame.transform.scale(plant_image, (int(w*0.3),int(w*0.3)))
-                    screen.blit(plant_image,(0.65*w,0.2*h))
-                    
-        # draw_text('Number of images for each species', medium_font, black, screen, 20, 20)
+                    screen.blit(plant_image,(0.65*w,0.23*h))
+
+                for event in list_of_events: # second part of the gadget to change the plant representative with right click
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if event.button == 3:
+                            plant_representative += 1
+        else:
+                draw_text("Species : ", font, black, screen, 0.65*w,0.78*h)
+                draw_text("Number of Images : ", font, black, screen, 0.65*w,0.81*h) 
 
         running = possibility_to_return_to_menu(list_of_events, running,screen,w,mx, my,
         arrow_button,arrow_back,arrow_back_grey)
@@ -286,6 +320,9 @@ def groups():
     interactive_text = "Click on a group name"
     list_of_species = []
 
+    plant_representative = 0
+    max_plant_representative = 1 # maximum value of plant_representative+1
+
     interval_w = 0.02
     interval_h = 0.05
 
@@ -297,11 +334,11 @@ def groups():
 
         screen.fill(white)
         arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
-        screen.blit(wide_logo,(0.25*w,0))
+        screen.blit(wide_logo_2,(0.25*w,0))
 
         mx, my = pygame.mouse.get_pos()
         
-        rect = pygame.Rect(0, h*0.06,margin, h*0.1)
+        # rect = pygame.Rect(0, h*0.06,margin, h*0.1)
         # pygame.draw.rect(screen, button_color, rect)
         # Keep that uncomment please
 
@@ -379,8 +416,8 @@ def groups():
             for i in range(4):
                 if (counter+(page-1)*8)<len(list_of_species):
 
-                    # rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
-                    # pygame.draw.rect(screen, button_color, rect)
+                    rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
+                    pygame.draw.rect(screen, green, rect)
                     # Let's keep these rectangles in comments;
                     # There are very useful to understand the code
 
@@ -388,34 +425,41 @@ def groups():
 
                     os.chdir(path_to_DIR)
 
-                    number_images = len(os.listdir())
+                    number_images = len(os.listdir()) # number of images for ONE species
+
+                    if plant_representative > number_images-1:
+                        plant_representative = 0
 
                     if number_images > 0 :
-                        plant_image_jpg_name = os.listdir()[0]
-                        plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
-                        plant_image = pygame.transform.scale(plant_image, (int(w*0.15),int(w*0.15)))
-                        list_of_images_for_the_actual_group += [plant_image]
+                        list_of_images_of_the_same_species = []
+                        for m in range(min(number_images,max_plant_representative)):
+                            plant_image_jpg_name = os.listdir()[0]
+                            plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
+                            plant_image = pygame.transform.scale(plant_image, (int(w*0.15),int(w*0.15)))
+                            list_of_images_of_the_same_species += [plant_image]
+                        list_of_images_for_the_actual_group += [list_of_images_of_the_same_species]
                     else :
                         list_of_images_for_the_actual_group += [False] # No images for this species
+                        
                     counter+=1
 
         counter = 0
 
         for p in range(2):
-                    for i in range(4):
-                        if (counter+(page-1)*8)<len(list_of_species):
+            for i in range(4):
+                if (counter+(page-1)*8)<len(list_of_species):
 
-                            if list_of_images_for_the_actual_group[counter] != False:
-                                screen.blit(list_of_images_for_the_actual_group[counter],
-                                (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
-                            else:
-                                screen.blit(no_images,
-                                (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
+                    if list_of_images_for_the_actual_group[counter] != False:
+                        screen.blit(list_of_images_for_the_actual_group[counter][plant_representative],
+                        (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
+                    else:
+                        screen.blit(no_images,
+                        (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
 
-                            draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
-                            margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
-                            
-                            counter+=1
+                    draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
+                    margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+                    
+                    counter+=1
 
         ### If there are more than 8 images to display ###
 
@@ -449,4 +493,4 @@ def groups():
 
 #### End of GROUPS ###
 
-groups()
+menu()
