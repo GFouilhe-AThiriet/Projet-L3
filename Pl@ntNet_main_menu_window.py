@@ -320,11 +320,14 @@ def groups():
     interactive_text = "Click on a group name"
     list_of_species = []
 
-    plant_representative = 0
+    plant_representative = np.zeros((2,4),dtype=int)
     max_plant_representative = 1 # maximum value of plant_representative+1
 
     interval_w = 0.02
     interval_h = 0.05
+
+    switch = 1 # When a new group is selected, switch takes 0 as a value and Pygame loads the images
+    # of the selected group
 
     page = 1
 
@@ -365,7 +368,11 @@ def groups():
                     if event.button == 5 and j<len(list_of_groups)-40:
                         j+=1
                     if event.button == 1:
+
+                        switch = 0 # in order that the loading of the images is only done once
+
                         page = 1
+
                         for i in range(40):
                             if my>h*(i+10)*0.02 and my<h*(i+11)*0.02:
                                 actual_group = list_of_groups[i+j]
@@ -405,10 +412,48 @@ def groups():
         previous_button = pygame.Rect(0.165*w,0.7475*h, right_arrow_size, right_arrow_size)
         pygame.draw.rect(screen, additional_color, previous_button)
 
-        # Display species' photos and names
+        ######################### Display species' photos and names #########################
 
-        list_of_species_for_the_actual_group = id_species_per_group[index_actual_group]
-        list_of_images_for_the_actual_group = []
+        ### LOADING OF THE IMAGES FOR THE ACTUAL GROUP ###
+
+        if switch == 0: # New group selected; Pygame has to load the images
+
+            list_of_species_for_the_actual_group = id_species_per_group[index_actual_group]
+            list_of_images_for_the_actual_group = []
+
+            counter = 0
+
+            for p in range(2):
+                for i in range(4):
+                    if (counter+(page-1)*8)<len(list_of_species):
+
+                        rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
+                        pygame.draw.rect(screen, green, rect)
+
+                        path_to_DIR = os.path.join(path_to_train,str(list_of_species_for_the_actual_group[counter+(page-1)*8]))
+
+                        os.chdir(path_to_DIR)
+
+                        number_images = len(os.listdir()) # number of images for ONE species
+
+                        if number_images > 0 :
+                            list_of_images_of_the_same_species = []
+                            for m in range(min(number_images,max_plant_representative)):
+                                plant_image_jpg_name = os.listdir()[0]
+                                plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
+                                plant_image = pygame.transform.scale(plant_image, (int(w*0.15),int(w*0.15)))
+                                list_of_images_of_the_same_species += [plant_image]
+                            list_of_images_for_the_actual_group += [list_of_images_of_the_same_species]
+                        else :
+                            list_of_images_for_the_actual_group += [False] # No images for this species
+                            
+                        counter+=1
+
+            switch = 1 # no need to load again the images for Pygame until another group is selected
+
+        ### End of LOADING OF THE IMAGES FOR THE ACTUAL GROUP ###
+
+        ####### Display of the images of this group #######
 
         counter = 0
 
@@ -416,50 +461,17 @@ def groups():
             for i in range(4):
                 if (counter+(page-1)*8)<len(list_of_species):
 
-                    rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
-                    pygame.draw.rect(screen, green, rect)
-                    # Let's keep these rectangles in comments;
-                    # There are very useful to understand the code
-
-                    path_to_DIR = os.path.join(path_to_train,str(list_of_species_for_the_actual_group[counter+(page-1)*8]))
-
-                    os.chdir(path_to_DIR)
-
-                    number_images = len(os.listdir()) # number of images for ONE species
-
-                    if plant_representative > number_images-1:
-                        plant_representative = 0
-
-                    if number_images > 0 :
-                        list_of_images_of_the_same_species = []
-                        for m in range(min(number_images,max_plant_representative)):
-                            plant_image_jpg_name = os.listdir()[0]
-                            plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
-                            plant_image = pygame.transform.scale(plant_image, (int(w*0.15),int(w*0.15)))
-                            list_of_images_of_the_same_species += [plant_image]
-                        list_of_images_for_the_actual_group += [list_of_images_of_the_same_species]
-                    else :
-                        list_of_images_for_the_actual_group += [False] # No images for this species
-                        
-                    counter+=1
-
-        counter = 0
-
-        for p in range(2):
-            for i in range(4):
-                if (counter+(page-1)*8)<len(list_of_species):
-
+                    # Display one imags of each of the species of the group
                     if list_of_images_for_the_actual_group[counter] != False:
-                        screen.blit(list_of_images_for_the_actual_group[counter][plant_representative],
+                        screen.blit(list_of_images_for_the_actual_group[counter][plant_representative[p][i]],
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
                     else:
                         screen.blit(no_images,
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
-
-                    draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
-                    margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
                     
                     counter+=1
+
+        ####### End of Display of the images of this group #######
 
         ### If there are more than 8 images to display ###
 

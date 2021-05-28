@@ -164,3 +164,6 @@
 # print(path_to_DIR)
 # os.chdir(path_to_DIR)
 # print(os.listdir())
+
+import numpy as np
+print(np.zeros((2,4),dtype=int)[1][3])
