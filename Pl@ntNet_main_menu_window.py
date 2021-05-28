@@ -20,6 +20,11 @@ from pygame.locals import *
 
 User = "Aurélien"
 
+# If you don't have internet, write False and the species' data will
+# be read from the csv file instead of the online file
+
+internet = True
+
 ############ End of Users' Parameters ############
 
 path_to_train, path_to_classnames, path_to_folder = user_paths(User)
@@ -27,8 +32,12 @@ path_to_train, path_to_classnames, path_to_folder = user_paths(User)
 # Dataframe with index, id_species, species_name, Images (number of images)
 # sorted by decreasing number of images 
 
-url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
-data = pd.read_csv(url)
+if internet == True :
+    url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
+    data = pd.read_csv(url)
+else:
+    print("ok")
+
 
 list_of_groups = list_of_groups(data.species_group)
 id_species_per_group = id_species_per_group(data.id_species,data.species_group,list_of_groups)
@@ -254,7 +263,7 @@ def groups():
     actual_group = "not initialised"
     index_actual_group = 0
     interactive_text = "Click on a group name"
-    list_of_species = ["not initialised"]
+    list_of_species = []
 
     interval_w = 0.02
     interval_h = 0.05
@@ -366,7 +375,7 @@ def groups():
                         plant_image = pygame.transform.scale(plant_image, (int(w*0.15),int(w*0.15)))
                         list_of_images_for_the_actual_group += [plant_image]
                     else :
-                        list_of_images_for_the_actual_group += "no_images_for_this_species"
+                        list_of_images_for_the_actual_group += [False] # No images for this species
                     counter+=1
 
         counter = 0
@@ -375,7 +384,7 @@ def groups():
                     for i in range(4):
                         if (counter+(page-1)*8)<len(list_of_species):
 
-                            if list_of_images_for_the_actual_group[counter] != "no_images_for_this_species":
+                            if list_of_images_for_the_actual_group[counter] != False:
                                 screen.blit(list_of_images_for_the_actual_group[counter],
                                 (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
 
