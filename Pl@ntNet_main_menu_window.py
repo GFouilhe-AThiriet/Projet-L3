@@ -31,7 +31,7 @@ internet = False
 
 ################## Global Setup ##################
 
-path_to_train, path_to_classnames, path_to_folder = user_paths(User)
+path_to_train , path_to_folder = user_paths(User)
 
 # Dataframe with index, id_species, species_name, Images (number of images)
 # sorted by decreasing number of images 
