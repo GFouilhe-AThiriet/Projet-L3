@@ -270,7 +270,7 @@ def Images():
             # draw_text("abscisses="+str(abscisses), medium_font, black, screen, 0.8*w,0.1*h)
             # Keep also that please
 
-            if 0<=abscisses<=1080:
+            if 0<=abscisses<=len(data):
                 species_name = data.species_name[abscisses]
                 draw_text("Species : "+species_name, font, black, screen, 0.65*w,0.78*h)
 
