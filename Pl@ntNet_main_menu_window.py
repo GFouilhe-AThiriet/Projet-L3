@@ -271,7 +271,7 @@ def Images():
             # Keep also that please
 
             if 0<=abscisses<=len(data):
-                species_name = data.species_name[abscisses]
+                species_name = str(data.id_species[abscisses])
                 draw_text("Species : "+species_name, font, black, screen, 0.65*w,0.78*h)
 
                 images = data.Images[abscisses]

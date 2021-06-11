@@ -36,7 +36,7 @@ elif User=="Camille":
     path_to_classnames = os.path.join("...")
 
 #Dataframe with index, id_species, species_name, Images (number of images) sorted by decreasing number of images 
-url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/data.csv'
+url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
 data = pd.read_csv(url)
 
 print(data)

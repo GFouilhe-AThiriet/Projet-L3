@@ -13,3 +13,6 @@ print("Number of images in the dataset : ",int(n))
 
 # Aurélien : 306230
 # Online : 306293
+
+
+## https://nbviewer.jupyter.org/url/josephsalmon.eu/enseignement/TELECOM/MDI720/PCA.ipynb
