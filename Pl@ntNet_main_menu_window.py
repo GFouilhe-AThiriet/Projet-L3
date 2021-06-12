@@ -358,9 +358,9 @@ def groups():
         # pygame.draw.rect(screen, button_color, rect)
         # Keep that uncomment please
 
-        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h,0)
-        draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
-        medium_font, black, screen, 0.8*w,0,0)
+        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h,0)
+        # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
+        # medium_font, black, screen, 0.8*w,0,0)
         # Useful to see positions when placing things
 
         list_of_events = pygame.event.get()
@@ -448,11 +448,26 @@ def groups():
 
             list_of_rectangles = []
 
+            small_font = pygame.font.SysFont("timesnewroman", 22)
+            index_font = 22
+
             for p in range(2):
                 sub_list_of_rectangles = []
                 for i in range(4):
 
                     if (counter+(page-1)*8)<len(list_of_species):
+                        
+                        species_name = list_of_species[(counter+(page-1)*8)]
+
+                        # Small adjustment if the name of the species is long
+                        textobj = small_font.render(species_name, 1, black)
+                        textrect = textobj.get_rect()
+                        while textrect[2]/w > 0.17:
+                            index_font-=1
+                            small_font = pygame.font.SysFont("timesnewroman", index_font)
+                            textobj = small_font.render(species_name, 1, black)
+                            textrect = textobj.get_rect()
+                        #End of the small adjust
 
                         rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
                         # pygame.draw.rect(screen, green, rect)
@@ -507,19 +522,6 @@ def groups():
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
                     
                     species_name = list_of_species[counter+(page-1)*8]
-
-                    small_font = pygame.font.SysFont("timesnewroman", 22)
-
-                    # Visual adaptation of the font if the species name if very long
-                    textobj = small_font.render(species_name, 1, black)
-                    textrect = textobj.get_rect()
-                    index_font = 22
-                    while textrect[2]/w > 0.17:
-                        index_font-=1
-                        small_font = pygame.font.SysFont("timesnewroman", index_font)
-                        textobj = small_font.render(species_name, 1, black)
-                        textrect = textobj.get_rect()
-                    # End of the Visual adaptation of the font
 
                     draw_text(species_name,
                     small_font, black, screen,
