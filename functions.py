@@ -34,10 +34,16 @@ def user_paths(User):
 
 ###################################################################################
 
-def draw_text(text, font, color, surface, x, y):
+def draw_text(text, font, color, surface, x, y, center):
+
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
-    textrect.topleft = (x, y)
+
+    if center == True : # (x,y) will be the center of the rectangle
+        textrect.center = (x, y)
+    else: # (x,y) will be the topleft corner of the rectangle
+        textrect.topleft = (x, y)
+
     surface.blit(textobj, textrect)
 
 ###################################################################################

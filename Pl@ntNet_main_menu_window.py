@@ -74,11 +74,14 @@ screen = pygame.display.set_mode((screen_width,screen_height))
 
 ############# Fonts and Colors ##############
 
-mini_font = pygame.font.SysFont(None, 24)
-medium_font = pygame.font.SysFont(None, 27)
-big_font = pygame.font.SysFont(None, 50)
+mini_font = pygame.font.SysFont("timesnewroman", 20)
+medium_font = pygame.font.SysFont("timesnewroman", 27)
+big_font = pygame.font.SysFont("timesnewroman", 32)
 
 font = medium_font
+
+# List of fonts :
+# print(pygame.font.get_fonts())
 
 white = (255,255,255)
 black = (0,0,0)
@@ -87,7 +90,7 @@ dark_grey = (64,64,64)
 green = (0,200,0)
 blue = (51,153,255)
 
-button_color = white # Change it from white to blue to see margin's buttons
+button_color = blue # Change it from white to blue to see margin's buttons
 
 additional_color = white # Change it from white to green to see additional buttons
 
@@ -187,41 +190,39 @@ def menu():
                     pygame.quit()
                     sys.exit()
 
-        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h) 
+        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h,0) 
         # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
-        # font, black, screen, 0,0.7*h)
+        # font, black, screen, 0,0.7*h,0)
         # Please, keep that uncomment
         # It's useful to see positions when placing things
 
         ####### Margin #######
 
-        Images_button = pygame.Rect(0, h*0.1, margin, h*0.1)
-        pygame.draw.rect(screen, button_color, Images_button)
-        img_txt_position_x = w*0.01
-        img_txt_position_y = h* 0.135
+        first_button = pygame.Rect(0, h*0.1, margin, h*0.1)
+        first_button_x , firt_button_y = margin/2 , h*0.15
+        pygame.draw.rect(screen, button_color, first_button)
 
-        if Images_button.collidepoint((mx, my)):
-            draw_text('Number of images for each species', font, grey, screen, 
-            img_txt_position_x, img_txt_position_y)
+        if first_button.collidepoint((mx, my)):
+            draw_text('Pareto Effect', big_font , grey, screen, 
+            first_button_x, firt_button_y,1)
             if event.type == MOUSEBUTTONDOWN:
                 Images()
         else:
-            draw_text('Number of images for each species', font, black, screen,
-            img_txt_position_x, img_txt_position_y)
+            draw_text('Pareto Effect', big_font, black, screen,
+            first_button_x, firt_button_y,1)
 
-        Groups_button = pygame.Rect(0, h*0.25,margin, h*0.1)
-        pygame.draw.rect(screen, button_color, Groups_button)
-        img_groups_position_x = w*0.1
-        img_groups_position_y = h*0.29
+        second_button = pygame.Rect(0, h*0.25,margin, h*0.1)
+        second_button_x , second_button_y = margin/2 , h*0.3
+        pygame.draw.rect(screen, button_color, second_button)
 
-        if Groups_button.collidepoint((mx, my)):
-            draw_text('Groups', font, grey, screen,
-            img_groups_position_x, img_groups_position_y)
+        if second_button.collidepoint((mx, my)):
+            draw_text('Genus', big_font, grey, screen,
+            second_button_x, second_button_y,1)
             if event.type == MOUSEBUTTONDOWN:
                 groups()
         else:
-            draw_text('Groups', font, black, screen,
-            img_groups_position_x, img_groups_position_y)
+            draw_text('Genus', big_font, black, screen,
+            second_button_x, second_button_y,1)
 
         ####### End of Margin #######
  
@@ -276,10 +277,10 @@ def Images():
 
             if 0<=abscisses<=len(data):
                 species_name = str(data.id_species[abscisses])
-                draw_text("Species : "+species_name, font, black, screen, 0.65*w,0.78*h)
+                draw_text("Species : "+species_name, font, black, screen, 0.65*w,0.78*h,0)
 
                 images = data.Images[abscisses]
-                draw_text("Number of Images : "+str(images), font, black, screen, 0.65*w,0.81*h)
+                draw_text("Number of Images : "+str(images), font, black, screen, 0.65*w,0.81*h,0)
 
                 id_species = data.id_species[abscisses]
                 path_to_DIR = os.path.join(path_to_train,str(id_species))
@@ -290,7 +291,7 @@ def Images():
                     plant_representative = 0
 
                 if number_images>0: # Display of the photo of the plant-species
-                    print(len(os.listdir()))
+                    # print(len(os.listdir()))
                     plant_image_jpg_name = os.listdir()[plant_representative]
                     plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
                     plant_image = pygame.transform.scale(plant_image, (int(w*0.3),int(w*0.3)))
@@ -301,8 +302,8 @@ def Images():
                         if event.button == 3:
                             plant_representative += 1
         else:
-                draw_text("Species : ", font, black, screen, 0.65*w,0.78*h)
-                draw_text("Number of Images : ", font, black, screen, 0.65*w,0.81*h) 
+                draw_text("Species : ", font, black, screen, 0.65*w,0.78*h,0)
+                draw_text("Number of Images : ", font, black, screen, 0.65*w,0.81*h,0) 
 
         running = possibility_to_return_to_menu(list_of_events, running, screen,w,mx, my,
         arrow_button,arrow_back,arrow_back_grey)
@@ -350,9 +351,9 @@ def groups():
         # pygame.draw.rect(screen, button_color, rect)
         # Keep that uncomment please
 
-        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h)
-        # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
-        # medium_font, black, screen, 0.8*w,0)
+        draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h,0)
+        draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
+        medium_font, black, screen, 0.8*w,0,0)
         # Useful to see positions when placing things
 
         list_of_events = pygame.event.get()
@@ -378,8 +379,8 @@ def groups():
 
                         page = 1
 
-                        for i in range(40):
-                            if my>h*(i+10)*0.02 and my<h*(i+11)*0.02:
+                        for i in range(41):
+                            if my>h*(i+9)*0.02 and my<h*(i+10)*0.02:
                                 actual_group = list_of_groups[i+j]
                                 index_actual_group = i+j
                                 list_of_species = []
@@ -387,25 +388,25 @@ def groups():
                                     if data.species_group[k] == actual_group :
                                         list_of_species += [data.species_name[k]]
 
-           ### End of the Scrolling list ###
+        for i in range(1,41): # Display groups' names in the margin
+            draw_text(list_of_groups[i+j], mini_font, black, screen, 0, h*(i+9)*0.02,0)
 
-        ### Displayed Global Text ###
+        ### End of the Scrolling list ###
+
+        ### Global Displayed Text ###
         
         # Title and Interactive research text (not active yet)
 
-        draw_text('Groups', font, black, screen, w*0.09, 0.18*h)
-        draw_text(interactive_text, font, black, screen, 0.04*w, h*0.1)
+        draw_text('bla bla', font, black, screen, w*0.09, 0.18*h,0)
+        draw_text(interactive_text, font, black, screen, 0.04*w, h*0.1,0)
 
-        draw_text("Group : "+actual_group+".", font, black, screen, margin, h*11*0.02)
+        draw_text("Group : "+actual_group+".", font, black, screen, margin, h*11*0.02,0)
         draw_text("Number of species : "+str(len(list_of_species)), font, black, screen,
-        margin+(0.15+interval_w)*w, h*11*0.02)
+        margin+(0.15+interval_w)*w, h*11*0.02,0)
 
         # for i in range(0,len(list_of_species)):
-        #         draw_text(list_of_species[i], font, black, screen, w*0.5, h*i*0.02)
-        # Let's keep that to control groups' species if necessary
-
-        for i in range(1,40): # Display groups' names in the margin
-            draw_text(list_of_groups[i+j], font, black, screen, 0, h*(i+10)*0.02)
+        #         draw_text(list_of_species[i], font, black, screen, w*0.5, h*i*0.02,0)
+        # Let's keep that to control genus if necessary
 
         ### End of Displayed Global Text ###
 
@@ -489,7 +490,7 @@ def groups():
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
                     
                     draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
-                    margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h)
+                    margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h,0)
                     # End of Display one image and the species' name
 
                     rect = list_of_rectangles[p][i]
