@@ -49,8 +49,9 @@ id_species_per_group = id_species_per_group(data.id_species,data.species_group,l
 screen_width = 1400 # 1400 with 0.57 ratio might be a good size
 ratio = 0.57
 
-# NB : text font won't be affected by the size of the Window.
-# Thus, you might have to change the global font manually below
+# Be careful !
+# If you change these parameters, you'll have to adapt manually the position
+# and size of most of the displayed elements
 
 mainClock = pygame.time.Clock()
 pygame.init()
@@ -94,12 +95,14 @@ additional_color = white # Change it from white to green to see additional butto
 
 ############ Pygales Elements ############
 
+path_to_Pygame_elements = os.path.join(path_to_folder,"Pygames_elements")
+
 # Backgrounds :
 
 list_of_backgrounds = []
 
 for i in range(1,7):
-    background = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","plantnet_background_"+str(i)+".jpg"))
+    background = pygame.image.load(os.path.join(path_to_Pygame_elements,"plantnet_background_"+str(i)+".jpg"))
     background_width , backgroundheight = background.get_rect().size
     background = pygame.transform.scale(background, (int((background_width*h)/backgroundheight),h))
     background_width , backgroundheight = background.get_rect().size
@@ -112,25 +115,25 @@ margin = w-background_width
 arrow_w = int(w*0.1)
 arrow_h =  int(w*0.08)
 
-arrow_back = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","arrow_back.png"))
+arrow_back = pygame.image.load(os.path.join(path_to_Pygame_elements,"arrow_back.png"))
 arrow_back = pygame.transform.scale(arrow_back, (arrow_w, arrow_h))
 
 arrow_back_grey = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","arrow_back_grey.png"))
 arrow_back_grey = pygame.transform.scale(arrow_back_grey, (arrow_w,arrow_h))
 
-right_arrow_size = int(arrow_w*0.6)
+small_arrow_size = int(arrow_w*0.6)
 
 grey_right_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","grey_right_arrow.png"))
-grey_right_arrow = pygame.transform.scale(grey_right_arrow, (right_arrow_size,right_arrow_size))
+grey_right_arrow = pygame.transform.scale(grey_right_arrow, (small_arrow_size,small_arrow_size))
 
 black_right_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","black_right_arrow.png"))
-black_right_arrow = pygame.transform.scale(black_right_arrow, (right_arrow_size,right_arrow_size))
+black_right_arrow = pygame.transform.scale(black_right_arrow, (small_arrow_size,small_arrow_size))
 
 grey_left_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","grey_left_arrow.png"))
-grey_left_arrow = pygame.transform.scale(grey_left_arrow, (right_arrow_size,right_arrow_size))
+grey_left_arrow = pygame.transform.scale(grey_left_arrow, (small_arrow_size,small_arrow_size))
 
 black_left_arrow = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","black_left_arrow.png"))
-black_left_arrow = pygame.transform.scale(black_left_arrow, (right_arrow_size,right_arrow_size))
+black_left_arrow = pygame.transform.scale(black_left_arrow, (small_arrow_size,small_arrow_size))
 
 # Number of images for each species :
 
@@ -187,7 +190,8 @@ def menu():
         # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h) 
         # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
         # font, black, screen, 0,0.7*h)
-        # Useful to see positions when placing things
+        # Please, keep that uncomment
+        # It's useful to see positions when placing things
 
         ####### Margin #######
 
@@ -286,6 +290,7 @@ def Images():
                     plant_representative = 0
 
                 if number_images>0: # Display of the photo of the plant-species
+                    print(len(os.listdir()))
                     plant_image_jpg_name = os.listdir()[plant_representative]
                     plant_image = pygame.image.load(os.path.join(path_to_DIR,plant_image_jpg_name))
                     plant_image = pygame.transform.scale(plant_image, (int(w*0.3),int(w*0.3)))
@@ -299,7 +304,7 @@ def Images():
                 draw_text("Species : ", font, black, screen, 0.65*w,0.78*h)
                 draw_text("Number of Images : ", font, black, screen, 0.65*w,0.81*h) 
 
-        running = possibility_to_return_to_menu(list_of_events, running,screen,w,mx, my,
+        running = possibility_to_return_to_menu(list_of_events, running, screen,w,mx, my,
         arrow_button,arrow_back,arrow_back_grey)
 
         pygame.display.update()
@@ -406,10 +411,10 @@ def groups():
 
         ############### SPECIES' NAMES AND PHOTOS IN A GROUP ###############
         
-        more_button = pygame.Rect(0.92*w,0.7475*h, right_arrow_size, right_arrow_size)
+        more_button = pygame.Rect(0.92*w,0.7475*h, small_arrow_size, small_arrow_size)
         pygame.draw.rect(screen, additional_color, more_button)
 
-        previous_button = pygame.Rect(0.165*w,0.7475*h, right_arrow_size, right_arrow_size)
+        previous_button = pygame.Rect(0.165*w,0.7475*h, small_arrow_size, small_arrow_size)
         pygame.draw.rect(screen, additional_color, previous_button)
 
         ######################### Display species' photos and names #########################
