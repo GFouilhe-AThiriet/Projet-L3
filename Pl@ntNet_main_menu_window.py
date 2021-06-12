@@ -85,14 +85,13 @@ font = medium_font
 
 white = (255,255,255)
 black = (0,0,0)
-grey = (96,119,117)
-dark_grey = (64,64,64)
+light_grey = (96,119,117)
+light_blue = (106,154,154)
+grey = (60,60,60)
 green = (0,200,0)
+forest_green = (19,94,19)
+light_green = (53,139,53)
 blue = (51,153,255)
-
-button_color = blue # Change it from white to blue to see margin's buttons
-
-additional_color = white # Change it from white to green to see additional buttons
 
 ############# End of Fonts and Colors ##############
 
@@ -150,7 +149,7 @@ images_repartition = pygame.transform.scale(images_repartition,(int(0.6*w),int(0
 wide_logo = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_wide_logo.png"))
 logo_width , logo_height = wide_logo.get_size()
 coeff = logo_height/logo_width
-wide_logo_1 = pygame.transform.scale(wide_logo, (int(0.3*w),int(w*0.3*coeff)))
+wide_logo_1 = pygame.transform.scale(wide_logo, (int(0.4*w),int(w*0.4*coeff)))
 wide_logo_2 = pygame.transform.scale(wide_logo, (int(0.5*w),int(w*0.5*coeff)))
 
 no_images = pygame.image.load(os.path.join(path_to_folder,"Pygames_elements","Pl@ntNet_logo.png"))
@@ -163,6 +162,8 @@ no_images = pygame.transform.scale(no_images, (int(w*0.15),int(w*0.15)))
 ############ MENU ############
 
 def menu():
+
+    button_color = light_green # Change it from white to blue to see margin's buttons
 
     background_index = np.random.randint(0,6) # Initialisation
 
@@ -248,7 +249,7 @@ def Images():
     while running:
         screen.fill(white)
         arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
-        screen.blit(wide_logo_1,(0.345*w,h*0.00))
+        screen.blit(wide_logo_1,(0.3*w,h*0))
 
         screen.blit(images_repartition,(0.01*w,0.15*h)) # the graph
 
@@ -276,11 +277,11 @@ def Images():
             # Keep also that please
 
             if 0<=abscisses<=len(data):
-                species_name = str(data.id_species[abscisses])
+                species_name = str(data.species_name[abscisses])
                 draw_text("Species : "+species_name, font, black, screen, 0.65*w,0.78*h,0)
 
-                images = data.Images[abscisses]
-                draw_text("Number of Images : "+str(images), font, black, screen, 0.65*w,0.81*h,0)
+                images = int(data.Images[abscisses])
+                draw_text("Number of Images : "+str(images), font, black, screen, 0.65*w,0.82*h,0)
 
                 id_species = data.id_species[abscisses]
                 path_to_DIR = os.path.join(path_to_train,str(id_species))
@@ -301,9 +302,6 @@ def Images():
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if event.button == 3:
                             plant_representative += 1
-        else:
-                draw_text("Species : ", font, black, screen, 0.65*w,0.78*h,0)
-                draw_text("Number of Images : ", font, black, screen, 0.65*w,0.81*h,0) 
 
         running = possibility_to_return_to_menu(list_of_events, running, screen,w,mx, my,
         arrow_button,arrow_back,arrow_back_grey)
@@ -323,7 +321,6 @@ def groups():
     j = 0
     actual_group = "not initialised"
     index_actual_group = 0
-    interactive_text = "Click on a group name"
     list_of_species = []
 
     plant_representative = np.zeros((2,4),dtype=int)
@@ -337,6 +334,13 @@ def groups():
 
     page = 1
 
+    short_margin = 0.15*w
+
+    margin_color = light_blue
+
+    additional_color = white # Change it from white to green to see additional buttons
+
+
     running = True
 
     while running :
@@ -344,6 +348,9 @@ def groups():
         screen.fill(white)
         arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
         screen.blit(wide_logo_2,(0.25*w,0))
+
+        margin_button = pygame.Rect(0, 0, short_margin, h)
+        pygame.draw.rect(screen, margin_color, margin_button)
 
         mx, my = pygame.mouse.get_pos()
         
@@ -379,8 +386,8 @@ def groups():
 
                         page = 1
 
-                        for i in range(41):
-                            if my>h*(i+9)*0.02 and my<h*(i+10)*0.02:
+                        for i in range(0,45):
+                            if my>h*(i+5)*0.02-0.01*h and my<h*(i+6)*0.02-0.01*h:
                                 actual_group = list_of_groups[i+j]
                                 index_actual_group = i+j
                                 list_of_species = []
@@ -388,8 +395,8 @@ def groups():
                                     if data.species_group[k] == actual_group :
                                         list_of_species += [data.species_name[k]]
 
-        for i in range(1,41): # Display groups' names in the margin
-            draw_text(list_of_groups[i+j], mini_font, black, screen, 0, h*(i+9)*0.02,0)
+        for i in range(0,45): # Display groups' names in the margin
+            draw_text(list_of_groups[i+j], mini_font, black, screen, margin/3, h*(i+5)*0.02,1)
 
         ### End of the Scrolling list ###
 
@@ -397,12 +404,22 @@ def groups():
         
         # Title and Interactive research text (not active yet)
 
-        draw_text('bla bla', font, black, screen, w*0.09, 0.18*h,0)
-        draw_text(interactive_text, font, black, screen, 0.04*w, h*0.1,0)
+        draw_text("Genus",  pygame.font.SysFont("timesnewroman", 27, italic=True), black,
+        screen, short_margin/2, 0.05*h, 1)
 
-        draw_text("Group : "+actual_group+".", font, black, screen, margin, h*11*0.02,0)
-        draw_text("Number of species : "+str(len(list_of_species)), font, black, screen,
-        margin+(0.15+interval_w)*w, h*11*0.02,0)
+        space = interval_w + 0.15
+
+        # Very minor visual adaptation
+        # if the name of the species is very long
+        textobj = font.render("Genus : "+actual_group+".", 1, black)
+        textrect = textobj.get_rect()
+        if textrect[2]/w > 0.17:
+            space = textrect[2]/w+0.005
+        # End of the Very minor visual adaptation
+
+        draw_text("Genus : "+actual_group+".", font, black, screen, margin, h*11*0.02,0)
+        draw_text("Number of species : "+str(len(list_of_species))+".", font, black, screen,
+        margin+space*w, h*11*0.02,0)
 
         # for i in range(0,len(list_of_species)):
         #         draw_text(list_of_species[i], font, black, screen, w*0.5, h*i*0.02,0)
@@ -489,8 +506,24 @@ def groups():
                         screen.blit(no_images,
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
                     
-                    draw_text(list_of_species[counter+(page-1)*8], font, black, screen,
-                    margin+i*(0.15+interval_w)*w, 2*0.27*h+p*(0.27+interval_h)*h,0)
+                    species_name = list_of_species[counter+(page-1)*8]
+
+                    small_font = pygame.font.SysFont("timesnewroman", 22)
+
+                    # Visual adaptation of the font if the species name if very long
+                    textobj = small_font.render(species_name, 1, black)
+                    textrect = textobj.get_rect()
+                    index_font = 22
+                    while textrect[2]/w > 0.17:
+                        index_font-=1
+                        small_font = pygame.font.SysFont("timesnewroman", index_font)
+                        textobj = small_font.render(species_name, 1, black)
+                        textrect = textobj.get_rect()
+                    # End of the Visual adaptation of the font
+
+                    draw_text(species_name,
+                    small_font, black, screen,
+                    margin+i*(0.15+interval_w)*w+0.075*w, 2*0.27*h+p*(0.27+interval_h)*h+0.02*h, 1)
                     # End of Display one image and the species' name
 
                     rect = list_of_rectangles[p][i]
