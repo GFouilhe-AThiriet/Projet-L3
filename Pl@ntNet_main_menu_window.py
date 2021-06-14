@@ -378,7 +378,7 @@ def groups():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 4 and j>0:
                         j+=-1
-                    if event.button == 5 and j<len(list_of_groups)-40:
+                    if event.button == 5 and j<len(list_of_groups)-45:
                         j+=1
                     if event.button == 1:
 
@@ -467,7 +467,7 @@ def groups():
                             small_font = pygame.font.SysFont("timesnewroman", index_font)
                             textobj = small_font.render(species_name, 1, black)
                             textrect = textobj.get_rect()
-                        #End of the small adjust
+                        #End of the small adjustment
 
                         rect = pygame.Rect(margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h, w*0.15, w*0.15 )
                         # pygame.draw.rect(screen, green, rect)

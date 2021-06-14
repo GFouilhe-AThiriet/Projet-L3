@@ -20,16 +20,14 @@ for i in range (len(data)):
 group = pd.Series(L)
 a=[]
 for i in range(len(L)):
-    interrupteur=0
+    switch=0
     for j in range(len(a)):
         if a[j]==L[i]:
-                interrupteur=1
-    if interrupteur==0:
+                switch=1
+    if switch==0:
         a+=[L[i]]
 
-for 
+data = pd.read_csv('data.csv')
+data.insert(2, "species_group", group)
 
-# data = pd.read_csv('data.csv')
-# data.insert(2, "species_group", group)
-
-# data.to_csv("groups",index=False)
+data.to_csv("groups",index=False)
