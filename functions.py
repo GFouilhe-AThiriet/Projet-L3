@@ -19,7 +19,7 @@ from pygame.locals import *
 def user_paths(User):
         
     if User=="Aurélien":
-        path_to_train = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
+        path_to_train = os.path.join('C:','\\Users','lyz50','Documents',"train")
         path_to_folder=os.path.join('C:','\\Users','lyz50',"documents","Github","Projet-L3")
     elif User=="Guilhem":
         path_to_train = os.path.join('C:/','Plantnet_project','plantnet_subset')
@@ -69,7 +69,7 @@ def possibility_to_return_to_menu(list_of_events,running,screen,w,mx, my,arrow_b
 
 ###################################################################################
 
-def list_of_groups(serie):
+def make_a_list_of_groups(serie):
     a=[]
     for i in range(len(serie)):
         switch=0
@@ -84,7 +84,7 @@ def list_of_groups(serie):
 
 ###################################################################################
 
-def id_species_per_group(list_of_id_species,sorted_list_of_species_group,list_of_groups):
+def make_id_species_per_group(list_of_id_species,sorted_list_of_species_group,list_of_groups):
     L = []
     for i in range(len(list_of_groups)):
         H = []

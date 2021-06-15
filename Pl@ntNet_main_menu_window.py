@@ -37,14 +37,23 @@ path_to_train , path_to_folder = user_paths(User)
 # sorted by decreasing number of images 
 
 if internet == True :
-    url = 'https://raw.githubusercontent.com/GFouilhe-AThiriet/Projet-L3/main/Miscellaneous/groups.csv'
-    data = pd.read_csv(url)
+    url = 0
+    # data = pd.read_csv(url)
 else:
-    data = pd.read_csv(os.path.join(path_to_folder,"Miscellaneous","groups.csv")) 
+    data = pd.read_csv(os.path.join(path_to_folder,"class_names_3.csv"))
 
+# Load the list of genus and species for each genus
 
-list_of_groups = list_of_groups(data.species_group)
-id_species_per_group = id_species_per_group(data.id_species,data.species_group,list_of_groups)
+# Sorted by the order of genus corresponding to the decreasing order of number of images by species
+list_of_groups_order_1 = make_a_list_of_groups(data.genus)
+id_species_per_group_order_1 = make_id_species_per_group(data.id_species,data.genus,list_of_groups_order_1)
+
+# Sorted by alphabetical order
+data.sort_values(by=['genus'], inplace=True, ascending=True)
+data.reset_index(drop=True,inplace=True) # Re-index
+list_of_groups_order_2 = make_a_list_of_groups(data.genus)
+id_species_per_group_order_2 = make_id_species_per_group(data.id_species,data.genus,list_of_groups_order_2)
+# End of Load the list of genus and species for each genus
 
 screen_width = 1400 # 1400 with 0.57 ratio might be a good size
 ratio = 0.57
@@ -238,6 +247,11 @@ def menu():
 
 def Images():
 
+    data.sort_values(by=['Images'], inplace=True, ascending=False)
+    # Sorted by decreasing order of number of images
+    data.reset_index(drop=True,inplace=True)
+    # Re-index
+
     plant_representative = 0
 
     running = True
@@ -318,6 +332,16 @@ def Images():
 
 def groups():
 
+    data.sort_values(by=['genus'], inplace=True, ascending=True)
+    # To have the list in alphabetical order
+    data.reset_index(drop=True,inplace=True)
+    # Re-index
+
+    order = 1
+    order_text = "ABC"
+    id_species_per_group = id_species_per_group_order_2
+    list_of_groups = list_of_groups_order_2
+    
     j = 0
     actual_group = "not initialised"
     index_actual_group = 0
@@ -340,7 +364,6 @@ def groups():
 
     additional_color = white # Change it from white to green to see additional buttons
 
-
     running = True
 
     while running :
@@ -358,6 +381,11 @@ def groups():
         # pygame.draw.rect(screen, button_color, rect)
         # Keep that uncomment please
 
+        order_button = pygame.Rect(w*0.165, h*0.025, w*0.033, w*0.033)
+        pygame.draw.rect(screen, light_green, order_button)
+        draw_text(order_text,mini_font,black,screen,w*0.182,h*0.053,1)
+        # To change the order of the scrolling list
+
         # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h,0)
         # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
         # medium_font, black, screen, 0.8*w,0,0)
@@ -373,6 +401,21 @@ def groups():
                     j+=-1
                 if event.key == K_DOWN and j<len(list_of_groups)-40:
                     j+=1
+
+            # Possibility to change the order of the scrolling list
+            if order_button.collidepoint((mx, my)):
+                if event.type == MOUSEBUTTONDOWN:
+                    if order == 1:
+                        order = 2
+                        list_of_groups = list_of_groups_order_2
+                        id_species_per_group = id_species_per_group_order_2
+                        order_text = "ABC"
+                    else: #order = 2
+                        order = 1
+                        list_of_groups = list_of_groups_order_1
+                        id_species_per_group = id_species_per_group_order_1
+                        order_text = "123"
+            # End of Possibility to change the order of the scrolling list
 
             if mx<margin*0.6: 
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -392,7 +435,7 @@ def groups():
                                 index_actual_group = i+j
                                 list_of_species = []
                                 for k in range(len(data)):
-                                    if data.species_group[k] == actual_group :
+                                    if data.genus[k] == actual_group :
                                         list_of_species += [data.species_name[k]]
 
         for i in range(0,45): # Display groups' names in the margin
