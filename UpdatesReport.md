@@ -65,3 +65,5 @@ Update 27/05 by Au. : Step 3 completed. Minor details to fix but the result is t
 Update 28/05 by Au. : I optimized the code : now Pygame loads the images only once when a new group is selected. I added the right click gadget in the two windows. And I finished to make a decent looking display. Thus : steps 1, 2 and 3 completed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Embeddings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Update 15/06 by Au. : A lot of presentation done. Starting the embeddings part soon.
