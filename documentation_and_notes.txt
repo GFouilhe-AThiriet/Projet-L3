@@ -91,3 +91,16 @@ https://www.shanelynn.ie/python-pandas-read-csv-load-data-from-csv-files/
 # Very interesting : https://www.reddit.com/r/pygame/comments/40873s/could_you_explain_for_event_in_pygameeventget/
 # https://stackoverflow.com/questions/42215932/two-for-event-in-pygame-event-get
 # https://stackoverflow.com/questions/46390231/how-can-i-create-a-text-input-box-with-pygame#:~:text=If%20the%20box%20is%20active,and%20reset%20it%20to%20%27%27%20.
+
+
+########-----Altair Documentation-----########
+# https://altair-viz.github.io/
+# https://altair-viz.github.io/user_guide/display_frontends.html#display-general
+# https://www.youtube.com/watch?v=x-iU2UwgVf0
+# https://pypi.org/project/altair-viewer/
+# https://towardsdatascience.com/python-interactive-data-visualization-with-altair-b4c4664308f8
+# https://altair-viz.github.io/user_guide/interactions.html
+# https://vegawidget.github.io/altair/articles/example-gallery-08-interactive-charts.html
+# https://pypi.org/project/altair-images/
+# https://matthewkudija.com/blog/2018/06/22/altair-interactive/
+# https://altair-viz.github.io/user_guide/marks.html

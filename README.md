@@ -4,3 +4,17 @@
 
 We are two 3rd year students in Mathematics at the University of Montpellier. We are taking part in a research project under supervision of Joseph Salmon, Benjamin Charlier and Camille Garcin.
 It mainly focuses on various visualisation tasks of a sample of a Pl@ntNet dataset.
+
+### Fill the parameters to run the code
+
+1. Download this github repertory
+2. Install Pygame (pip install Pygame)
+3. In function.py, complete path_to_train and path_to_folder leading respectively to the dataset train and to our downloaded github
+4. Complete your name in Pl@ntNet_main_menu_window.py
+
+NB : Two people downloading the dataset Train might end up with two slightly different dataset as 0.1% of the images might be discarded during the download of the plants' pictures. If you want to have the exact graph of the Pareto effect corresponding to the exact dataset in your computer, follow the follow steps.
+
+1. Delete class_names_2.csv and class_names_3.csv
+2. Run create_class_names_2_and_3.py; thus the number of images for each species in class_names_3 will absolutely the dataset present on your computer
+3. Run graph.py and save the picture of the graph in Pygames_elements as images_for_each_species.png, replacing the precedent picture
+4. In Pl@ntNet_main_menu_window.py, adapt the position of the image by adapting the x and y coordinates of the picture : screen.blit(images_repartition,(0.01*w,0.15*h)). Then adapt the a and b values corresponding to the rims of the graph in order that the cursor position fit to the displayed legend : a , b = 0.085 , 0.585.

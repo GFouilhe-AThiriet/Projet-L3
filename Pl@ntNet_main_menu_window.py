@@ -18,11 +18,6 @@ from pygame.locals import *
 
 User = "Aurélien"
 
-# If you don't have internet, write False and the species' data will
-# be read from the csv file instead of the online file
-
-internet = False
-
 ############ End of Users' Parameters ############
 
 
@@ -36,13 +31,9 @@ path_to_train , path_to_folder = user_paths(User)
 # Dataframe with index, id_species, species_name, Images (number of images)
 # sorted by decreasing number of images 
 
-if internet == True :
-    url = 0
-    # data = pd.read_csv(url)
-else:
-    data = pd.read_csv(os.path.join(path_to_folder,"class_names_3.csv"))
+data = pd.read_csv(os.path.join(path_to_folder,"class_names_3.csv"))
 
-# Load the list of genus and species for each genus
+##### Load the list of genus and species for each genus
 
 # Sorted by the order of genus corresponding to the decreasing order of number of images by species
 list_of_groups_order_1 = make_a_list_of_groups(data.genus)
@@ -53,7 +44,7 @@ data.sort_values(by=['genus'], inplace=True, ascending=True)
 data.reset_index(drop=True,inplace=True) # Re-index
 list_of_groups_order_2 = make_a_list_of_groups(data.genus)
 id_species_per_group_order_2 = make_id_species_per_group(data.id_species,data.genus,list_of_groups_order_2)
-# End of Load the list of genus and species for each genus
+##### End of Load the list of genus and species for each genus
 
 screen_width = 1400 # 1400 with 0.57 ratio might be a good size
 ratio = 0.57
