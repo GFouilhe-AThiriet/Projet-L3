@@ -38,4 +38,28 @@ for i in range(len(data)):
 os.chdir(path_to_folder)
 data.insert(3, "Images", Images)
 data.sort_values(by=['Images'], inplace=True, ascending=False)
+data.reset_index(drop=True,inplace=True) # Re-index
+
+# Let's obtain the number of images per genus (for the other order of the scrolling list)
+
+list_of_groups = make_a_list_of_groups(data.genus)
+
+L=np.zeros(len(list_of_groups),dtype=int)
+
+for genus_index in range (len(list_of_groups)):
+    a=0
+    for k in range(len(data)):
+        if data.genus[k] == list_of_groups[genus_index] :
+            L[genus_index]+= data.Images[k]
+
+H=[]
+for i in range (len(data)):
+    for genus_index in range (len(list_of_groups)):
+        if data.genus[i] == list_of_groups[genus_index]:
+            H+=[L[genus_index]]
+
+data.insert(4, "genus_images", H)
+# End of Nmber of images per genus (for the other order of the scrolling list)
+
 data.to_csv("class_names_2.csv",index=False)
+

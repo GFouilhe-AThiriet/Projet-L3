@@ -35,7 +35,9 @@ data = pd.read_csv(os.path.join(path_to_folder,"class_names_2.csv"))
 
 ##### Load the list of genus and species for each genus
 
-# Sorted by the order of genus corresponding to the decreasing order of number of images by species
+# Sorted by the decreasing order of images per genus
+data.sort_values(by=['genus_images'], inplace=True, ascending=False)
+data.reset_index(drop=True,inplace=True) # Re-index
 list_of_groups_order_1 = make_a_list_of_groups(data.genus)
 id_species_per_group_order_1 = make_id_species_per_group(data.id_species,data.genus,list_of_groups_order_1)
 
@@ -44,6 +46,7 @@ data.sort_values(by=['genus'], inplace=True, ascending=True)
 data.reset_index(drop=True,inplace=True) # Re-index
 list_of_groups_order_2 = make_a_list_of_groups(data.genus)
 id_species_per_group_order_2 = make_id_species_per_group(data.id_species,data.genus,list_of_groups_order_2)
+
 ##### End of Load the list of genus and species for each genus
 
 screen_width = 1400 # 1400 with 0.57 ratio might be a good size
@@ -322,11 +325,6 @@ def Images():
 #### GROUPS ###
 
 def groups():
-
-    data.sort_values(by=['genus'], inplace=True, ascending=True)
-    # To have the list in alphabetical order
-    data.reset_index(drop=True,inplace=True)
-    # Re-index
 
     order = 2
     order_text = "ABC"
