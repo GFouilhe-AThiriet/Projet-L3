@@ -14,7 +14,7 @@ path_to_train , path_to_folder = user_paths(User)
 alt.renderers.enable('altair_viewer')
 
 # Dataframe
-data = pd.read_csv(os.path.join(path_to_folder,"class_names_3.csv"))
+data = pd.read_csv(os.path.join(path_to_folder,"class_names_2.csv"))
 
 chart = alt.Chart(data.reset_index(),title="Number of Images for each species in the Dataset").mark_point().encode(
     x="index",
