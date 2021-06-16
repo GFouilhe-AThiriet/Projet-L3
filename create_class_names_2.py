@@ -27,12 +27,6 @@ for i in range (len(data)):
 group = pd.Series(L)
 
 data.insert(2, "genus", group)
-data.to_csv("class_names_2.csv",index=False)
-
-# Transform class_names_2 into class_names_3
-
-# Dataframe with id_species, species_name
-data = pd.read_csv(os.path.join(path_to_folder,"class_names_2.csv"))
 
 Images = []
 for i in range(len(data)):
@@ -44,4 +38,4 @@ for i in range(len(data)):
 os.chdir(path_to_folder)
 data.insert(3, "Images", Images)
 data.sort_values(by=['Images'], inplace=True, ascending=False)
-data.to_csv("class_names_3.csv",index=False)
+data.to_csv("class_names_2.csv",index=False)

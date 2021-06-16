@@ -31,7 +31,7 @@ path_to_train , path_to_folder = user_paths(User)
 # Dataframe with index, id_species, species_name, Images (number of images)
 # sorted by decreasing number of images 
 
-data = pd.read_csv(os.path.join(path_to_folder,"class_names_3.csv"))
+data = pd.read_csv(os.path.join(path_to_folder,"class_names_2.csv"))
 
 ##### Load the list of genus and species for each genus
 
@@ -328,7 +328,7 @@ def groups():
     data.reset_index(drop=True,inplace=True)
     # Re-index
 
-    order = 1
+    order = 2
     order_text = "ABC"
     id_species_per_group = id_species_per_group_order_2
     list_of_groups = list_of_groups_order_2
