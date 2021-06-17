@@ -166,7 +166,7 @@ no_images = pygame.transform.scale(no_images, (int(w*0.15),int(w*0.15)))
 
 def menu():
 
-    button_color = light_green # Change it from white to blue to see margin's buttons
+    button_color = light_green # Change it from white to light_green to see margin's buttons
 
     background_index = np.random.randint(0,6) # Initialisation
 
