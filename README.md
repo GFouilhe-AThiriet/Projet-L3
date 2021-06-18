@@ -18,7 +18,7 @@ https://gitlab.inria.fr/cgarcin/plantnet_dataset
 5. To update class_names.csv if necessary : replace class_names.csv by the new csv file and then name it class_names.csv. Delete class_names_2.csv and then run create_class_names_2.py.
 
 NB : Two people downloading the dataset Train might end up with two slightly different dataset as 0.1% of the images might be discarded during the download of the plants' pictures. If have updated class_names.csv, you might also need to update the graph of the Pareto effect.
-In any case, if you want to have the exact graph of the Pareto effect corresponding to the exact dataset in your computer, follow the follow steps.
+In any case, if you want to have the exact graph of the Pareto effect corresponding to the exact dataset in your computer, follow the following steps.
 
 1. Delete class_names_2.csv
 2. Run create_class_names_2.py; thus the number of images for each species in class_names_2.csv will absolutely fit the dataset in your computer
