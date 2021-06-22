@@ -21,18 +21,18 @@ species_name = data.species_name
 L = []
 for i in range (len(data)):
     l = len(species_name[i])
-    species_group = ""
-    short_name = ""
+    name = ""
     j=0
     while species_name[i][j]!=" ": # A space
-        species_group += species_name[i][j]
+        name += species_name[i][j]
         j=j+1
-    L+=[species_group]
+    L+=[name]
 
     # To only have : "Loropetalum chinense" instead of "Loropetalum chinense (R. Br.) Oliv."
 
     if l>j+1:
 
+        name += species_name[i][j]
         j=j+1
 
         # Sometimes there is a "x" : 1419115,Pelargonium x hortorum L.H. Bailey
@@ -45,9 +45,9 @@ for i in range (len(data)):
         #
 
         while species_name[i][j]!=" " and j<l-1: # A space
-            short_name += species_name[i][j]
+            name += species_name[i][j]
             j=j+1
-        data.species_name[i] = short_name
+        data.species_name[i] = name
 
     # End of To only have : "Loropetalum chinense" instead of "Loropetalum chinense (R. Br.) Oliv."
 
