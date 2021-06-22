@@ -8,7 +8,7 @@ from functions import *
 User = "Aurélien"
 path_to_train , path_to_folder = user_paths(User)
 
-# # Transform class_names into class_names_2
+############# Transform class_names into class_names_2 #############
 
 # Dataframe with id_species, species_name
 data = pd.read_csv(os.path.join(path_to_folder,"class_names.csv"))
