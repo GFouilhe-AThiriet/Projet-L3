@@ -250,7 +250,7 @@ def Images():
 
     running = True
 
-    a , b = 0.085 , 0.585
+    a , b = 0.07357 , 0.60285
     # y position of the y axis and of the last species' data
     # on the x axis of the displayed graph
 
@@ -259,13 +259,14 @@ def Images():
         arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
         screen.blit(wide_logo_1,(0.3*w,h*0))
 
-        screen.blit(images_repartition,(0.01*w,0.15*h)) # the graph
+        screen.blit(images_repartition,(0.03*w,0.174*h)) # the graph
+        draw_text("Number of images for each species",
+        medium_font, black, screen, 0.35*w,0.165*h,1)
 
         mx, my = pygame.mouse.get_pos()
         
-        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0.8*w,0.05*h)
-        # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
-        # medium_font, black, screen, 0.8*w,0)
+        # draw_text("(x="+str(round(mx/w,4))+", y="+str(round(my/h,4))+")",
+        # medium_font, black, screen, 0.3*w,0,0)
         # Useful to see positions when placing things
 
         # rect = pygame.Rect(0.65*w,0.23*h,int(w*0.3),int(w*0.3))
@@ -279,9 +280,9 @@ def Images():
 
         if a <= mxw and mxw <=b and my/h>0.23:
 
-            abscisses = int((mxw-a)/(b-a)*1080)
+            abscisses = round((mxw-a)/(b-a)*1080)
 
-            # draw_text("abscisses="+str(abscisses), medium_font, black, screen, 0.8*w,0.1*h)
+            # draw_text("abscisses="+str(abscisses), medium_font, black, screen, 0.8*w,0.1*h,0)
             # Keep also that please
 
             if 0<=abscisses<=len(data):

@@ -38,20 +38,20 @@ tsne_result_data = pd.DataFrame(
 
 print(tsne_result_data)
 
-# 2D Display
-fig , ax = plt.subplots()
-sns.scatterplot(
-    x = 'tsne_1',
-    y = 'tsne_2',
-    hue ='label',
-    data = tsne_result_data,
-    ax = ax,
-    s = 120
-    )
-ax.set_aspect('equal')
-plt.show()
+# # 2D Display
+# fig , ax = plt.subplots()
+# sns.scatterplot(
+#     x = 'tsne_1',
+#     y = 'tsne_2',
+#     hue ='label',
+#     data = tsne_result_data,
+#     ax = ax,
+#     s = 120
+#     )
+# ax.set_aspect('equal')
+# plt.show()
 
-# 3D Display - First Try
+# 3D Display - Test 1
 fig = plt.figure()
 ax = plt.axes(projection ='3d')
 
@@ -63,11 +63,12 @@ ax.set_xlabel("tsne_1")
 ax.set_ylabel("tsne_2")
 ax.set_zlabel("tsne_3")
 
-ax.scatter(x, y, z)
+ax.scatter(x, y, z,c=label)
 
+ax.legend(label)
 plt.show()
 
-# 3D Display - Second Try
+# 3D Display - Test 2
 fig = plt.figure()
 ax = plt.axes(projection ='3d')
 

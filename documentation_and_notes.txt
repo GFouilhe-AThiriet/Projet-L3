@@ -65,3 +65,5 @@ https://www.shanelynn.ie/python-pandas-read-csv-load-data-from-csv-files/
 # https://towardsdatascience.com/t-sne-python-example-1ded9953f26
 # 3D Scatter Plot
 # https://stackabuse.com/seaborn-scatter-plot-tutorial-and-examples
+# Label in 3D
+# https://stackoverflow.com/questions/30511340/add-a-list-of-labels-in-pythons-matplotlib
