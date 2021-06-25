@@ -67,3 +67,4 @@ https://www.shanelynn.ie/python-pandas-read-csv-load-data-from-csv-files/
 # https://stackabuse.com/seaborn-scatter-plot-tutorial-and-examples
 # Label in 3D
 # https://stackoverflow.com/questions/30511340/add-a-list-of-labels-in-pythons-matplotlib
+# https://matplotlib.org/stable/gallery/lines_bars_and_markers/scatter_with_legend.html#sphx-glr-gallery-lines-bars-and-markers-scatter-with-legend-py

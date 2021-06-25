@@ -259,9 +259,9 @@ def Images():
         arrow_button = pygame.Rect(0.9*w,0, arrow_w, arrow_h)
         screen.blit(wide_logo_1,(0.3*w,h*0))
 
-        screen.blit(images_repartition,(0.03*w,0.174*h)) # the graph
+        screen.blit(images_repartition,(0.03*w,0.19*h)) # the graph
         draw_text("Number of images for each species",
-        medium_font, black, screen, 0.35*w,0.165*h,1)
+        medium_font, black, screen, 0.35*w,0.175*h,1)
 
         mx, my = pygame.mouse.get_pos()
         
@@ -278,9 +278,9 @@ def Images():
 
         mxw = mx / w
 
-        if a <= mxw and mxw <=b and my/h>0.23:
+        if a <= mxw and mxw <=b and my/h>0.2:
 
-            abscisses = round((mxw-a)/(b-a)*1080)
+            abscisses = int((mxw-a)/(b-a)*1080)
 
             # draw_text("abscisses="+str(abscisses), medium_font, black, screen, 0.8*w,0.1*h,0)
             # Keep also that please

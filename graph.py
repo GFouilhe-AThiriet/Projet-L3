@@ -25,15 +25,3 @@ chart.encoding.x.title = 'Species'
 chart.encoding.y.title = 'Images'
 
 chart.show()
-
-# # To screenshot the chart without legend :
-
-# chart = alt.Chart(data.reset_index(),title=" ").mark_point().encode(
-#     x="index",
-#     y="Images"
-# ).encode(tooltip=['species_name','Images'])
-
-# chart.encoding.x.title = ' '
-# chart.encoding.y.title = ' '
-
-# chart.show()
