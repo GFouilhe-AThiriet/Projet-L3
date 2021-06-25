@@ -13,15 +13,6 @@ import csv
 # plt.imshow(read_image)
 # plt.show()
 
-# #To get the coordinates of the mouse in real time
-# coords=[[0,0]] #Global Variable
-
-# def onclick(event):
-#     x,y=event.xdata, event.ydata
-#     global coords
-#     coords+=[[int(x),int(y)]]
-#     print(coords)
-
 A_size_0 = 200
 A_size_1 = 100
 n_components = 3
@@ -62,7 +53,7 @@ fig = plt.figure(figsize=(14,6))
 fig.suptitle('TSNE transformation of '+str(A_size_0)+" vectors")
 
 ax1 = fig.add_subplot(1,2,1,projection ='3d')
-scatter = ax1.scatter(x, y, z,c=label)
+scatter = ax1.scatter(x, y, z,c=label,picker = True)
 ax1.set_xlabel("tsne_1")
 ax1.set_ylabel("tsne_2")
 ax1.set_zlabel("tsne_3")
@@ -78,13 +69,40 @@ ax1.add_artist(legend)
 ax2 = fig.add_subplot(1,2,2)
 ax2.axis("off")
 
-# fig.canvas.mpl_connect('button_press_event', onclick)
+#To get the coordinates of the mouse in real time
+coords=[[0,0]] #Global Variable
+
+global switch
+switch = 0
+
+def on_click(event):
+    artist = event.artist
+    # xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
+    # coord = ax.format_coord(xmouse, ymouse)
+    # global L
+    # L += [[coord]]
+    # ind = event.ind
+    # ind = ind[0]
+    # print ('Object picked:', artist)
+    global switch
+    switch = 1
+    print("on_click")
+    # print ("Selection", ind)
+    # print("Coordinates : ",coord)
+    # x,y=event.xdata, event.ydata
+    # global coords
+    # coords+=[[int(x),int(y)]]
+    # print(coords)
 
 def animate(i):
     ax2.clear()
     ax2.axis("off")
-    fig.suptitle('TSNE transformation of '+str(A_size_0)+" vectors"+str(i))
     ax2.plot([1,2,3], [np.sin(i),np.cos(i),np.tan(i)],"o")
+    global switch
+    if switch == 1:
+        print("animate")
+        switch = 0
+    print(switch)
 #     number_y=int(array[number][2])
 #     subplot_title=("Species+ n°"+str(number))
 #     second_sub_plot.set_title(subplot_title)
@@ -94,6 +112,8 @@ def animate(i):
 #     image=os.listdir()[plant_representative]
 #     read_image=plt.imread( os.path.join(path_to_DIR,image))
 #     plt.imshow(read_image)
+
+fig.canvas.callbacks.connect('pick_event', on_click)
 
 anim = FuncAnimation(fig, animate, frames=10,interval=1000)
 # After (too) many hours of bugs, I think that a big value for interval might be necessary.

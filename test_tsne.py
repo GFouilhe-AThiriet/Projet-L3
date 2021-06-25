@@ -65,7 +65,6 @@ def display_function(A_size_0=200,A_size_1=100):
     ax.set_zlabel("tsne_3")
 
     scatter = ax.scatter(x, y, z,c=label,picker = True)
-
     legend = ax.legend(
         *scatter.legend_elements(num=10),
         bbox_to_anchor=(1.2,1),
