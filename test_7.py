@@ -13,7 +13,7 @@ path_to_train , path_to_folder = user_paths(User)
 
 # If you need to load a pre-saved tsne_result_data_for_x_vectors.csv
 
-# data = pd.read_csv(os.path.join(path_to_folder,"tsne_result_data_for_20000_vectors.csv"))
+tsne_result_data = pd.read_csv(os.path.join(path_to_folder,"tsne_result_data_for_20000_vectors.csv"))
 
 
 # second_sub_plot=fig.add_subplot(1, 2, 2)#position of the subplot
@@ -27,37 +27,38 @@ A_size_0 = 20*10**3
 A_size_1 = 100
 n_components = 3
 
-A = np.zeros((A_size_0,A_size_1))
-for i in range (A_size_0):
-    A[i] = i*np.ones(A_size_1)
+# A = np.zeros((A_size_0,A_size_1))
+# for i in range (A_size_0):
+#     A[i] = i*np.ones(A_size_1)
 
-print("A")
-print(A)
+# print("A")
+# print(A)
 
-# Label
+# # Label
 
-label = list(i for i in range(A_size_0))
+# label = list(i for i in range(A_size_0))
 
-# TSNE
+# # TSNE
 
-tsne = TSNE(n_components)
-tsne_result = tsne.fit_transform(A)
+# tsne = TSNE(n_components)
+# tsne_result = tsne.fit_transform(A)
 
-# print(tsne_result.shape)
-# print(tsne_result)
+# # print(tsne_result.shape)
+# # print(tsne_result)
 
-tsne_result_data = pd.DataFrame(
-    {'tsne_1': tsne_result[:,0],
-    'tsne_2': tsne_result[:,1],
-    'tsne_3': tsne_result[:,2],
-    'label': label
-    })
+# tsne_result_data = pd.DataFrame(
+#     {'tsne_1': tsne_result[:,0],
+#     'tsne_2': tsne_result[:,1],
+#     'tsne_3': tsne_result[:,2],
+#     'label': label
+#     })
 
-print(tsne_result_data)
+# print(tsne_result_data)
 
 x = tsne_result_data['tsne_1']
 y = tsne_result_data['tsne_2']
 z = tsne_result_data['tsne_3']
+label = tsne_result_data['label']
 
 fig = plt.figure(figsize=(14,6))
 fig.suptitle('TSNE transformation of '+str(A_size_0)+" vectors")
@@ -139,5 +140,4 @@ anim = FuncAnimation(fig, animate, frames=100,interval=1000)
 
 plt.show()
 
-
-tsne_result_data.to_csv("tsne_result_data_for_"+str(A_size_0)+"_vectors.csv",index=False)
+#tsne_result_data.to_csv("tsne_result_data_for_"+str(A_size_0)+"_vectors.csv",index=False)
