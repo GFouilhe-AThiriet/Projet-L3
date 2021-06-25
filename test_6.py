@@ -69,40 +69,49 @@ ax1.add_artist(legend)
 ax2 = fig.add_subplot(1,2,2)
 ax2.axis("off")
 
-#To get the coordinates of the mouse in real time
-coords=[[0,0]] #Global Variable
+####
 
 global switch
 switch = 0
+global coord
+coord = ""
+global ind
+ind = 0
 
 def on_click(event):
-    artist = event.artist
-    # xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
-    # coord = ax.format_coord(xmouse, ymouse)
-    # global L
-    # L += [[coord]]
-    # ind = event.ind
-    # ind = ind[0]
+    # artist = event.artist
     # print ('Object picked:', artist)
+    xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
+    global coord
+    coord = ax1.format_coord(xmouse, ymouse)
+    global ind
+    ind = event.ind
+    ind = ind[0]
+    print("Coordinates : ",coord)
+    print ("Selection", ind)
+
     global switch
     switch = 1
     print("on_click")
-    # print ("Selection", ind)
-    # print("Coordinates : ",coord)
     # x,y=event.xdata, event.ydata
     # global coords
     # coords+=[[int(x),int(y)]]
     # print(coords)
 
 def animate(i):
-    ax2.clear()
-    ax2.axis("off")
-    ax2.plot([1,2,3], [np.sin(i),np.cos(i),np.tan(i)],"o")
     global switch
-    if switch == 1:
+    if switch == 1: #If the user has clicked
+        global coord
+        print(coord)
+        global ind
+        print(ind)
+        ax2.clear()
+        ax2.axis("off")
+        ax2.set_title(coord+"; ind="+str(ind))
+        ax2.plot([1,2,3], [np.sin(i),np.cos(i),np.tan(i)],"o")
         print("animate")
         switch = 0
-    print(switch)
+
 #     number_y=int(array[number][2])
 #     subplot_title=("Species+ n°"+str(number))
 #     second_sub_plot.set_title(subplot_title)
@@ -115,7 +124,7 @@ def animate(i):
 
 fig.canvas.callbacks.connect('pick_event', on_click)
 
-anim = FuncAnimation(fig, animate, frames=10,interval=1000)
+anim = FuncAnimation(fig, animate, frames=100,interval=1000)
 # After (too) many hours of bugs, I think that a big value for interval might be necessary.
 
 plt.show()
