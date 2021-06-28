@@ -140,4 +140,4 @@ anim = FuncAnimation(fig, animate, frames=100,interval=1000)
 plt.show()
 
 
-tsne_result_data.to_csv("tsne_result_data_for_"+str(A_size_0)+"_vectors.csv",index=False)
+# tsne_result_data.to_csv("tsne_result_data_for_"+str(A_size_0)+"_vectors.csv",index=False)
