@@ -18,7 +18,7 @@ from pygame.locals import *
 
 user = input('Please type the name of the user (choose among Aurélien, Guilhem, Joseph, Camille : ')
 if user not in ['Aurélien', 'Guilhem', 'Joseph', 'Camille']:
-    raise ValueError('Incorrect username')
+     raise ValueError('Incorrect username')
 
 ############ End of Users' Parameters ############
 
