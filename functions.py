@@ -11,6 +11,7 @@ from pygame.locals import *
 # possibility_to_return_to_menu
 # list_of_groups(serie)
 # id_species_per_group
+# decipher_coord
 
 ############# END #############
 
@@ -93,4 +94,19 @@ def make_id_species_per_group(list_of_id_species,sorted_list_of_species_group,li
                 H += [list_of_id_species[j]]
         L += [H]
     return L
+
+###################################################################################
+
+def decipher_coord(coords): #coords is a string
+    for i in range(len(coords)):
+        if coords[i] == "x":
+            pos_x = i
+        if coords[i] == "y":
+            pos_y = i
+        if coords[i] == "z":
+            pos_z = i
+    return coords[pos_x+2:pos_x+9],coords[pos_y+2:pos_y+9],coords[pos_z+2:pos_z+9]
+
+# transform the string "x=36.0244, y=−17.0519, z=36.9563"
+# in the 3 strings "36.0244","17.0519", and "36.9563" (lenght : 7 characters)
 

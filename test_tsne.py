@@ -77,4 +77,4 @@ def display_function(A_size_0=200,A_size_1=100):
     plt.title(str(A_size_0)+"_vectors")
     plt.show()
 
-display_function(200,100)
+display_function(20000,100)

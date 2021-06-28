@@ -112,13 +112,14 @@ def on_click(event):
 def animate(i):
     global switch
     if switch == 1: #If the user has clicked
-        global coord
-        print(coord)
-        global ind
-        print(ind)
+        # global coord
+        # print(coord)
+        x,y,z = decipher_coord(coord)
+        # global ind
+        # print(ind)
         ax2.clear()
         ax2.axis("off")
-        ax2.set_title(coord+"; ind="+str(ind))
+        ax2.set_title(coord)
         ax2.plot([1,2,3], [np.sin(i),np.cos(i),np.tan(i)],"o")
         print("animate")
         switch = 0
