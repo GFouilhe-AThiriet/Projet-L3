@@ -16,7 +16,9 @@ from pygame.locals import *
 
 # Complete the required paths in functions.py and then enter your name :
 
-User = "Aurélien"
+user = input('Please type the name of the user (choose among Aurélien, Guilhem, Joseph, Camille : ')
+if user not in ['Aurélien', 'Guilhem', 'Joseph', 'Camille']:
+    raise ValueError('Incorrect username')
 
 # If you don't have internet, write False and the species' data will
 # be read from the csv file instead of the online file
@@ -31,7 +33,7 @@ internet = False
 
 ################## Global Setup ##################
 
-path_to_train , path_to_folder = user_paths(User)
+path_to_train , path_to_folder = user_paths(user)
 
 # Dataframe with index, id_species, species_name, Images (number of images)
 # sorted by decreasing number of images 

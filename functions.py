@@ -16,20 +16,21 @@ from pygame.locals import *
 
 ###################################################################################
 
+
 def user_paths(User):
-        
-    if User=="Aurélien":
+    if User == "Aurélien":
         path_to_train = os.path.join('C:','\\Users','lyz50','Documents','GitHub','plantnet_dataset','python','train')
         path_to_folder=os.path.join('C:','\\Users','lyz50',"documents","Github","Projet-L3")
-    elif User=="Guilhem":
+    elif User == "Guilhem":
         path_to_train = os.path.join('C:/','Plantnet_project','plantnet_subset')
         path_to_folder= os.path.join('C:','\\Users\guilh\OneDrive\Documents\GitHub\Projet-L3')
-    elif User=="Joseph":
+    elif User == "Joseph":
         path_to_train = os.path.join("/home","jsalmon","Documents","Datasets","train")
         path_to_folder=os.path.join("...")
-    elif User=="Camille":
-        path_to_train = os.path.join("...")
-        path_to_folder=os.path.join("...")
+    elif User == "Camille":
+        print(os.getcwd())
+        path_to_train = os.path.join(r"C:\Users\cgarc\top-k-classification\Python\data\big_plantnet\train")
+        path_to_folder=os.path.join(r"C:\Users\cgarc\Projet-L3")
     return ((path_to_train,path_to_folder))
 
 ###################################################################################
