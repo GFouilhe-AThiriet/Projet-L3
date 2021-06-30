@@ -6,9 +6,8 @@ import numpy as np
 from functions import *
 from pygame.locals import *
 
-##################################################
 
-################ Users' Parameters ###############
+# Users' Parameters
 
 # Note : you have to download the ENTIRE subset named "TRAIN" before lauching this code
 # If you have only downloaded a sample of this subset, the code should not return errors
@@ -22,13 +21,8 @@ user = input(
 if user not in ["Aurélien", "Guilhem", "Joseph", "Camille"]:
     raise ValueError("Incorrect username")
 
-############ End of Users' Parameters ############
 
-
-###################################################################################
-###################################################################################
-
-################## Global Setup ##################
+# Global Setup
 
 path_to_train, path_to_folder = user_paths(user)
 
@@ -37,7 +31,7 @@ path_to_train, path_to_folder = user_paths(user)
 
 data = pd.read_csv(os.path.join(path_to_folder, "class_names_2.csv"))
 
-##### Load the list of genus and species for each genus
+# Load the list of genus and species for each genus
 
 # Sorted by the decreasing order of images per genus
 data.sort_values(by=["genus_images"], inplace=True, ascending=False)
@@ -55,7 +49,6 @@ id_species_per_group_order_2 = make_id_species_per_group(
     data.id_species, data.genus, list_of_groups_order_2
 )
 
-##### End of Load the list of genus and species for each genus
 
 screen_width = 1400  # 1400 with 0.57 ratio might be a good size
 ratio = 0.57
@@ -83,9 +76,7 @@ w, h = screen_width, screen_height
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-############ End of Global Setup ############
-
-############# Fonts and Colors ##############
+# Fonts and Colors
 
 mini_font = pygame.font.SysFont("timesnewroman", 20)
 medium_font = pygame.font.SysFont("timesnewroman", 27)
@@ -93,8 +84,10 @@ big_font = pygame.font.SysFont("timesnewroman", 32)
 
 font = medium_font
 
-# List of fonts :
+# List of fonts
 # print(pygame.font.get_fonts())
+
+# List of colors
 
 white = (255, 255, 255)
 black = (0, 0, 0)
@@ -106,13 +99,12 @@ forest_green = (19, 94, 19)
 light_green = (53, 139, 53)
 blue = (51, 153, 255)
 
-############# End of Fonts and Colors ##############
 
-############ Pygales Elements ############
+# Pygales Elements
 
 path_to_Pygame_elements = os.path.join(path_to_folder, "Pygames_elements")
 
-# Backgrounds :
+# Backgrounds
 
 list_of_backgrounds = []
 
@@ -172,26 +164,26 @@ black_left_arrow = pygame.transform.scale(
     black_left_arrow, (small_arrow_size, small_arrow_size)
 )
 
-# Number of images for each species :
+# Number of images for each species
 
 images_repartition = pygame.image.load(
     os.path.join(path_to_folder, "Pygames_elements", "images_for_each_species.png")
 )
 images_repartition_width, images_repartition_height = images_repartition.get_size()
-coeff = images_repartition_height / images_repartition_width
+coef = images_repartition_height / images_repartition_width
 images_repartition = pygame.transform.scale(
-    images_repartition, (int(0.6 * w), int(0.6 * w * coeff))
+    images_repartition, (int(0.6 * w), int(0.6 * w * coef))
 )
 
-# Other :
+# Other
 
 wide_logo = pygame.image.load(
     os.path.join(path_to_folder, "Pygames_elements", "Pl@ntNet_wide_logo.png")
 )
 logo_width, logo_height = wide_logo.get_size()
-coeff = logo_height / logo_width
-wide_logo_1 = pygame.transform.scale(wide_logo, (int(0.4 * w), int(w * 0.4 * coeff)))
-wide_logo_2 = pygame.transform.scale(wide_logo, (int(0.5 * w), int(w * 0.5 * coeff)))
+coef = logo_height / logo_width
+wide_logo_1 = pygame.transform.scale(wide_logo, (int(0.4 * w), int(w * 0.4 * coef)))
+wide_logo_2 = pygame.transform.scale(wide_logo, (int(0.5 * w), int(w * 0.5 * coef)))
 
 no_images = pygame.image.load(
     os.path.join(path_to_folder, "Pygames_elements", "Pl@ntNet_logo.png")
@@ -243,7 +235,7 @@ def menu():
         # Please, keep that uncomment
         # It's useful to see positions when placing things
 
-        ####### Margin #######
+        # Margin
 
         first_button = pygame.Rect(0, h * 0.1, margin, h * 0.1)
         first_button_x, firt_button_y = margin / 2, h * 0.15
@@ -287,16 +279,11 @@ def menu():
                 "Genus", big_font, black, screen, second_button_x, second_button_y, 1
             )
 
-        ####### End of Margin #######
-
         pygame.display.update()
         mainClock.tick(60)
 
 
-###################################################################################
-###################################################################################
-
-#### Number of images for each species ###
+# Number of images for each species ###
 
 
 def Images():
@@ -381,7 +368,7 @@ def Images():
 
                 number_images = len(
                     os.listdir()
-                )  # first part of gadget to change the plant photo whith right click
+                )  # first part of gadget to change the plant photo with right click
                 if plant_representative > number_images - 1:
                     plant_representative = 0
 
@@ -421,12 +408,7 @@ def Images():
         mainClock.tick(60)
 
 
-#### End of Number of images for each species ###
-
-###################################################################################
-###################################################################################
-
-#### GROUPS ###
+# GROUPS
 
 
 def groups():
@@ -447,7 +429,7 @@ def groups():
     interval_w = 0.02
     interval_h = 0.05
 
-    switch = 1  # When a new group is selected, switch takes 0 as a value and Pygame loads the images
+    switch = 1  # When selecting new group, switch to 0 and Pygame loads images
     # of the selected group
 
     page = 1
@@ -456,7 +438,7 @@ def groups():
 
     margin_color = light_blue
 
-    additional_color = white  # Change it from white to green to see additional buttons
+    additional_color = white  # Change from white to green for more buttons
 
     running = True
 
@@ -546,9 +528,7 @@ def groups():
                 1,
             )
 
-        ### End of the Scrolling list ###
-
-        ### Global Displayed Text ###
+        # Global Displayed Text
 
         # Title and Interactive research text (not active yet)
 
@@ -595,9 +575,7 @@ def groups():
         #         draw_text(list_of_species[i], font, black, screen, w*0.5, h*i*0.02,0)
         # Let's keep that to control genus if necessary
 
-        ### End of Displayed Global Text ###
-
-        ############### SPECIES' NAMES AND PHOTOS IN A GROUP ###############
+        # SPECIES' NAMES AND PHOTOS IN A GROUP
 
         more_button = pygame.Rect(
             0.92 * w, 0.7475 * h, small_arrow_size, small_arrow_size
@@ -609,9 +587,9 @@ def groups():
         )
         pygame.draw.rect(screen, additional_color, previous_button)
 
-        ######################### Display species' photos and names #########################
+        # Display species' photos and names
 
-        ### LOADING OF THE IMAGES FOR THE ACTUAL GROUP ###
+        # LOADING OF THE IMAGES FOR THE ACTUAL GROUP
 
         if switch == 0:  # New group selected; Pygame has to load the images
 
@@ -704,11 +682,9 @@ def groups():
 
             # print(plant_representative)
 
-            switch = 1  # no need to load again the images for Pygame until another group is selected
+            switch = 1  # no need to load images again until another group is selected
 
-        ### End of LOADING OF THE IMAGES FOR THE ACTUAL GROUP ###
-
-        ####### Display of the images of this group #######
+        # Display of the images of this group #######
 
         counter = 0
 
@@ -761,9 +737,7 @@ def groups():
 
                     counter += 1
 
-        ####### End of Display of the images of this group #######
-
-        ### If there are more than 8 images to display ###
+        # If there are more than 8 images to display ###
 
         if page > 1:  # need to have the possibility to come back to the previous window
             for event in list_of_events:
@@ -806,7 +780,5 @@ def groups():
         pygame.display.update()
         mainClock.tick(60)
 
-
-#### End of GROUPS ###
 
 menu()
