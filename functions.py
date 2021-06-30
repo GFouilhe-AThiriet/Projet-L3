@@ -29,7 +29,7 @@ def user_paths(User):
         path_to_folder= os.path.join('C:','\\Users\guilh\OneDrive\Documents\GitHub\Projet-L3')
     elif User == "Joseph":
         path_to_train = os.path.join("/home","jsalmon","Documents","Datasets","train")
-        path_to_folder=os.path.join("...")
+        path_to_folder=os.path.join("/home/jsalmon/Documents/Mes_cours/Montpellier/Stages/L3/Projet-L3")
     elif User == "Camille":
         path_to_train = os.path.join(r"C:\Users\cgarc\top-k-classification\Python\data\big_plantnet\train")
         path_to_folder=os.path.join(r"C:\Users\cgarc\Projet-L3")

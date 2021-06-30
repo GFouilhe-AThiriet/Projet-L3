@@ -31,7 +31,7 @@ if user not in ['Aurélien', 'Guilhem', 'Joseph', 'Camille']:
 path_to_train , path_to_folder = user_paths(user)
 
 # Dataframe with index, id_species, species_name, Images (number of images)
-# sorted by decreasing number of images 
+# sorted by decreasing number of images
 
 data = pd.read_csv(os.path.join(path_to_folder,"class_names_2.csv"))
 
@@ -196,7 +196,7 @@ def menu():
                     pygame.quit()
                     sys.exit()
 
-        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h,0) 
+        # draw_text("(x="+str(mx)+", y="+str(my)+")", font, black, screen, 0,0.6*h,0)
         # draw_text("(x="+str(round(mx/w,2))+", y="+str(round(my/h,2))+")",
         # font, black, screen, 0,0.7*h,0)
         # Please, keep that uncomment
@@ -209,7 +209,7 @@ def menu():
         pygame.draw.rect(screen, button_color, first_button)
 
         if first_button.collidepoint((mx, my)):
-            draw_text('Pareto Effect', big_font , grey, screen, 
+            draw_text('Pareto Effect', big_font , grey, screen,
             first_button_x, firt_button_y,1)
             if event.type == MOUSEBUTTONDOWN:
                 Images()
@@ -231,7 +231,7 @@ def menu():
             second_button_x, second_button_y,1)
 
         ####### End of Margin #######
- 
+
         pygame.display.update()
         mainClock.tick(60)
 
@@ -266,7 +266,7 @@ def Images():
         medium_font, black, screen, 0.35*w,0.175*h,1)
 
         mx, my = pygame.mouse.get_pos()
-        
+
         # draw_text("(x="+str(round(mx/w,4))+", y="+str(round(my/h,4))+")",
         # medium_font, black, screen, 0.3*w,0,0)
         # Useful to see positions when placing things
@@ -333,7 +333,7 @@ def groups():
     order_text = "ABC"
     id_species_per_group = id_species_per_group_order_2
     list_of_groups = list_of_groups_order_2
-    
+
     j = 0
     actual_group = "not initialised"
     index_actual_group = 0
@@ -368,7 +368,7 @@ def groups():
         pygame.draw.rect(screen, margin_color, margin_button)
 
         mx, my = pygame.mouse.get_pos()
-        
+
         # rect = pygame.Rect(0, h*0.06,margin, h*0.1)
         # pygame.draw.rect(screen, button_color, rect)
         # Keep that uncomment please
@@ -409,7 +409,7 @@ def groups():
                         order_text = "123"
             # End of Possibility to change the order of the scrolling list
 
-            if mx<margin*0.6: 
+            if mx<margin*0.6:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 4 and j>0:
                         j+=-1
@@ -436,7 +436,7 @@ def groups():
         ### End of the Scrolling list ###
 
         ### Global Displayed Text ###
-        
+
         # Title and Interactive research text (not active yet)
 
         draw_text("Genus",  pygame.font.SysFont("timesnewroman", 27, italic=True), black,
@@ -463,7 +463,7 @@ def groups():
         ### End of Displayed Global Text ###
 
         ############### SPECIES' NAMES AND PHOTOS IN A GROUP ###############
-        
+
         more_button = pygame.Rect(0.92*w,0.7475*h, small_arrow_size, small_arrow_size)
         pygame.draw.rect(screen, additional_color, more_button)
 
@@ -491,7 +491,7 @@ def groups():
                 for i in range(4):
 
                     if (counter+(page-1)*8)<len(list_of_species):
-                        
+
                         species_name = list_of_species[(counter+(page-1)*8)]
 
                         # Small adjustment if the name of the species is long
@@ -528,7 +528,7 @@ def groups():
                             list_of_images_for_the_actual_group += [list_of_images_of_the_same_species]
                         else :
                             list_of_images_for_the_actual_group += [False] # No images for this species
-                            
+
                         counter+=1
 
                 list_of_rectangles += [sub_list_of_rectangles]
@@ -555,7 +555,7 @@ def groups():
                     else:
                         screen.blit(no_images,
                         (margin+i*(0.15+interval_w)*w, 0.27*h+p*(0.27+interval_h)*h))
-                    
+
                     species_name = list_of_species[counter+(page-1)*8]
 
                     draw_text(species_name,
