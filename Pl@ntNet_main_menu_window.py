@@ -438,7 +438,7 @@ def groups():
 
     margin_color = light_blue
 
-    additional_color = white  # Change from white to green for more buttons
+    additional_color = white  # Change from white to green to see more_button
 
     running = True
 
@@ -530,7 +530,7 @@ def groups():
 
         # Global Displayed Text
 
-        # Title and Interactive research text (not active yet)
+        # Title
 
         draw_text(
             "Genus",
