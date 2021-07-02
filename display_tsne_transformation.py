@@ -8,14 +8,12 @@ from functions import *
 
 def tsne_transformation(data,dim):
 
-    print(data)
-
     if dim == 3:
         
-        x = data._3D_tsne_1[0]
-        y = data._3D_tsne_2[0]
-        z = data._3D_tsne_3[0]
-        label = data.id_species[0]
+        x = data._3D_tsne_1
+        y = data._3D_tsne_2
+        z = data._3D_tsne_3
+        label = data.id_species
 
         fig = plt.figure(figsize=(14,6))
         fig.suptitle('TSNE transformation of '+str(len(data))+" vectors")

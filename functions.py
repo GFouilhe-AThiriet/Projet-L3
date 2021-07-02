@@ -110,16 +110,16 @@ def decipher_coord(coords,data,dim): #coords is a string
                 pos_y = i
             if coords[i] == "z":
                 pos_z = i
-        a,b,c = coords[pos_x+2:pos_x+5],coords[pos_y+2:pos_y+5],coords[pos_z+2:pos_z+5]
+        a,b,c = coords[pos_x+2:pos_x+3],coords[pos_y+2:pos_y+3],coords[pos_z+2:pos_z+3]
         # transform the string "x=36.0244, y=−17.0519, z=36.9563"
         # in the 3 strings a="36.02",a="17.05", and c="36.95" (lenght : 5 characters)
         
         i = 0
         loop = True
         while i < len(data)-1 and loop == True:
-            if str(data._3D_tsne_1[i])[:5] == a:
-                if str(data._3D_tsne_2[i])[:5] == b:
-                    if str(data._3D_tsne_1[i])[:5] == c:
+            if str(data._3D_tsne_1[i])[:1] == a:
+                if str(data._3D_tsne_2[i])[:1] == b:
+                    if str(data._3D_tsne_1[i])[:1] == c:
                         id_species = data.id_species[i]
                         loop = False # to end theloop
             i += 1
