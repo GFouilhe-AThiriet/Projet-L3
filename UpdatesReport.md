@@ -69,3 +69,5 @@ Update 28/05 by Au. : I optimized the code : now Pygame loads the images only on
 Update 15/06 by Au. : A lot of presentation done. Starting the embeddings part soon.
 
 25/06 : TSNE tests
+
+29/06 : cf pdf in "Miscellaneous" folder
