@@ -168,16 +168,16 @@
 # import numpy as np
 # print(np.zeros((2,4),dtype=int)[1][3])
 
-import json
-import pandas as pd
-import os
+# import json
+# import pandas as pd
+# import os
 
-from functions import *
+# from functions import *
 
-User = "Aurélien"
-path_to_train , path_to_folder = user_paths(User)
+# User = "Aurélien"
+# path_to_train , path_to_folder = user_paths(User)
 
-path_to_file = os.path.join(path_to_folder,"data.json")
+# path_to_file = os.path.join(path_to_folder,"data.json")
 
-data = pd.read_json(path_to_file,typ='series')
-data.to_csv("class_names_2.csv",index=False)
+# data = pd.read_json(path_to_file,typ='series')
+# data.to_csv("class_names_2.csv",index=False)

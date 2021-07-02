@@ -71,3 +71,5 @@ Update 15/06 by Au. : A lot of presentation done. Starting the embeddings part s
 25/06 : TSNE tests
 
 29/06 : cf pdf in "Miscellaneous" folder
+
+02/07 : Big problem : the mouse coordinates are very imprecise. For instance "-10.01 -0.92 7.61" will be displayed "-10.3 -0.87 7.2". So how do you go back to species_id with those changes ?

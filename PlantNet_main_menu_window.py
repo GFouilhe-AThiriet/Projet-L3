@@ -9,6 +9,7 @@ from pygame.locals import *
 from pygame_loading import *
 from Images import *
 from groups import *
+from display_tsne_transformation import *
 
 # Users' Parameters
 
@@ -51,6 +52,11 @@ list_of_groups_order_2 = make_a_list_of_groups(data.genus)
 id_species_per_group_order_2 = make_id_species_per_group(
     data.id_species, data.genus, list_of_groups_order_2
 )
+
+data.sort_values(by=["Images"], inplace=True, ascending=False)
+# Sorted by decreasing order of number of images
+data.reset_index(drop=True, inplace=True)
+# Re-index
 
 
 screen_width = 1400  # 1400 with 0.57 ratio might be a good size
@@ -102,6 +108,10 @@ logo, window_name, screen, mini_font, medium_font, big_font, font, list_of_backg
 
 def menu():
 
+    running = True
+
+    display_tsne_transfo = False
+
     sub_choice = False
 
     button_color = (
@@ -110,7 +120,7 @@ def menu():
 
     background_index = np.random.randint(0, 6)  # Initialisation
 
-    while True:
+    while running:
         screen = pygame.display.set_mode((screen_width, screen_height))
         screen.fill(white)
 
@@ -304,7 +314,8 @@ def menu():
                     1
                 )
                 if event.type == MOUSEBUTTONDOWN:
-                    print("gauuche")
+                    display_tsne_transfo = 2
+                    running = False
             else:
                 draw_text("2D",big_font, black, screen, left_text_x, left_text_y, 1)
                 
@@ -320,14 +331,18 @@ def menu():
                     1
                 )
                 if event.type == MOUSEBUTTONDOWN:
-                    print("droooite")
+                    display_tsne_transfo = 3
+                    running = False
             else:
                 draw_text("3D",big_font, black, screen, right_text_x, right_text_y, 1)
                 
-
         # End of Interactions ###
 
         pygame.display.update()
         mainClock.tick(60)
+
+    if display_tsne_transfo != False:
+        dim = display_tsne_transfo
+        tsne_transformation(data,dim)
 
 menu()

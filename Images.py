@@ -1,6 +1,5 @@
 # Pareto Effect Window ###
 
-
 def Images(
     pygame,
     os,

@@ -99,16 +99,28 @@ def make_id_species_per_group(list_of_id_species,sorted_list_of_species_group,li
 
 ###################################################################################
 
-def decipher_coord(coords): #coords is a string
-    for i in range(len(coords)):
-        if coords[i] == "x":
-            pos_x = i
-        if coords[i] == "y":
-            pos_y = i
-        if coords[i] == "z":
-            pos_z = i
-    return coords[pos_x+2:pos_x+9],coords[pos_y+2:pos_y+9],coords[pos_z+2:pos_z+9]
+def decipher_coord(coords,data,dim): #coords is a string
 
-# transform the string "x=36.0244, y=−17.0519, z=36.9563"
-# in the 3 strings "36.0244","17.0519", and "36.9563" (lenght : 7 characters)
+    if dim == 3:
 
+        for i in range(len(coords)):
+            if coords[i] == "x":
+                pos_x = i
+            if coords[i] == "y":
+                pos_y = i
+            if coords[i] == "z":
+                pos_z = i
+        a,b,c = coords[pos_x+2:pos_x+5],coords[pos_y+2:pos_y+5],coords[pos_z+2:pos_z+5]
+        # transform the string "x=36.0244, y=−17.0519, z=36.9563"
+        # in the 3 strings a="36.02",a="17.05", and c="36.95" (lenght : 5 characters)
+        
+        i = 0
+        loop = True
+        while i < len(data)-1 and loop == True:
+            if str(data._3D_tsne_1[i])[:5] == a:
+                if str(data._3D_tsne_2[i])[:5] == b:
+                    if str(data._3D_tsne_1[i])[:5] == c:
+                        id_species = data.id_species[i]
+                        loop = False # to end theloop
+            i += 1
+        return i

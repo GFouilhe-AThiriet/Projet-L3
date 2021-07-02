@@ -27,12 +27,12 @@ A_size_0 = 20*10**3
 A_size_1 = 100
 n_components = 3
 
-# A = np.zeros((A_size_0,A_size_1))
-# for i in range (A_size_0):
-#     A[i] = i*np.ones(A_size_1)
+A = np.zeros((A_size_0,A_size_1))
+for i in range (A_size_0):
+    A[i] = i*np.ones(A_size_1)
 
-# print("A")
-# print(A)
+print("A")
+print(A)
 
 # # Label
 

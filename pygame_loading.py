@@ -118,4 +118,4 @@ def pygame_loading(
     )
     no_images = pygame.transform.scale(no_images, (int(w * 0.15), int(w * 0.15)))
 
-    return logo, window_name, screen, mini_font, medium_font, big_font, font, list_of_backgrounds, background_width, background_height, margin, arrow_w, arrow_h, arrow_back, arrow_back_grey, small_arrow_size, grey_right_arrow, black_right_arrow, grey_left_arrow, black_left_arrow, images_repartition, wide_logo_1, wide_logo_2, no_images 
+    return logo, window_name, screen, mini_font, medium_font, big_font, font, list_of_backgrounds, background_width, background_height, margin, arrow_w, arrow_h, arrow_back, arrow_back_grey, small_arrow_size, grey_right_arrow, black_right_arrow, grey_left_arrow, black_left_arrow, images_repartition, wide_logo_1, wide_logo_2, no_images

@@ -16,26 +16,42 @@ User = "Aurélien"
 path_to_train , path_to_folder = user_paths(User)
 
 data = pd.read_csv(os.path.join(path_to_folder,"class_names_2.csv"))
+data.sort_values(by=["id_species"], inplace=True, ascending=True)
 
-# for n_components in range(2,2): # n_components = 2 and then n_components = 3
+A_size_0 = len(data)
+A_size_1 = 100
 
-#     label = list(i for i in range(A_size_0))
+A = np.zeros((A_size_0,A_size_1))
+for i in range (A_size_0):
+    A[i] = i*np.ones(A_size_1)
 
-#     # TSNE
+label = list(i for i in range(len(data)))
 
-#     tsne = TSNE(n_components)
-#     tsne_result = tsne.fit_transform(A)
+# 2D TSNE transformation
 
-#     # print(tsne_result.shape)
-#     # print(tsne_result)
+n_components = 2
 
-#     tsne_result_data = pd.DataFrame(
-#         {'tsne_1': tsne_result[:,0],
-#         'tsne_2': tsne_result[:,1],
-#         'tsne_3': tsne_result[:,2],
-#         'label': label
-#         })
+tsne = TSNE(n_components)
+tsne_result = tsne.fit_transform(A)
 
-#     print(tsne_result_data)
+# print(tsne_result.shape)
+# print(tsne_result)
 
-#     # tsne_result_data.to_csv("tsne_result_data_for_"+str(A_size_0)+"_vectors.csv",index=False)
+data.insert(5, "_2D_tsne_1", tsne_result[:,0])
+data.insert(6, "_2D_tsne_2", tsne_result[:,1])
+
+# 3D TSNE transformation
+
+n_components = 3
+
+tsne = TSNE(n_components)
+tsne_result = tsne.fit_transform(A)
+
+data.insert(7, "_3D_tsne_1", tsne_result[:,0])
+data.insert(8, "_3D_tsne_2", tsne_result[:,1])
+data.insert(9, "_3D_tsne_3", tsne_result[:,2])
+
+# print(tsne_result.shape)
+# print(tsne_result)
+
+data.to_csv("class_names_2.csv",index=False)
