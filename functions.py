@@ -1,6 +1,7 @@
 import pygame, sys
 import os
 import pandas as pd
+import numpy as np
 
 from pygame.locals import *
 
@@ -11,7 +12,6 @@ from pygame.locals import *
 # possibility_to_return_to_menu
 # list_of_groups(serie)
 # id_species_per_group
-# decipher_coord
 
 ############# END #############
 
@@ -99,9 +99,63 @@ def make_id_species_per_group(list_of_id_species,sorted_list_of_species_group,li
 
 ###################################################################################
 
+##### This function is not OK is the current state
+# As the precision of mouse coordinates is very bad,
+# I don't even know if the result would be satisfying if it was
+
 def decipher_coord(coords,data,dim): #coords is a string
 
+    if dim == 2:
+        
+        index = "not found"
+
+        for i in range(len(coords)):
+            if coords[i] == "x":
+                pos_x = i
+            if coords[i] == "y":
+                pos_y = i
+
+        a,b = coords[pos_x+3:pos_x+5],coords[pos_y+3:pos_y+5]
+        if coords[pos_x+2] == "−" or coords[pos_x+2] == "-":
+            a = "-" + a
+        else:
+            a = coords[pos_x+2] + a
+        if coords[pos_y+2] == "−" or coords[pos_y+2] == "-":
+            b = "-" + b
+        else:
+            b = coords[pos_y+2] + b
+        c = 0
+
+        # transform the string "x=36.0244, y=−17.0519"
+        # in the 3 strings a="36.02",b="17.05"
+
+        error = 0
+        
+        while index == "not found" :
+            
+            i = 0
+            loop = True
+            while i < len(data)-1 and loop == True:
+                if (
+                    (data._2D_tsne_1[i]-float(a))
+                    + (data._2D_tsne_2[i]-float(b)) 
+                    < error
+                    ):
+                    index = i
+                    loop = False # to end the loop
+                i += 1
+
+            error += 0.1
+            if error > error_limit:
+                index = 0
+                error = "too big"
+
     if dim == 3:
+
+        error_limit = 5
+
+        
+        index = "not found"
 
         for i in range(len(coords)):
             if coords[i] == "x":
@@ -110,17 +164,42 @@ def decipher_coord(coords,data,dim): #coords is a string
                 pos_y = i
             if coords[i] == "z":
                 pos_z = i
-        a,b,c = coords[pos_x+2:pos_x+3],coords[pos_y+2:pos_y+3],coords[pos_z+2:pos_z+3]
+        a,b,c = coords[pos_x+3:pos_x+7],coords[pos_y+3:pos_y+7],coords[pos_z+3:pos_z+7]
+        if coords[pos_x+2] == "−" or coords[pos_x+2] == "-":
+            a = "-" + a
+        else:
+            a = coords[pos_x+2] + a
+        if coords[pos_y+2] == "−" or coords[pos_y+2] == "-":
+            b = "-" + b
+        else:
+            b = coords[pos_y+2] + b
+        if coords[pos_z+2] == "−" or coords[pos_z+2] == "-":
+            c = "-" + c
+        else:
+            c = coords[pos_z+2] + c
         # transform the string "x=36.0244, y=−17.0519, z=36.9563"
-        # in the 3 strings a="36.02",a="17.05", and c="36.95" (lenght : 5 characters)
-        
-        i = 0
-        loop = True
-        while i < len(data)-1 and loop == True:
-            if str(data._3D_tsne_1[i])[:1] == a:
-                if str(data._3D_tsne_2[i])[:1] == b:
-                    if str(data._3D_tsne_1[i])[:1] == c:
-                        id_species = data.id_species[i]
-                        loop = False # to end theloop
-            i += 1
-        return i
+        # in the 3 strings a="36.02",b="17.05", and c="36.95"
+
+        error = 0
+
+        while index == "not found" :
+            
+            i = 0
+            loop = True
+            while i < len(data)-1 and loop == True:
+                if (
+                    (data._3D_tsne_1[i]-float(a))**2
+                    + (data._3D_tsne_2[i]-float(b))**2
+                    +(data._3D_tsne_3[i]-float(c))**2
+                    < error
+                    ):
+                    index = i
+                    loop = False # to end the loop
+                i += 1
+
+            error += 0.1
+            if error > error_limit:
+                index = 0
+                error = "too big"
+
+    return a, b, c, index , error

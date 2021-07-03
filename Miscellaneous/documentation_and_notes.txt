@@ -71,3 +71,5 @@ https://www.shanelynn.ie/python-pandas-read-csv-load-data-from-csv-files/
 
 # Animation ><
 # https://www.reddit.com/r/learnpython/comments/4ullyv/matplotlib_animation_attributeerror_axessubplot/
+
+# http://matplotlib.1069221.n5.nabble.com/event-ind-in-point-picking-gives-wrong-number-td42012.html

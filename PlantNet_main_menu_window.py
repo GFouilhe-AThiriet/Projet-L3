@@ -343,6 +343,6 @@ def menu():
 
     if display_tsne_transfo != False:
         dim = display_tsne_transfo
-        tsne_transformation(data,dim)
+        tsne_transformation(data,dim,path_to_train)
 
 menu()
