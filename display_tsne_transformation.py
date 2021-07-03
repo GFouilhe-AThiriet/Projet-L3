@@ -96,7 +96,7 @@ def tsne_transformation(data,dim,path_to_train):
         ax1.set_title(coord)
         
         legend = ax1.legend(
-            *scatter.legend_elements(num=10),
+            *scatter.legend_elements(num=19),
             bbox_to_anchor=(-0.3,1),
             loc=2,
             title="Class")
@@ -182,7 +182,7 @@ def tsne_transformation(data,dim,path_to_train):
         ax1.set_title(coord)
         
         legend = ax1.legend(
-            *scatter.legend_elements(num=10),
+            *scatter.legend_elements(num=19),
             bbox_to_anchor=(-0.3,1),
             loc=2,
             title="Class")

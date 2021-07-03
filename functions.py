@@ -106,6 +106,8 @@ def make_id_species_per_group(list_of_id_species,sorted_list_of_species_group,li
 def decipher_coord(coords,data,dim): #coords is a string
 
     if dim == 2:
+
+        error_limit = 2
         
         index = "not found"
 
@@ -115,7 +117,7 @@ def decipher_coord(coords,data,dim): #coords is a string
             if coords[i] == "y":
                 pos_y = i
 
-        a,b = coords[pos_x+3:pos_x+5],coords[pos_y+3:pos_y+5]
+        a,b = coords[pos_x+3:pos_y-1],coords[pos_y+3:len(coords)]
         if coords[pos_x+2] == "−" or coords[pos_x+2] == "-":
             a = "-" + a
         else:
@@ -137,23 +139,22 @@ def decipher_coord(coords,data,dim): #coords is a string
             loop = True
             while i < len(data)-1 and loop == True:
                 if (
-                    (data._2D_tsne_1[i]-float(a))
-                    + (data._2D_tsne_2[i]-float(b)) 
+                    (data._2D_tsne_1[i]-float(a))**2
+                    + (data._2D_tsne_2[i]-float(b))**2
                     < error
                     ):
                     index = i
                     loop = False # to end the loop
                 i += 1
 
-            error += 0.1
+            error += 0.02
             if error > error_limit:
                 index = 0
                 error = "too big"
 
     if dim == 3:
 
-        error_limit = 5
-
+        error_limit = 10
         
         index = "not found"
 
@@ -164,7 +165,7 @@ def decipher_coord(coords,data,dim): #coords is a string
                 pos_y = i
             if coords[i] == "z":
                 pos_z = i
-        a,b,c = coords[pos_x+3:pos_x+7],coords[pos_y+3:pos_y+7],coords[pos_z+3:pos_z+7]
+        a,b,c = coords[pos_x+3:pos_y-2],coords[pos_y+3:pos_z-2],coords[pos_z+3:len(coords)]
         if coords[pos_x+2] == "−" or coords[pos_x+2] == "-":
             a = "-" + a
         else:
@@ -197,7 +198,7 @@ def decipher_coord(coords,data,dim): #coords is a string
                     loop = False # to end the loop
                 i += 1
 
-            error += 0.1
+            error += 0.5
             if error > error_limit:
                 index = 0
                 error = "too big"
