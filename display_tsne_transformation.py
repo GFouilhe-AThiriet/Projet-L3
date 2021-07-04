@@ -58,12 +58,12 @@ def tsne_transformation(data,dim,path_to_train):
 
                 ax1.set_title(
                     coord +
-                     " read "+
-                     a +
-                     "," +
-                     b +
-                     "," +
-                     c +
+                     " read x="+
+                     str(round(data._3D_tsne_1[species_index],2)) +
+                     " y=" +
+                     str(round(data._3D_tsne_2[species_index],2)) +
+                     " z=" +
+                     str(round(data._3D_tsne_3[species_index],2)) +
                      " ; Cursor error = " +
                       str(error)
                       )
@@ -147,10 +147,10 @@ def tsne_transformation(data,dim,path_to_train):
 
                 ax1.set_title(
                     coord +
-                     " read "+
-                     a +
-                     "," +
-                     b +
+                     " read x="+
+                     str(round(data._2D_tsne_1[species_index],2)) +
+                     " y=" +
+                     str(round(data._2D_tsne_2[species_index],2)) +
                      " ; Cursor error = " +
                       str(error)
                       )
