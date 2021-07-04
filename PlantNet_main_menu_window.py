@@ -2,6 +2,7 @@ import pygame, sys
 import os
 import pandas as pd
 import numpy as np
+import time
 
 from functions import *
 from pygame.locals import *
@@ -10,6 +11,7 @@ from pygame_loading import *
 from Images import *
 from groups import *
 from display_tsne_transformation import *
+from Altair_2D_tsne import *
 
 # Users' Parameters
 
@@ -341,8 +343,12 @@ def menu():
         pygame.display.update()
         mainClock.tick(60)
 
+    pygame.quit()
+
     if display_tsne_transfo != False:
         dim = display_tsne_transfo
-        tsne_transformation(data,dim,path_to_train)
+        # if dim == 2:
+        #     altair_2D_tsne_chart(data) # Launch the Altair version
+        tsne_transformation(data,dim,path_to_train) # Launch the Matplotlib version
 
 menu()
