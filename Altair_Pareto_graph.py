@@ -16,10 +16,17 @@ alt.renderers.enable('altair_viewer')
 # Dataframe
 data = pd.read_csv(os.path.join(path_to_folder,"class_names_2.csv"))
 
+data.sort_values(by=["Images"], inplace=True, ascending=False)
+# Sorted by decreasing order of number of images
+data.reset_index(drop=True, inplace=True)
+# Re-index
+
 chart = alt.Chart(data.reset_index(),title="Number of Images for each species in the Dataset").mark_point().encode(
     x="index",
     y="Images"
-).encode(tooltip=['species_name','Images'])
+).encode(
+    tooltip=['id_species','species_name','Images']
+    )
 
 chart.encoding.x.title = 'Species'
 chart.encoding.y.title = 'Images'
