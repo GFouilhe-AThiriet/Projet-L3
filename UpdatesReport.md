@@ -43,7 +43,6 @@ Current state : https://i.ibb.co/99rX13G/Capture-d-cran-2021-04-08-192809.png
 Update 09/04 by Au. : Step 2) almost done.
 Now, the plant image changes when someone clicks on the graph. There still is some presentation to do, but the code works now.
 
-
 Update 11/04 by Guilhem : 
 I cleaned the code by removing unnecessary features, simplifying some lines, formatted comments and created a separated "doc.txt" to save doc info on tools we use.
 I also added the actual names of species on the picture displayed instead of their id.
@@ -73,3 +72,9 @@ Update 15/06 by Au. : A lot of presentation done. Starting the embeddings part s
 29/06 : cf pdf in "Miscellaneous" folder
 
 02/07 : Big problem : the mouse coordinates are very imprecise. For instance "-10.01 -0.92 7.61" will be displayed "-10.3 -0.87 7.2". So how do you go back to species_id with those changes ?
+
+04/07 : Implemented the tsne visualisation. It seems to work rather well in 2D despite the imprecision of the mouse coordinates. Nevertheless, in 3D, this imprecision is in general too big to link the points to the right entries of the csv file. I also added a Altair graph for the 2D tsne visualisation. The images aren't shown but the data absolutely fit the mouse coordinates as there are read directly from the pandas dataframe.
+
+Conclusion : I think we'll review the last aspects of this project with Camille next week. Finally, we've completed the steps 1 to 5 of the worksheet. The tsne visualisation is good. The images corresponding to the dots selected with the mouse are still pretty good in 2D despite the imprecision of the mouse coordinates. I'm especially happy for the dataset visualisation tool of the groups. The Pareto effect graph is very fluid also, which is fine. Globally, it has been very instructive and challenging and I'm happy with the global result.
+
+Au.
