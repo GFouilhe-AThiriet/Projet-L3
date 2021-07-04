@@ -154,7 +154,7 @@ def decipher_coord(coords,data,dim): #coords is a string
 
     if dim == 3:
 
-        error_limit = 10
+        error_limit = 30
         
         index = "not found"
 
@@ -191,7 +191,7 @@ def decipher_coord(coords,data,dim): #coords is a string
                 if (
                     (data._3D_tsne_1[i]-float(a))**2
                     + (data._3D_tsne_2[i]-float(b))**2
-                    +(data._3D_tsne_3[i]-float(c))**2
+                    + (data._3D_tsne_3[i]-float(c))**2
                     < error
                     ):
                     index = i
