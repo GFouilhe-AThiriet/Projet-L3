@@ -1,10 +1,8 @@
 import os
 import csv
 import pandas as pd
-import altair as alt
-import altair_viewer
-
-# To import altair : https://altair-viz.github.io/getting_started/installation.html
+import altair as alt # You might need to install it
+import altair_viewer # You might need to install it
 
 from functions import *
 
@@ -19,7 +17,7 @@ def altair_2D_tsne_chart(data):
     chart = alt.Chart(data.reset_index(),title="2D TSNE of the images embeddings").mark_point().encode(
         x ="_2D_tsne_1",
         y ="_2D_tsne_2",
-        color = 'id_species'
+        color = alt.Color('id_species', scale=alt.Scale(scheme='viridis'))
     ).encode(
         tooltip=['_2D_tsne_1','_2D_tsne_2','id_species','species_name']
         ).add_selection(

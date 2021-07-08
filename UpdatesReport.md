@@ -75,6 +75,7 @@ Update 15/06 by Au. : A lot of presentation done. Starting the embeddings part s
 
 04/07 : Implemented the tsne visualisation. It seems to work rather well in 2D despite the imprecision of the mouse coordinates. Nevertheless, in 3D, this imprecision is in general too big to link the points to the right entries of the csv file. I also added a Altair graph for the 2D tsne visualisation. The images aren't shown but the data absolutely fit the mouse coordinates as there are read directly from the pandas dataframe.
 
-Conclusion : I think we'll review the last aspects of this project with Camille next week. Finally, we've completed the steps 1 to 5 of the worksheet. The tsne visualisation is good. The images corresponding to the dots selected with the mouse are still pretty good in 2D despite the imprecision of the mouse coordinates. I'm especially happy for the dataset visualisation tool of the groups. The Pareto effect graph is very fluid also, which is fine. Globally, it has been very instructive and challenging and I'm happy with the global result.
+I think we'll review the last aspects of this project with Camille next week. Finally, we've completed the steps 1 to 5 of the worksheet. The tsne visualisation is good. The images corresponding to the dots selected with the mouse are still pretty good in 2D despite the imprecision of the mouse coordinates. I'm especially happy for the dataset visualisation tool of the groups. The Pareto effect graph is very fluid also, which is fine. Globally, it has been very instructive and challenging and I'm happy with the global result.
 
-Au.
+08/07 : I deleted the attempt to display the tsne with matplotlib (I kept a copy in archives all the same) because the tsne visualisation will be done with https://github.com/lanpa/tensorboardX .
+

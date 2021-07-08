@@ -2,7 +2,6 @@ import pygame, sys
 import os
 import pandas as pd
 import numpy as np
-import time
 
 from functions import *
 from pygame.locals import *
@@ -10,8 +9,6 @@ from pygame.locals import *
 from pygame_loading import *
 from Images import *
 from groups import *
-from display_tsne_transformation import *
-from Altair_2D_tsne import *
 
 # Users' Parameters
 
@@ -21,11 +18,11 @@ from Altair_2D_tsne import *
 
 # Complete the required paths in functions.py and then enter your name :
 
-user = "Aurélien" #input(
-#     "Please type the name of the user (choose among Aurélien, Guilhem, Joseph, Camille : "
-# )
-# if user not in ["Aurélien", "Guilhem", "Joseph", "Camille"]:
-#     raise ValueError("Incorrect username")
+user = input(
+    "Please type the name of the user (choose among Aurélien, Guilhem, Joseph, Camille : "
+)
+if user not in ["Aurélien", "Guilhem", "Joseph", "Camille"]:
+    raise ValueError("Incorrect username")
 
 
 # Global Setup ###############################################################
@@ -345,10 +342,44 @@ def menu():
 
     pygame.quit()
 
-    if display_tsne_transfo != False:
-        dim = display_tsne_transfo
-        # if dim == 2:
-        #     altair_2D_tsne_chart(data) # Launch the Altair version
-        tsne_transformation(data,dim,path_to_train) # Launch the Matplotlib version
+# menu()
 
-menu()
+groups(
+    pygame,
+    os,
+    np,
+    mainClock,
+    data,
+    path_to_train,
+    screen,
+    w,
+    h,
+    white,
+    black,
+    light_blue,
+    light_green,
+    arrow_w,
+    arrow_h,
+    arrow_back,
+    arrow_back_grey,
+    small_arrow_size,
+    grey_left_arrow,
+    black_left_arrow,
+    grey_right_arrow,
+    black_right_arrow,
+    wide_logo_2,
+    no_images,
+    list_of_groups_order_1,
+    list_of_groups_order_2,
+    id_species_per_group_order_1,
+    id_species_per_group_order_2,
+    margin,
+    mini_font,
+    font,
+    MOUSEBUTTONDOWN,
+    KEYDOWN,
+    K_UP,
+    K_DOWN,
+    draw_text,
+    possibility_to_return_to_menu,
+    )

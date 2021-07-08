@@ -1,15 +1,18 @@
 import os
 import csv
 import pandas as pd
-import altair as alt
-import altair_viewer
-
-# To import altair : https://altair-viz.github.io/getting_started/installation.html
+import altair as alt # You might need to install it
+import altair_viewer # You might need to install it
 
 from functions import *
 
-User = "Aurélien"
-path_to_train , path_to_folder = user_paths(User)
+user = input(
+    "Please type the name of the user (choose among Aurélien, Guilhem, Joseph, Camille : "
+    )
+if user not in ["Aurélien", "Guilhem", "Joseph", "Camille"]:
+    raise ValueError("Incorrect username")
+
+path_to_train , path_to_folder = user_paths(user)
 
 alt.renderers.enable('altair_viewer')
 
