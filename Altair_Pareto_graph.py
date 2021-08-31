@@ -9,7 +9,7 @@ from functions import *
 user = input(
     "Please type the name of the user (choose among Aurélien, Guilhem, Joseph, Camille : "
     )
-if user not in ["Aurélien", "Guilhem", "Joseph", "Camille"]:
+if user not in ["Aurélien", "A", "a","Guilhem", "Joseph", "Camille"]:
     raise ValueError("Incorrect username")
 
 path_to_train , path_to_folder = user_paths(user)

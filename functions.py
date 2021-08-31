@@ -20,9 +20,8 @@ from pygame.locals import *
 
 def user_paths(User):
 
-    if User=="Aurélien":
+    if User=="Aurélien" or User=="A" or User=="a":
         path_to_train = os.path.join('C:','\\Users','lyz50','Documents',"train")
-
         path_to_folder=os.path.join('C:','\\Users','lyz50',"documents","Github","Projet-L3")
     elif User == "Guilhem":
         path_to_train = os.path.join('C:/','Plantnet_project','plantnet_subset')

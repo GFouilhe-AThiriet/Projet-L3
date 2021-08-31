@@ -21,7 +21,7 @@ from groups import *
 user = input(
     "Please type the name of the user (choose among Aurélien, Guilhem, Joseph, Camille : "
 )
-if user not in ["Aurélien", "Guilhem", "Joseph", "Camille"]:
+if user not in ["Aurélien", "A", "a", "Guilhem", "Joseph", "Camille"]:
     raise ValueError("Incorrect username")
 
 
@@ -342,44 +342,44 @@ def menu():
 
     pygame.quit()
 
-# menu()
+menu()
 
-groups(
-    pygame,
-    os,
-    np,
-    mainClock,
-    data,
-    path_to_train,
-    screen,
-    w,
-    h,
-    white,
-    black,
-    light_blue,
-    light_green,
-    arrow_w,
-    arrow_h,
-    arrow_back,
-    arrow_back_grey,
-    small_arrow_size,
-    grey_left_arrow,
-    black_left_arrow,
-    grey_right_arrow,
-    black_right_arrow,
-    wide_logo_2,
-    no_images,
-    list_of_groups_order_1,
-    list_of_groups_order_2,
-    id_species_per_group_order_1,
-    id_species_per_group_order_2,
-    margin,
-    mini_font,
-    font,
-    MOUSEBUTTONDOWN,
-    KEYDOWN,
-    K_UP,
-    K_DOWN,
-    draw_text,
-    possibility_to_return_to_menu,
-    )
+# groups(
+#     pygame,
+#     os,
+#     np,
+#     mainClock,
+#     data,
+#     path_to_train,
+#     screen,
+#     w,
+#     h,
+#     white,
+#     black,
+#     light_blue,
+#     light_green,
+#     arrow_w,
+#     arrow_h,
+#     arrow_back,
+#     arrow_back_grey,
+#     small_arrow_size,
+#     grey_left_arrow,
+#     black_left_arrow,
+#     grey_right_arrow,
+#     black_right_arrow,
+#     wide_logo_2,
+#     no_images,
+#     list_of_groups_order_1,
+#     list_of_groups_order_2,
+#     id_species_per_group_order_1,
+#     id_species_per_group_order_2,
+#     margin,
+#     mini_font,
+#     font,
+#     MOUSEBUTTONDOWN,
+#     KEYDOWN,
+#     K_UP,
+#     K_DOWN,
+#     draw_text,
+#     possibility_to_return_to_menu,
+#     )
