@@ -20,6 +20,8 @@ https://gitlab.inria.fr/cgarcin/plantnet_dataset
 NB : Two people downloading the dataset Train might end up with two slightly different dataset as 0.1% of the images might be discarded during the download of the plants' pictures. If have updated class_names.csv, you might also need to update the graph of the Pareto effect.
 In any case, if you want to have the exact graph of the Pareto effect corresponding to the exact dataset in your computer, follow the following steps.
 
+_How to update images_for_each_species.png according to your dataset :_
+
 1. Delete class_names_2.csv
 2. Run create_class_names_2.py; thus the number of images for each species in class_names_2.csv will absolutely fit the dataset in your computer
 3. Run graph.py and save the picture of the graph in Pygames_elements as images_for_each_species.png, replacing the precedent picture
